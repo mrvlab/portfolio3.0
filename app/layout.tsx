@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { Syne, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+import { SanityLive } from '@/sanity/lib/live';
+import { draftMode } from 'next/headers';
+import { VisualEditing } from 'next-sanity';
+import { DisableDraftMode } from '@/components/DisableDraftMode';
 
 const syne = Syne({ subsets: ['latin'], variable: '--font-syne' });
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -38,14 +42,23 @@ export const viewport: Viewport = {
   themeColor: '#000000',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang='en' className={`${syne.variable} ${plusJakartaSans.className}`}>
-      <body className='antialiased'>{children}</body>
+      <body className='antialiased'>
+        {children}
+        <SanityLive />
+        {(await draftMode()).isEnabled && (
+          <>
+            <VisualEditing />
+            <DisableDraftMode />
+          </>
+        )}
+      </body>
     </html>
   );
 }
