@@ -7,14 +7,15 @@
     "node": ">=18.17.0"
   },
   "scripts": {
-    "preinstall": "nvm use",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/client": "^7.8.2",
     "next": "15.4.7",
+    "next-sanity": "^10.0.12",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
