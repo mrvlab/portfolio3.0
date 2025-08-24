@@ -34,20 +34,10 @@ export type Header = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  linkReferenceQuery?: Array<{
-    linkLabel?: string;
-    page?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "page";
-    };
-    _type: "internalLink";
-    _key: string;
-  } | {
-    linkLabel?: string;
+  navigationItems?: Array<{
+    label?: string;
     link?: Link;
-    _type: "externalLink";
+    _type: "navigationItem";
     _key: string;
   }>;
 };
@@ -61,11 +51,67 @@ export type Footer = {
   rights?: string;
 };
 
-export type InfoSection = {
-  _type: "infoSection";
-  heading?: string;
-  subheading?: string;
-  content?: Array<{
+export type NavBar = {
+  _type: "navBar";
+  logo?: string;
+};
+
+export type NameHero = {
+  _type: "nameHero";
+  logoMobile?: MediaType;
+  logoDesktop?: MediaType;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h2" | "h3" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      _key: string;
+    } & Link>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    _key: string;
+  } & MediaType>;
+};
+
+export type MediaGroup = {
+  _type: "mediaGroup";
+  mediaItems?: Array<{
+    _key: string;
+  } & MediaType>;
+};
+
+export type Contributions = {
+  _type: "contributions";
+  title?: string;
+  agencyWorkList?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "agencyWork";
+  }>;
+  projectListLabel?: string;
+  projectsList?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "caseStudy";
+  }>;
+};
+
+export type CaseDetails = {
+  _type: "caseDetails";
+  title?: string;
+  descriptionLabel?: string;
+  description?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -97,6 +143,14 @@ export type InfoSection = {
     _type: "block";
     _key: string;
   }>;
+  detailsLabel?: string;
+  detailsItems?: Array<{
+    _key: string;
+  } & DetailsItem>;
+  creditsLabel?: string;
+  creditsItems?: Array<{
+    _key: string;
+  } & DetailsItem>;
 };
 
 export type CallToAction = {
@@ -118,40 +172,41 @@ export type Seo = {
   metaImage?: MediaType;
 };
 
-export type MediaType = {
-  _type: "mediaType";
-  media?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
+export type RichText = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h2" | "h3" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    _key: string;
+  } & Link>;
+  level?: number;
+  _type: "block";
+  _key: string;
+} | {
+  _key: string;
+} & MediaType>;
 
-export type Link = {
-  _type: "link";
-  linkType?: "href" | "page" | "caseStudy";
-  href?: string;
-  page?: {
+export type DetailsItem = {
+  _type: "detailsItem";
+  itemType?: "titleWithText" | "titleWithReferences" | "titleWithLink";
+  title?: string;
+  text?: string;
+  tags?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "tags";
+  }>;
+  linkData?: {
+    linkLabel?: string;
+    link?: Link;
   };
-  caseStudy?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "caseStudy";
-  };
-  openInNewTab?: boolean;
 };
 
 export type BlockContent = Array<{
@@ -218,7 +273,15 @@ export type Page = {
     _key: string;
   } & CallToAction | {
     _key: string;
-  } & InfoSection>;
+  } & CaseDetails | {
+    _key: string;
+  } & Contributions | {
+    _key: string;
+  } & MediaGroup | {
+    _key: string;
+  } & NameHero | {
+    _key: string;
+  } & NavBar>;
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
@@ -235,17 +298,62 @@ export type CaseStudy = {
   _rev: string;
   name?: string;
   slug?: Slug;
+  poster?: MediaType;
   pageBuilder?: Array<{
     _key: string;
   } & CallToAction | {
     _key: string;
-  } & InfoSection>;
+  } & CaseDetails | {
+    _key: string;
+  } & Contributions | {
+    _key: string;
+  } & MediaGroup | {
+    _key: string;
+  } & NameHero | {
+    _key: string;
+  } & NavBar>;
   date?: string;
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
     metaImage?: MediaType;
     _type: "seo";
+  };
+};
+
+export type Link = {
+  _type: "link";
+  linkType?: "href" | "page" | "caseStudy";
+  href?: string;
+  page?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "page";
+  };
+  caseStudy?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "caseStudy";
+  };
+  openInNewTab?: boolean;
+};
+
+export type MediaType = {
+  _type: "mediaType";
+  media?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
   };
 };
 
@@ -367,7 +475,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Settings | Header | Footer | InfoSection | CallToAction | Seo | MediaType | Link | BlockContent | Tags | AgencyWork | Page | CaseStudy | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Settings | Header | Footer | NavBar | NameHero | MediaGroup | Contributions | CaseDetails | CallToAction | Seo | RichText | DetailsItem | BlockContent | Tags | AgencyWork | Page | CaseStudy | Link | MediaType | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -403,10 +511,10 @@ export type GetHomePageQueryResult = {
     } | null;
   } | {
     _key: string;
-    _type: "infoSection";
-    heading?: string;
-    subheading?: string;
-    content: Array<{
+    _type: "caseDetails";
+    title?: string;
+    descriptionLabel?: string;
+    description?: Array<{
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -415,19 +523,89 @@ export type GetHomePageQueryResult = {
       }>;
       style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
       listItem?: "bullet" | "number";
-      markDefs: Array<{
+      markDefs?: Array<{
         linkType?: "caseStudy" | "href" | "page";
         href?: string;
-        page: string | null;
-        caseStudy: string | null;
+        page?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        };
+        caseStudy?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "caseStudy";
+        };
         openInNewTab?: boolean;
         _type: "link";
         _key: string;
-      }> | null;
+      }>;
       level?: number;
       _type: "block";
       _key: string;
-    }> | null;
+    }>;
+    detailsLabel?: string;
+    detailsItems?: Array<{
+      _key: string;
+    } & DetailsItem>;
+    creditsLabel?: string;
+    creditsItems?: Array<{
+      _key: string;
+    } & DetailsItem>;
+  } | {
+    _key: string;
+    _type: "contributions";
+    title?: string;
+    agencyWorkList?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "agencyWork";
+    }>;
+    projectListLabel?: string;
+    projectsList?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "caseStudy";
+    }>;
+  } | {
+    _key: string;
+    _type: "mediaGroup";
+    mediaItems?: Array<{
+      _key: string;
+    } & MediaType>;
+  } | {
+    _key: string;
+    _type: "nameHero";
+    logoMobile?: MediaType;
+    logoDesktop?: MediaType;
+    description?: Array<{
+      _key: string;
+    } & MediaType | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h2" | "h3" | "normal";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  } | {
+    _key: string;
+    _type: "navBar";
+    logo?: string;
   }> | null;
   seo: {
     metaTitle: string | null;
@@ -458,10 +636,10 @@ export type GetPageQueryResult = {
     } | null;
   } | {
     _key: string;
-    _type: "infoSection";
-    heading?: string;
-    subheading?: string;
-    content: Array<{
+    _type: "caseDetails";
+    title?: string;
+    descriptionLabel?: string;
+    description?: Array<{
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -470,19 +648,89 @@ export type GetPageQueryResult = {
       }>;
       style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
       listItem?: "bullet" | "number";
-      markDefs: Array<{
+      markDefs?: Array<{
         linkType?: "caseStudy" | "href" | "page";
         href?: string;
-        page: string | null;
-        caseStudy: string | null;
+        page?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        };
+        caseStudy?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "caseStudy";
+        };
         openInNewTab?: boolean;
         _type: "link";
         _key: string;
-      }> | null;
+      }>;
       level?: number;
       _type: "block";
       _key: string;
-    }> | null;
+    }>;
+    detailsLabel?: string;
+    detailsItems?: Array<{
+      _key: string;
+    } & DetailsItem>;
+    creditsLabel?: string;
+    creditsItems?: Array<{
+      _key: string;
+    } & DetailsItem>;
+  } | {
+    _key: string;
+    _type: "contributions";
+    title?: string;
+    agencyWorkList?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "agencyWork";
+    }>;
+    projectListLabel?: string;
+    projectsList?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "caseStudy";
+    }>;
+  } | {
+    _key: string;
+    _type: "mediaGroup";
+    mediaItems?: Array<{
+      _key: string;
+    } & MediaType>;
+  } | {
+    _key: string;
+    _type: "nameHero";
+    logoMobile?: MediaType;
+    logoDesktop?: MediaType;
+    description?: Array<{
+      _key: string;
+    } & MediaType | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h2" | "h3" | "normal";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  } | {
+    _key: string;
+    _type: "navBar";
+    logo?: string;
   }> | null;
   seo: {
     metaTitle: string | null;

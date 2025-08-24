@@ -1,4 +1,4 @@
-import { TiersIcon } from '@sanity/icons';
+import { ImageIcon, TiersIcon } from '@sanity/icons';
 import { format, parseISO } from 'date-fns';
 import { defineField, defineType } from 'sanity';
 import * as blocks from '../blocks';
@@ -36,6 +36,11 @@ export const caseStudy = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'poster',
+      title: 'Poster',
+      type: 'mediaType',
+    }),
+    defineField({
       name: 'pageBuilder',
       title: 'Page builder',
       type: 'array',
@@ -49,7 +54,7 @@ export const caseStudy = defineType({
             {
               name: 'grid',
               previewImageUrl: (schemaTypeName) =>
-                `/blockListThumbnails/${schemaTypeName}.png`,
+                `/blocksThumbnails/${schemaTypeName}.png`,
             },
           ],
         },
@@ -72,14 +77,18 @@ export const caseStudy = defineType({
     select: {
       title: 'name',
       date: 'date',
-      media: 'seo.metaImage.media',
+      media: 'poster.media',
     },
     prepare({ title, media, date }) {
       const subtitles = [
         date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
       ].filter(Boolean);
 
-      return { title, media, subtitle: subtitles.join(' ') };
+      return {
+        title: title || 'Untitled Case Study',
+        media: media || ImageIcon,
+        subtitle: subtitles.join(' '),
+      };
     },
   },
 });
