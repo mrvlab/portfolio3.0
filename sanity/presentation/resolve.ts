@@ -5,8 +5,8 @@ import {
 
 export const resolve: PresentationPluginOptions['resolve'] = {
   locations: {
-    // Add more locations for other post types
-    post: defineLocations({
+    // Add more locations for other case study types
+    caseStudy: defineLocations({
       select: {
         title: 'title',
         slug: 'slug.current',
@@ -15,7 +15,7 @@ export const resolve: PresentationPluginOptions['resolve'] = {
         locations: [
           {
             title: doc?.title || 'Untitled',
-            href: `/${doc?.slug}`,
+            href: `/projects/${doc?.slug}`,
           },
           { title: 'Home', href: `/` },
         ],

@@ -20,51 +20,11 @@ export type Settings = {
   _updatedAt: string;
   _rev: string;
   title?: string;
-  description?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      linkType?: "href" | "page" | "post";
-      href?: string;
-      page?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      };
-      post?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      };
-      openInNewTab?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  ogImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    metadataBase?: string;
-    _type: "image";
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    metaImage?: MediaType;
+    _type: "seo";
   };
 };
 
@@ -74,7 +34,7 @@ export type Header = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  linkReference?: Array<{
+  linkReferenceQuery?: Array<{
     linkLabel?: string;
     page?: {
       _ref: string;
@@ -115,7 +75,7 @@ export type InfoSection = {
     style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      linkType?: "href" | "page" | "post";
+      linkType?: "href" | "page" | "caseStudy";
       href?: string;
       page?: {
         _ref: string;
@@ -123,11 +83,11 @@ export type InfoSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "page";
       };
-      post?: {
+      caseStudy?: {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
+        [internalGroqTypeReferenceTo]?: "caseStudy";
       };
       openInNewTab?: boolean;
       _type: "link";
@@ -147,9 +107,37 @@ export type CallToAction = {
   link?: Link;
 };
 
+export type Seo = {
+  _id: string;
+  _type: "seo";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaImage?: MediaType;
+};
+
+export type MediaType = {
+  _type: "mediaType";
+  media?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
 export type Link = {
   _type: "link";
-  linkType?: "href" | "page" | "post";
+  linkType?: "href" | "page" | "caseStudy";
   href?: string;
   page?: {
     _ref: string;
@@ -157,11 +145,11 @@ export type Link = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "page";
   };
-  post?: {
+  caseStudy?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "post";
+    [internalGroqTypeReferenceTo]?: "caseStudy";
   };
   openInNewTab?: boolean;
 };
@@ -176,7 +164,7 @@ export type BlockContent = Array<{
   style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
   listItem?: "bullet" | "number";
   markDefs?: Array<{
-    linkType?: "href" | "page" | "post";
+    linkType?: "href" | "page" | "caseStudy";
     href?: string;
     page?: {
       _ref: string;
@@ -184,11 +172,11 @@ export type BlockContent = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "page";
     };
-    post?: {
+    caseStudy?: {
       _ref: string;
       _type: "reference";
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "post";
+      [internalGroqTypeReferenceTo]?: "caseStudy";
     };
     openInNewTab?: boolean;
     _type: "link";
@@ -208,6 +196,16 @@ export type Tags = {
   name?: string;
 };
 
+export type AgencyWork = {
+  _id: string;
+  _type: "agencyWork";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  agencyClient?: string;
+  agencyClientUrl?: string;
+};
+
 export type Page = {
   _id: string;
   _type: "page";
@@ -221,15 +219,21 @@ export type Page = {
   } & CallToAction | {
     _key: string;
   } & InfoSection>;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    metaImage?: MediaType;
+    _type: "seo";
+  };
 };
 
-export type Post = {
+export type CaseStudy = {
   _id: string;
-  _type: "post";
+  _type: "caseStudy";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  name?: string;
   slug?: Slug;
   pageBuilder?: Array<{
     _key: string;
@@ -237,34 +241,11 @@ export type Post = {
     _key: string;
   } & InfoSection>;
   date?: string;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "person";
-  };
-};
-
-export type Person = {
-  _id: string;
-  _type: "person";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  firstName?: string;
-  lastName?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    metaImage?: MediaType;
+    _type: "seo";
   };
 };
 
@@ -386,5 +367,206 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Settings | Header | Footer | InfoSection | CallToAction | Link | BlockContent | Tags | Page | Post | Person | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Settings | Header | Footer | InfoSection | CallToAction | Seo | MediaType | Link | BlockContent | Tags | AgencyWork | Page | CaseStudy | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./sanity/lib/queries.ts
+// Variable: settingsQuery
+// Query: *[_type == "settings"][0]{    title,    seo{      metaTitle,      metaDescription,      metaImage    }  }
+export type SettingsQueryResult = {
+  title: string | null;
+  seo: {
+    metaTitle: string | null;
+    metaDescription: string | null;
+    metaImage: MediaType | null;
+  } | null;
+} | null;
+// Variable: getHomePageQuery
+// Query: *[_type == 'page' && slug.current == '/'][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "caseStudy": caseStudy->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "caseStudy": caseStudy->slug.current  }          }        }      },    },    seo{      metaTitle,      metaDescription,      metaImage    },  }
+export type GetHomePageQueryResult = {
+  _id: string;
+  _type: "page";
+  name: string | null;
+  slug: Slug | null;
+  pageBuilder: Array<{
+    _key: string;
+    _type: "callToAction";
+    heading?: string;
+    text?: string;
+    buttonText?: string;
+    link: {
+      _type: "link";
+      linkType?: "caseStudy" | "href" | "page";
+      href?: string;
+      page: string | null;
+      caseStudy: string | null;
+      openInNewTab?: boolean;
+    } | null;
+  } | {
+    _key: string;
+    _type: "infoSection";
+    heading?: string;
+    subheading?: string;
+    content: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs: Array<{
+        linkType?: "caseStudy" | "href" | "page";
+        href?: string;
+        page: string | null;
+        caseStudy: string | null;
+        openInNewTab?: boolean;
+        _type: "link";
+        _key: string;
+      }> | null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+  }> | null;
+  seo: {
+    metaTitle: string | null;
+    metaDescription: string | null;
+    metaImage: MediaType | null;
+  } | null;
+} | null;
+// Variable: getPageQuery
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "caseStudy": caseStudy->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "caseStudy": caseStudy->slug.current  }          }        }      },    },    seo{      metaTitle,      metaDescription,      metaImage    },  }
+export type GetPageQueryResult = {
+  _id: string;
+  _type: "page";
+  name: string | null;
+  slug: Slug | null;
+  pageBuilder: Array<{
+    _key: string;
+    _type: "callToAction";
+    heading?: string;
+    text?: string;
+    buttonText?: string;
+    link: {
+      _type: "link";
+      linkType?: "caseStudy" | "href" | "page";
+      href?: string;
+      page: string | null;
+      caseStudy: string | null;
+      openInNewTab?: boolean;
+    } | null;
+  } | {
+    _key: string;
+    _type: "infoSection";
+    heading?: string;
+    subheading?: string;
+    content: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs: Array<{
+        linkType?: "caseStudy" | "href" | "page";
+        href?: string;
+        page: string | null;
+        caseStudy: string | null;
+        openInNewTab?: boolean;
+        _type: "link";
+        _key: string;
+      }> | null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+  }> | null;
+  seo: {
+    metaTitle: string | null;
+    metaDescription: string | null;
+    metaImage: MediaType | null;
+  } | null;
+} | null;
+// Variable: sitemapData
+// Query: *[_type == "page" || _type == "caseStudy" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
+export type SitemapDataResult = Array<{
+  slug: string | null;
+  _type: "caseStudy";
+  _updatedAt: string;
+} | {
+  slug: string | null;
+  _type: "page";
+  _updatedAt: string;
+}>;
+// Variable: allCaseStudiesQuery
+// Query: *[_type == "caseStudy" && defined(slug.current)] | order(date desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  name,  slug,  "date": coalesce(date, _updatedAt),  seo{    metaTitle,    metaDescription,    metaImage  }  }
+export type AllCaseStudiesQueryResult = Array<{
+  _id: string;
+  status: "draft" | "published";
+  name: string | null;
+  slug: Slug | null;
+  date: string;
+  seo: {
+    metaTitle: string | null;
+    metaDescription: string | null;
+    metaImage: MediaType | null;
+  } | null;
+}>;
+// Variable: moreCaseStudiesQuery
+// Query: *[_type == "caseStudy" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  name,  slug,  "date": coalesce(date, _updatedAt),  seo{    metaTitle,    metaDescription,    metaImage  }  }
+export type MoreCaseStudiesQueryResult = Array<{
+  _id: string;
+  status: "draft" | "published";
+  name: string | null;
+  slug: Slug | null;
+  date: string;
+  seo: {
+    metaTitle: string | null;
+    metaDescription: string | null;
+    metaImage: MediaType | null;
+  } | null;
+}>;
+// Variable: caseStudyQuery
+// Query: *[_type == "caseStudy" && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,        _type == "link" => {    "page": page->slug.current,    "caseStudy": caseStudy->slug.current  }    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  name,  slug,  "date": coalesce(date, _updatedAt),  seo{    metaTitle,    metaDescription,    metaImage  }  }
+export type CaseStudyQueryResult = {
+  content: null;
+  _id: string;
+  status: "draft" | "published";
+  name: string | null;
+  slug: Slug | null;
+  date: string;
+  seo: {
+    metaTitle: string | null;
+    metaDescription: string | null;
+    metaImage: MediaType | null;
+  } | null;
+} | null;
+// Variable: caseStudyPagesSlugs
+// Query: *[_type == "caseStudy" && defined(slug.current)]  {"slug": slug.current}
+export type CaseStudyPagesSlugsResult = Array<{
+  slug: string | null;
+}>;
+// Variable: pagesSlugs
+// Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
+export type PagesSlugsResult = Array<{
+  slug: string | null;
+}>;
+
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+  interface SanityQueries {
+    "\n  *[_type == \"settings\"][0]{\n    title,\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": SettingsQueryResult;
+    "\n  *[_type == 'page' && slug.current == '/'][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        \n  link {\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n      }\n,\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n          }\n        }\n      },\n    },\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    },\n  }\n": GetHomePageQueryResult;
+    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        \n  link {\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n      }\n,\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n          }\n        }\n      },\n    },\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    },\n  }\n": GetPageQueryResult;
+    "\n  *[_type == \"page\" || _type == \"caseStudy\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;
+    "\n  *[_type == \"caseStudy\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  name,\n  slug,\n  \"date\": coalesce(date, _updatedAt),\n  seo{\n    metaTitle,\n    metaDescription,\n    metaImage\n  }\n\n  }\n": AllCaseStudiesQueryResult;
+    "\n  *[_type == \"caseStudy\" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  name,\n  slug,\n  \"date\": coalesce(date, _updatedAt),\n  seo{\n    metaTitle,\n    metaDescription,\n    metaImage\n  }\n\n  }\n": MoreCaseStudiesQueryResult;
+    "\n  *[_type == \"caseStudy\" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  name,\n  slug,\n  \"date\": coalesce(date, _updatedAt),\n  seo{\n    metaTitle,\n    metaDescription,\n    metaImage\n  }\n\n  }\n": CaseStudyQueryResult;
+    "\n  *[_type == \"caseStudy\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": CaseStudyPagesSlugsResult;
+    "\n  *[_type == \"page\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": PagesSlugsResult;
+  }
+}

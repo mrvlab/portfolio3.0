@@ -1,2 +1,4 @@
 export { link } from './link';
 export { blockContent } from './blockContent';
+export { mediaType } from './mediaType';
+export { seo } from './seo';

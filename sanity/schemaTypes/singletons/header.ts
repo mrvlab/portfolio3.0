@@ -8,76 +8,57 @@ export const header = defineType({
   icon: LinkIcon,
   fields: [
     defineField({
-      name: 'linkReference',
-      title: 'Link Reference',
+      name: 'navigationItems',
+      title: 'Navigation Items',
       type: 'array',
       of: [
-        {
-          name: 'internalLink',
-          title: 'Link (Internal)',
+        defineField({
+          name: 'navigationItem',
+          title: 'Navigation Item',
           type: 'object',
-          description: 'Used to link to an existing page',
           fields: [
-            {
-              name: 'linkLabel',
-              title: 'Link Label',
-              description:
-                'Used to override the default label for the page, if not provided, the page title will be used',
+            defineField({
+              name: 'label',
+              title: 'Label',
               type: 'string',
-            },
-            {
-              name: 'page',
-              title: 'Page',
-              type: 'reference',
-              to: [{ type: 'page' }],
-            },
-          ],
-          preview: {
-            select: {
-              title: 'linkLabel',
-              pageTitle: 'page.pageTitle',
-            },
-            prepare({ title, pageTitle }) {
-              return {
-                title: title ? title : pageTitle || 'No label',
-                subtitle: pageTitle
-                  ? `Link to: ${pageTitle}`
-                  : 'No page selected',
-              };
-            },
-          },
-        },
-        {
-          type: 'object',
-          name: 'externalLink',
-          title: 'Link (External)',
-          description: 'Used to override the default label for the page',
-          fields: [
-            {
-              name: 'linkLabel',
-              title: 'Link Label',
-              type: 'string',
-            },
-            {
+            }),
+            defineField({
               name: 'link',
               title: 'Link',
               type: 'link',
-            },
+            }),
           ],
           preview: {
             select: {
-              title: 'linkLabel',
-              url: 'link.href',
+              title: 'label',
+              linkType: 'link.linkType',
+              href: 'link.href',
+              pageTitle: 'link.page.name',
+              caseStudyTitle: 'link.caseStudy.name',
             },
-            prepare({ title, url }) {
+            prepare(selection) {
+              const { title, linkType, href, pageTitle, caseStudyTitle } =
+                selection;
+              let subtitle = 'Link to: ';
+
+              if (linkType === 'href' && href) {
+                subtitle += href;
+              } else if (linkType === 'page' && pageTitle) {
+                subtitle += `Page: ${pageTitle}`;
+              } else if (linkType === 'caseStudy' && caseStudyTitle) {
+                subtitle += `Case Study: ${caseStudyTitle}`;
+              } else {
+                subtitle += 'No link configured';
+              }
+
               return {
-                title: title || 'No label',
-                subtitle: url ? `Link to: ${url}` : 'No URL',
-                media: LaunchIcon,
+                title,
+                subtitle,
+                media: LinkIcon,
               };
             },
           },
-        },
+        }),
       ],
     }),
   ],

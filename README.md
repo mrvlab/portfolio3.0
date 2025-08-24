@@ -8,16 +8,38 @@ My third portfolio website, built with next.js 15 and Sanity as my CMS.
 
 This project uses Node.js v22.16.0. Make sure you have [nvm](https://github.com/nvm-sh/nvm) installed.
 
-### Getting started
+### Setup
 
-    1) Clone the repo
+1. **Clone the repository:**
+   ```bash
+   git clone <repo-url>
+   ```
+2. **Install dependencies:**
 
-    2) Navigate to project directory
+   ```bash
+   yarn install
+   ```
 
-    3) Run the setup script (recommended):
-        - ./setup.sh
+3. **Configure environment variables:**
+   - Copy `.env.example` to `.env.local` and fill in the required values:
+     - `NEXT_PUBLIC_SANITY_PROJECT_ID`
+     - `NEXT_PUBLIC_SANITY_DATASET`
+     - `NEXT_PUBLIC_SANITY_API_VERSION`
+     - `NEXT_PUBLIC_SANITY_STUDIO_URL`
+     - `SANITY_API_READ_TOKEN`
 
-    4) Or manually:
-        - nvm use (to use the correct Node.js version)
-        - yarn install
-        - yarn dev
+4. **Run the development server:**
+
+   ```bash
+   yarn dev
+   # or
+   npm run dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+5. **Open the app:**
+   - Visit [http://localhost:3000](http://localhost:3000) to view the site.
+   - Visit [http://localhost:3000/studio](http://localhost:3000/studio) for Sanity Studio (content management).

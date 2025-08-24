@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { DocumentIcon } from '@sanity/icons';
+import { DocumentTextIcon } from '@sanity/icons';
 import * as blocks from '../blocks';
 
 /**
@@ -11,7 +11,14 @@ export const page = defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
-  icon: DocumentIcon,
+  icon: DocumentTextIcon,
+  fieldsets: [
+    {
+      name: 'seo',
+      title: 'Seo',
+      options: { collapsible: true, collapsed: true },
+    },
+  ],
   fields: [
     defineField({
       name: 'name',
@@ -44,11 +51,16 @@ export const page = defineType({
             {
               name: 'grid',
               previewImageUrl: (schemaTypeName) =>
-                `/blockListThumbnails/${schemaTypeName}.png`,
+                `/blocksThumbnails/${schemaTypeName}.png`,
             },
           ],
         },
       },
+    }),
+    defineField({
+      name: 'seo',
+      type: 'seo',
+      fieldset: 'seo',
     }),
   ],
 });

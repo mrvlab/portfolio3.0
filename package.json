@@ -1,6 +1,6 @@
 {
   "name": "portfolio3.0",
-  "version": "3.5",
+  "version": "3.5.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -17,8 +17,10 @@
     "@sanity/client": "^7.8.2",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.1.0",
+    "@sanity/types": "^4.5.0",
     "@sanity/vision": "^4.5.0",
     "@sanity/visual-editing": "^3.0.3",
+    "@tailwindcss/typography": "^0.5.16",
     "next": "15.4.7",
     "next-sanity": "^10.0.12",
     "react": "19.1.0",

@@ -1,10 +1,4 @@
-import { CogIcon } from '@sanity/icons';
-import type {
-  StructureBuilder,
-  StructureResolver,
-  ListItemBuilder,
-} from 'sanity/structure';
-import pluralize from 'pluralize-esm';
+import type { StructureBuilder, StructureResolver } from 'sanity/structure';
 
 /**
  * Structure builder is useful whenever you want to control how documents are grouped and
@@ -14,11 +8,11 @@ import pluralize from 'pluralize-esm';
 
 // Schema imports
 
-import * as documents from './schemaTypes/documents';
+import * as pages from './schemaTypes/pages';
 import * as references from './schemaTypes/references';
 import * as singletons from './schemaTypes/singletons';
 
-const documentsSchemas = Object.values(documents);
+const pagesSchemas = Object.values(pages);
 const referencesSchemas = Object.values(references);
 const singletonSchemas = Object.values(singletons);
 
@@ -26,8 +20,8 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
   S.list()
     .title('Portfolio')
     .items([
-      // Documents
-      ...documentsSchemas.map((schema) =>
+      // Pages
+      ...pagesSchemas.map((schema) =>
         S.documentTypeListItem(schema.name).title(schema.title || schema.name)
       ),
 

@@ -17,11 +17,10 @@ export const footer = defineType({
   preview: {
     select: {
       title: 'rights',
-      rights: 'rights',
     },
-    prepare({ rights }) {
+    prepare() {
       return {
-        title: rights,
+        title: 'Footer',
         media: DoubleChevronDownIcon,
       };
     },

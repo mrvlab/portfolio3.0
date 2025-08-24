@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from 'next';
+import type { Viewport } from 'next';
 import { Syne, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { SanityLive } from '@/sanity/lib/live';
@@ -12,34 +12,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: '--font-plusJakartaSans',
 });
 
-export const metadata: Metadata = {
-  title: 'Marvin Kiyingi | Portfolio',
-  description:
-    'My portfolio website, built with next.js 15 and Sanity as my CMS.',
-  manifest: '/manifest.json',
-  icons: {
-    icon: '/icon.png',
-    apple: '/apple-icon.png',
-  },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'Marvin Portfolio',
-  },
-  other: {
-    'mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-status-bar-style': 'default',
-    'apple-mobile-web-app-title': 'Marvin Portfolio',
-  },
-};
-
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: '#000000',
 };
 
 export default async function RootLayout({
@@ -47,17 +22,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: isDraftMode } = await draftMode();
   return (
     <html lang='en' className={`${syne.variable} ${plusJakartaSans.className}`}>
-      <body className='antialiased'>
-        {children}
-        <SanityLive />
-        {(await draftMode()).isEnabled && (
+      <body>
+        {isDraftMode && (
           <>
             <VisualEditing />
             <DisableDraftMode />
           </>
         )}
+
+        <SanityLive />
+        <main>{children}</main>
       </body>
     </html>
   );

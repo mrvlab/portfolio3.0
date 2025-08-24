@@ -1,40 +1,49 @@
-import {defineQuery} from 'next-sanity'
+import { defineQuery } from 'next-sanity';
 
-export const settingsQuery = defineQuery(`*[_type == "settings"][0]`)
+export const settingsQuery = defineQuery(`
+  *[_type == "settings"][0]{
+    title,
+    seo{
+      metaTitle,
+      metaDescription,
+      metaImage
+    }
+  }
+`);
 
-const postFields = /* groq */ `
+const caseStudyFieldsQuery = /* groq */ `
   _id,
   "status": select(_originalId in path("drafts.**") => "draft", "published"),
-  "title": coalesce(title, "Untitled"),
-  "slug": slug.current,
-  excerpt,
-  coverImage,
+  name,
+  slug,
   "date": coalesce(date, _updatedAt),
-  "author": author->{firstName, lastName, picture},
-`
+  seo{
+    metaTitle,
+    metaDescription,
+    metaImage
+  }
+`;
 
-const linkReference = /* groq */ `
+const linkReferenceQuery = /* groq */ `
   _type == "link" => {
     "page": page->slug.current,
-    "post": post->slug.current
+    "caseStudy": caseStudy->slug.current
   }
-`
+`;
 
 const linkFields = /* groq */ `
   link {
       ...,
-      ${linkReference}
+      ${linkReferenceQuery}
       }
-`
+`;
 
-export const getPageQuery = defineQuery(`
-  *[_type == 'page' && slug.current == $slug][0]{
+export const getHomePageQuery = defineQuery(`
+  *[_type == 'page' && slug.current == '/'][0]{
     _id,
     _type,
     name,
     slug,
-    heading,
-    subheading,
     "pageBuilder": pageBuilder[]{
       ...,
       _type == "callToAction" => {
@@ -45,53 +54,86 @@ export const getPageQuery = defineQuery(`
           ...,
           markDefs[]{
             ...,
-            ${linkReference}
+            ${linkReferenceQuery}
           }
         }
       },
     },
+    seo{
+      metaTitle,
+      metaDescription,
+      metaImage
+    },
   }
-`)
+`);
+export const getPageQuery = defineQuery(`
+  *[_type == 'page' && slug.current == $slug][0]{
+    _id,
+    _type,
+    name,
+    slug,
+    "pageBuilder": pageBuilder[]{
+      ...,
+      _type == "callToAction" => {
+        ${linkFields},
+      },
+      _type == "infoSection" => {
+        content[]{
+          ...,
+          markDefs[]{
+            ...,
+            ${linkReferenceQuery}
+          }
+        }
+      },
+    },
+    seo{
+      metaTitle,
+      metaDescription,
+      metaImage
+    },
+  }
+`);
 
 export const sitemapData = defineQuery(`
-  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {
+  *[_type == "page" || _type == "caseStudy" && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
     _type,
     _updatedAt,
   }
-`)
+`);
 
-export const allPostsQuery = defineQuery(`
-  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {
-    ${postFields}
+export const allCaseStudiesQuery = defineQuery(`
+  *[_type == "caseStudy" && defined(slug.current)] | order(date desc, _updatedAt desc) {
+    ${caseStudyFieldsQuery}
   }
-`)
+`);
 
-export const morePostsQuery = defineQuery(`
-  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
-    ${postFields}
+export const moreCaseStudiesQuery = defineQuery(`
+  *[_type == "caseStudy" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
+    ${caseStudyFieldsQuery}
   }
-`)
+`);
 
-export const postQuery = defineQuery(`
-  *[_type == "post" && slug.current == $slug] [0] {
+export const caseStudyQuery = defineQuery(`
+  *[_type == "caseStudy" && slug.current == $slug] [0] {
     content[]{
     ...,
     markDefs[]{
       ...,
-      ${linkReference}
+      ${linkReferenceQuery}
     }
   },
-    ${postFields}
+    ${caseStudyFieldsQuery}
   }
-`)
+`);
 
-export const postPagesSlugs = defineQuery(`
-  *[_type == "post" && defined(slug.current)]
+export const caseStudyPagesSlugs = defineQuery(`
+  *[_type == "caseStudy" && defined(slug.current)]
   {"slug": slug.current}
-`)
+`);
 
 export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
   {"slug": slug.current}
-`)
+`);

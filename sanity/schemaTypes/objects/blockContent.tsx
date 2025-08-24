@@ -1,4 +1,4 @@
-import {defineArrayMember, defineType, defineField} from 'sanity'
+import { defineArrayMember, defineType, defineField } from 'sanity';
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -33,9 +33,9 @@ export const blockContent = defineType({
                 initialValue: 'href',
                 options: {
                   list: [
-                    {title: 'URL', value: 'href'},
-                    {title: 'Page', value: 'page'},
-                    {title: 'Post', value: 'post'},
+                    { title: 'URL', value: 'href' },
+                    { title: 'Page', value: 'page' },
+                    { title: 'Case Study', value: 'caseStudy' },
                   ],
                   layout: 'radio',
                 },
@@ -44,41 +44,45 @@ export const blockContent = defineType({
                 name: 'href',
                 title: 'URL',
                 type: 'url',
-                hidden: ({parent}) => parent?.linkType !== 'href' && parent?.linkType != null,
+                hidden: ({ parent }) =>
+                  parent?.linkType !== 'href' && parent?.linkType != null,
                 validation: (Rule) =>
-                  Rule.custom((value, context: any) => {
-                    if (context.parent?.linkType === 'href' && !value) {
-                      return 'URL is required when Link Type is URL'
+                  Rule.custom((value, context) => {
+                    const parent = context.parent as { linkType?: string };
+                    if (parent?.linkType === 'href' && !value) {
+                      return 'URL is required when Link Type is URL';
                     }
-                    return true
+                    return true;
                   }),
               }),
               defineField({
                 name: 'page',
                 title: 'Page',
                 type: 'reference',
-                to: [{type: 'page'}],
-                hidden: ({parent}) => parent?.linkType !== 'page',
+                to: [{ type: 'page' }],
+                hidden: ({ parent }) => parent?.linkType !== 'page',
                 validation: (Rule) =>
-                  Rule.custom((value, context: any) => {
-                    if (context.parent?.linkType === 'page' && !value) {
-                      return 'Page reference is required when Link Type is Page'
+                  Rule.custom((value, context) => {
+                    const parent = context.parent as { linkType?: string };
+                    if (parent?.linkType === 'page' && !value) {
+                      return 'Page reference is required when Link Type is Page';
                     }
-                    return true
+                    return true;
                   }),
               }),
               defineField({
-                name: 'post',
-                title: 'Post',
+                name: 'caseStudy',
+                title: 'Case Study',
                 type: 'reference',
-                to: [{type: 'post'}],
-                hidden: ({parent}) => parent?.linkType !== 'post',
+                to: [{ type: 'caseStudy' }],
+                hidden: ({ parent }) => parent?.linkType !== 'caseStudy',
                 validation: (Rule) =>
-                  Rule.custom((value, context: any) => {
-                    if (context.parent?.linkType === 'post' && !value) {
-                      return 'Post reference is required when Link Type is Post'
+                  Rule.custom((value, context) => {
+                    const parent = context.parent as { linkType?: string };
+                    if (parent?.linkType === 'caseStudy' && !value) {
+                      return 'Case Study reference is required when Link Type is Case Study';
                     }
-                    return true
+                    return true;
                   }),
               }),
               defineField({
@@ -93,4 +97,4 @@ export const blockContent = defineType({
       },
     }),
   ],
-})
+});

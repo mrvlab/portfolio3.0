@@ -1,22 +1,24 @@
-import { DocumentTextIcon } from '@sanity/icons';
+import { TiersIcon } from '@sanity/icons';
 import { format, parseISO } from 'date-fns';
 import { defineField, defineType } from 'sanity';
 import * as blocks from '../blocks';
 
-/**
- * Post schema.  Define and edit the fields for the 'post' content type.
- * Learn more: https://www.sanity.io/docs/schema-types
- */
-
-export const post = defineType({
-  name: 'post',
-  title: 'Post',
-  icon: DocumentTextIcon,
+export const caseStudy = defineType({
+  name: 'caseStudy',
+  title: 'Case Study',
+  icon: TiersIcon,
   type: 'document',
+  fieldsets: [
+    {
+      name: 'seo',
+      title: 'SEO',
+      options: { collapsible: true, collapsed: true },
+    },
+  ],
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
+      name: 'name',
+      title: 'Name',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
@@ -24,9 +26,10 @@ export const post = defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      description: 'A slug is required for the post to show up in the preview',
+      description:
+        'A slug is required for the case study to show up in the preview',
       options: {
-        source: 'title',
+        source: 'name',
         maxLength: 96,
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
@@ -58,27 +61,21 @@ export const post = defineType({
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
     }),
+
     defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: [{ type: 'person' }],
+      name: 'seo',
+      type: 'seo',
+      fieldset: 'seo',
     }),
   ],
-  // List preview configuration. https://www.sanity.io/docs/previews-list-views
   preview: {
     select: {
-      title: 'title',
-      authorFirstName: 'author.firstName',
-      authorLastName: 'author.lastName',
+      title: 'name',
       date: 'date',
-      media: 'coverImage',
+      media: 'seo.metaImage.media',
     },
-    prepare({ title, media, authorFirstName, authorLastName, date }) {
+    prepare({ title, media, date }) {
       const subtitles = [
-        authorFirstName &&
-          authorLastName &&
-          `by ${authorFirstName} ${authorLastName}`,
         date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
       ].filter(Boolean);
 
