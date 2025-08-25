@@ -2,7 +2,7 @@
 
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @utility container {
   margin: 0 auto;

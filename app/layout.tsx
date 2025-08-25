@@ -5,6 +5,8 @@ import { SanityLive } from '@/sanity/lib/live';
 import { draftMode } from 'next/headers';
 import { VisualEditing } from 'next-sanity';
 import { DisableDraftMode } from '@/components/DisableDraftMode';
+import { ThemeProvider } from './components/ThemeProvider';
+import { ThemeScript } from './components/ThemeScript';
 
 const syne = Syne({ subsets: ['latin'], variable: '--font-syne' });
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -24,17 +26,24 @@ export default async function RootLayout({
 }>) {
   const { isEnabled: isDraftMode } = await draftMode();
   return (
-    <html lang='en' className={`${syne.variable} ${plusJakartaSans.className}`}>
-      <body>
-        {isDraftMode && (
-          <>
-            <VisualEditing />
-            <DisableDraftMode />
-          </>
-        )}
+    <html
+      lang='en'
+      className={`${syne.variable} ${plusJakartaSans.className}`}
+      suppressHydrationWarning
+    >
+      <body className='bg-gray-500 text-gray-900 dark:bg-green-500 dark:text-white'>
+        <ThemeScript />
+        <ThemeProvider>
+          {isDraftMode && (
+            <>
+              <VisualEditing />
+              <DisableDraftMode />
+            </>
+          )}
 
-        <SanityLive />
-        <main>{children}</main>
+          <SanityLive />
+          <>{children}</>
+        </ThemeProvider>
       </body>
     </html>
   );
