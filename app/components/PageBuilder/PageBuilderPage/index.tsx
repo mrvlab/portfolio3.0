@@ -4,18 +4,20 @@ import { SanityDocument } from 'next-sanity';
 import { useOptimistic } from 'next-sanity/hooks';
 import Link from 'next/link';
 
-import BlockRenderer from '@/app/components/BlockRenderer';
-import { GetPageQueryResult } from '@/sanity.types';
+import BlockRenderer from '../BlockRender';
+import { GetPageQueryResult, HeaderQueryResult } from '@/sanity.types';
 import { dataAttr } from '@/sanity/lib/utils';
 import { studioUrl } from '@/sanity/env';
 
 type PageBuilderPageProps = {
   page: GetPageQueryResult;
+  header?: HeaderQueryResult;
 };
 
 type PageBuilderSection = {
   _key: string;
   _type: string;
+  [key: string]: unknown;
 };
 
 type PageData = {
@@ -30,7 +32,8 @@ type PageData = {
 
 function renderSections(
   pageBuilderSections: PageBuilderSection[],
-  page: GetPageQueryResult
+  page: GetPageQueryResult,
+  header?: HeaderQueryResult
 ) {
   if (!page) {
     return null;
@@ -42,6 +45,7 @@ function renderSections(
         type: page._type,
         path: `pageBuilder`,
       }).toString()}
+      className='flex flex-col gap-5'
     >
       {pageBuilderSections.map((block: PageBuilderSection, index: number) => (
         <BlockRenderer
@@ -50,6 +54,7 @@ function renderSections(
           block={block}
           pageId={page._id}
           pageType={page._type}
+          header={header}
         />
       ))}
     </div>
@@ -82,7 +87,7 @@ function renderEmptyState(page: GetPageQueryResult) {
   );
 }
 
-export default function PageBuilder({ page }: PageBuilderPageProps) {
+export default function PageBuilder({ page, header }: PageBuilderPageProps) {
   const pageBuilderSections = useOptimistic<
     PageBuilderSection[] | undefined,
     SanityDocument<PageData>
@@ -113,6 +118,6 @@ export default function PageBuilder({ page }: PageBuilderPageProps) {
   }
 
   return pageBuilderSections && pageBuilderSections.length > 0
-    ? renderSections(pageBuilderSections, page)
+    ? renderSections(pageBuilderSections, page, header)
     : renderEmptyState(page);
 }

@@ -243,19 +243,10 @@
             "value": "nameHero"
           }
         },
-        "logoMobile": {
+        "logo": {
           "type": "objectAttribute",
           "value": {
-            "type": "inline",
-            "name": "mediaType"
-          },
-          "optional": true
-        },
-        "logoDesktop": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "mediaType"
+            "type": "string"
           },
           "optional": true
         },

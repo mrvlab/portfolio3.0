@@ -32,7 +32,7 @@ export default async function CaseStudyPage(props: Props) {
   return (
     <>
       <div className=''>
-        <div className='container my-12 lg:my-24 grid gap-12'>
+        <div className='container grid gap-12'>
           <div>
             <div className='pb-6 grid gap-6 mb-6 border-b border-gray-100'>
               <div className='max-w-3xl flex flex-col gap-6'>

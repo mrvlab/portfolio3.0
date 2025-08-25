@@ -8,14 +8,9 @@ export const nameHero = defineType({
   icon: BlockElementIcon,
   fields: [
     defineField({
-      name: 'logoMobile',
-      title: 'Logo Mobile',
-      type: 'mediaType',
-    }),
-    defineField({
-      name: 'logoDesktop',
-      title: 'Logo Desktop',
-      type: 'mediaType',
+      name: 'logo',
+      title: 'Logo',
+      type: 'string',
     }),
     defineField({
       name: 'description',

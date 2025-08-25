@@ -11,6 +11,34 @@ export const settingsQuery = defineQuery(`
   }
 `);
 
+export const headerQuery = defineQuery(`
+  *[_type == "header"][0]{
+    _id,
+    _type,
+    _createdAt,
+    _updatedAt,
+    _rev,
+    navigationItems[]{
+      _type,
+      _key,
+      label,
+      link{
+        linkType,
+        href,
+        page->{
+          name,
+          slug
+        },
+        caseStudy->{
+          name,
+          slug
+        },
+        openInNewTab
+      }
+    }
+  }
+`);
+
 const caseStudyFieldsQuery = /* groq */ `
   _id,
   "status": select(_originalId in path("drafts.**") => "draft", "published"),

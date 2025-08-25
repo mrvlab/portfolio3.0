@@ -3,5 +3,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <>{children}</>;
+  return (
+    <main className='grid p-5 gap-5 min-h-svh lg:min-h-vh'>{children}</main>
+  );
 }

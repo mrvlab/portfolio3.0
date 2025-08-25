@@ -58,8 +58,7 @@ export type NavBar = {
 
 export type NameHero = {
   _type: "nameHero";
-  logoMobile?: MediaType;
-  logoDesktop?: MediaType;
+  logo?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -488,6 +487,33 @@ export type SettingsQueryResult = {
     metaImage: MediaType | null;
   } | null;
 } | null;
+// Variable: headerQuery
+// Query: *[_type == "header"][0]{    _id,    _type,    _createdAt,    _updatedAt,    _rev,    navigationItems[]{      _type,      _key,      label,      link{        linkType,        href,        page->{          name,          slug        },        caseStudy->{          name,          slug        },        openInNewTab      }    }  }
+export type HeaderQueryResult = {
+  _id: string;
+  _type: "header";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  navigationItems: Array<{
+    _type: "navigationItem";
+    _key: string;
+    label: string | null;
+    link: {
+      linkType: "caseStudy" | "href" | "page" | null;
+      href: string | null;
+      page: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      caseStudy: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      openInNewTab: boolean | null;
+    } | null;
+  }> | null;
+} | null;
 // Variable: getHomePageQuery
 // Query: *[_type == 'page' && slug.current == '/'][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "caseStudy": caseStudy->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "caseStudy": caseStudy->slug.current  }          }        }      },    },    seo{      metaTitle,      metaDescription,      metaImage    },  }
 export type GetHomePageQueryResult = {
@@ -582,8 +608,7 @@ export type GetHomePageQueryResult = {
   } | {
     _key: string;
     _type: "nameHero";
-    logoMobile?: MediaType;
-    logoDesktop?: MediaType;
+    logo?: string;
     description?: Array<{
       _key: string;
     } & MediaType | {
@@ -707,8 +732,7 @@ export type GetPageQueryResult = {
   } | {
     _key: string;
     _type: "nameHero";
-    logoMobile?: MediaType;
-    logoDesktop?: MediaType;
+    logo?: string;
     description?: Array<{
       _key: string;
     } & MediaType | {
@@ -808,6 +832,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"settings\"][0]{\n    title,\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": SettingsQueryResult;
+    "\n  *[_type == \"header\"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    _rev,\n    navigationItems[]{\n      _type,\n      _key,\n      label,\n      link{\n        linkType,\n        href,\n        page->{\n          name,\n          slug\n        },\n        caseStudy->{\n          name,\n          slug\n        },\n        openInNewTab\n      }\n    }\n  }\n": HeaderQueryResult;
     "\n  *[_type == 'page' && slug.current == '/'][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        \n  link {\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n      }\n,\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n          }\n        }\n      },\n    },\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    },\n  }\n": GetHomePageQueryResult;
     "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        \n  link {\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n      }\n,\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"caseStudy\": caseStudy->slug.current\n  }\n\n          }\n        }\n      },\n    },\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    },\n  }\n": GetPageQueryResult;
     "\n  *[_type == \"page\" || _type == \"caseStudy\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;

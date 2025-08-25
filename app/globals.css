@@ -39,6 +39,26 @@
   --color-green-800: #32382e;
   --color-green-900: #191c17;
   --color-green-950: #0d0e0b;
+
+  --text-scale-0: 0.875rem;
+  /* Step -2: 12px → 12px */
+  --text-scale--2: clamp(0.75rem, 0.75rem + 0vi, 0.75rem);
+  /* Step -1: 14px → 14px */
+  --text-scale--1: clamp(0.875rem, 0.875rem + 0vi, 0.875rem);
+  /* Step 0: 16px → 16px */
+  --text-scale-0: clamp(1rem, 1rem + 0vi, 1rem);
+  /* Step 1: 20px → 20px */
+  --text-scale-1: clamp(1.25rem, 1.25rem + 0vi, 1.25rem);
+  /* Step 2: 24px → 24px */
+  --text-scale-2: clamp(1.5rem, 1.5rem + 0vi, 1.5rem);
+  /* Step 3: 28px → 28px */
+  --text-scale-3: clamp(1.75rem, 1.75rem + 0vi, 1.75rem);
+  /* Step 4: 33.1776px → 33.1776px */
+  --text-scale-4: clamp(2.0736rem, 2.0736rem + 0vi, 2.0736rem);
+  /* Step 5: 40px → 40px */
+  --text-scale-5: clamp(2.5rem, 2.5rem + 0vi, 2.5rem);
+  /* Step 6: 48px →  48px*/
+  --text-scale-6: clamp(3rem, 3rem + 0vi, 3rem);
 }
 
 html {
@@ -47,6 +67,48 @@ html {
 
 body {
   @apply min-h-svh lg:min-h-screen;
+}
+
+.link {
+  position: relative;
+  padding: 0.2rem 0rem;
+
+  &:after {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 0%;
+    height: 2.5px;
+    content: '';
+    opacity: 0;
+    background: var(--color-gray-800);
+    transition: all 0.3s ease;
+  }
+
+  &:hover:after {
+    width: 100%;
+    opacity: 0.7;
+  }
+
+  &:active:after {
+    opacity: 1;
+    background: var(--color-gray-600);
+  }
+
+  /* Dark mode support */
+  .dark & {
+    &:after {
+      background: var(--color-green-200);
+    }
+
+    &:hover:after {
+      background: var(--color-green-100);
+    }
+
+    &:active:after {
+      background: var(--color-green-50);
+    }
+  }
 }
 
 /* Custom animation for dark mode toggle ripples */

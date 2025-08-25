@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import PageBuilderPage from '@/app/components/PageBuilder';
+import PageBuilderPage from '@/app/components/PageBuilder/PageBuilderPage/index';
 import { sanityFetch } from '@/sanity/lib/live';
 import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries';
 import { GetPageQueryResult } from '@/sanity.types';
@@ -33,7 +33,7 @@ export default async function Page(props: Props) {
   }
 
   return (
-    <div className='my-12 lg:my-24'>
+    <div className=''>
       <Head>
         <title>{page.name}</title>
       </Head>
