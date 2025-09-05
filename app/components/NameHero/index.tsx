@@ -5,12 +5,13 @@ import DarkModeToggle from '../DarkModeToggle';
 import RichText from '../RichText/RichText';
 import ResolvedLink from '../ResolvedLink';
 
-type NameHeroProps = {
+type INameHero = {
   block: NameHeroType;
+  index: number;
   header?: Header;
 };
 
-const NameHero = ({ block, header }: NameHeroProps) => {
+const NameHero = ({ block, header }: INameHero) => {
   if (!block) return null;
 
   const { logo, description } = block;

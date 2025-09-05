@@ -1,38 +1,35 @@
 import React from 'react';
 import { dataAttr } from '@/sanity/lib/utils';
-import { HeaderQueryResult } from '@/sanity.types';
+import { HeaderQueryResult, GetPageQueryResult } from '@/sanity.types';
 import Cta from '../../Cta';
-import CaseDetails from '../../CaseDetails';
-import Contributions from '../../Contributions';
-import MediaGroup from '../../MediaGroup';
-import NameHero from '../../NameHero';
+import CaseDetailsComponent from '../../CaseDetails';
+import ContributionsComponent from '../../Contributions';
+import MediaGroupComponent from '../../MediaGroup';
+import NameHeroComponent from '../../NameHero';
 
-type BlockType = {
-  _type: string;
-  _key: string;
-  [key: string]: unknown;
-};
+type IBlockType = NonNullable<
+  NonNullable<GetPageQueryResult>['pageBuilder']
+>[number];
 
-type BlockProps = {
+type IBlockRenderer = {
   index: number;
-  block: BlockType;
+  block: IBlockType;
   pageId: string;
   pageType: string;
-  header?: HeaderQueryResult;
+  header?: HeaderQueryResult | null;
 };
 
-// Block registry - centralized component mapping
-const blockRegistry = {
+// Block registry - maps block types to their components
+const BLOCK_COMPONENTS = {
   callToAction: Cta,
-  nameHero: NameHero,
-  contributions: Contributions,
-  caseDetails: CaseDetails,
-  mediaGroup: MediaGroup,
+  nameHero: NameHeroComponent,
+  contributions: ContributionsComponent,
+  caseDetails: CaseDetailsComponent,
+  mediaGroup: MediaGroupComponent,
 } as const;
 
 /**
- * Used by the <PageBuilder>, this component renders the component
- * that matches the block type based on Sanity schema.
+ * Renders a single block based on its type from the Sanity schema.
  */
 export default function BlockRenderer({
   block,
@@ -40,18 +37,23 @@ export default function BlockRenderer({
   pageId,
   pageType,
   header,
-}: BlockProps) {
-  const Component = blockRegistry[block._type as keyof typeof blockRegistry];
+}: IBlockRenderer) {
+  const Component =
+    BLOCK_COMPONENTS[block._type as keyof typeof BLOCK_COMPONENTS];
 
+  // Create data attributes for Sanity presentation tool
+  const dataAttributes = dataAttr({
+    id: pageId,
+    type: pageType,
+    path: `pageBuilder[_key=="${block._key}"]`,
+  }).toString();
+
+  // If component doesn't exist, show error message
   if (!Component) {
     return (
       <div
         key={block._key}
-        data-sanity={dataAttr({
-          id: pageId,
-          type: pageType,
-          path: `pageBuilder[_key=="${block._key}"]`,
-        }).toString()}
+        data-sanity={dataAttributes}
         className='w-full bg-red-50 border border-red-200 text-center text-red-600 p-8 rounded'
       >
         A &ldquo;{block._type}&rdquo; block hasn&apos;t been created
@@ -60,16 +62,12 @@ export default function BlockRenderer({
   }
 
   return (
-    <div
-      key={block._key}
-      data-sanity={dataAttr({
-        id: pageId,
-        type: pageType,
-        path: `pageBuilder[_key=="${block._key}"]`,
-      }).toString()}
-    >
-      {/* @ts-expect-error - Component props are handled dynamically based on block type */}
-      <Component block={block} index={index} header={header} />
+    <div key={block._key} data-sanity={dataAttributes}>
+      <Component
+        block={block as never}
+        index={index}
+        header={header as never}
+      />
     </div>
   );
 }

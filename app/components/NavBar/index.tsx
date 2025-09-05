@@ -1,7 +1,24 @@
 import React from 'react';
+import { NavBar as NavBarType } from '@/sanity.types';
 
-const NavBar = () => {
-  return <section>NavBar</section>;
+type INavBar = {
+  block: NavBarType;
+  index: number;
+  header?: unknown;
+};
+
+const NavBar = ({ block }: INavBar) => {
+  if (!block) return null;
+
+  const { logo } = block;
+
+  return (
+    <section>
+      <nav>
+        <div className='logo'>{logo}</div>
+      </nav>
+    </section>
+  );
 };
 
 export default NavBar;
