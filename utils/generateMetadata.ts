@@ -1,7 +1,6 @@
 import type { Metadata, ResolvingMetadata } from 'next';
 import { resolveOpenGraphImage } from '@/sanity/lib/utils';
 import {
-  getHomePageQuery,
   getPageQuery,
   settingsQuery,
   caseStudyQuery,
@@ -43,7 +42,6 @@ export async function generateMetadata(
   // Determine the page type based on the current route
   // This function is used by both /[slug] and /projects/[slug] routes
   const isHome = !slug || slug === '/';
-  const isProjectPage = slug && !isHome; // If it's not home, it could be a project or regular page
 
   const baseUrl =
     process.env.NEXT_PUBLIC_SANITY_STUDIO_PREVIEW_URL ||
@@ -60,26 +58,18 @@ export async function generateMetadata(
       params: { slug },
     });
     caseStudy = data;
-  } catch (error) {
+  } catch {
     // If it's not a case study, continue to try as a regular page
   }
 
   // If it's not a case study, try as a regular page
   let page = null;
   if (!caseStudy) {
-    if (isHome) {
-      const { data } = await sanityFetch({
-        query: getHomePageQuery,
-        params: { slug: '/' },
-      });
-      page = data;
-    } else {
-      const { data } = await sanityFetch({
-        query: getPageQuery,
-        params: { slug },
-      });
-      page = data;
-    }
+    const { data } = await sanityFetch({
+      query: getPageQuery,
+      params: { slug: isHome ? '/' : slug },
+    });
+    page = data;
   }
 
   const pageSeo = page?.seo;

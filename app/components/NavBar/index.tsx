@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavBar as NavBarType } from '@/sanity.types';
+import { NavBar as NavBarType, HeaderQueryResult } from '@/sanity.types';
 
 type INavBar = {
   block: NavBarType;
   index: number;
-  header?: unknown;
+  header?: HeaderQueryResult;
 };
 
 const NavBar = ({ block }: INavBar) => {

@@ -19,7 +19,7 @@ type IBlockRenderer = {
   header?: HeaderQueryResult | null;
 };
 
-// Block registry - maps block types to their components
+// Simple block registry - single source of truth for all blocks
 const BLOCK_COMPONENTS = {
   callToAction: Cta,
   nameHero: NameHeroComponent,
@@ -28,9 +28,6 @@ const BLOCK_COMPONENTS = {
   mediaGroup: MediaGroupComponent,
 } as const;
 
-/**
- * Renders a single block based on its type from the Sanity schema.
- */
 export default function BlockRenderer({
   block,
   index,
@@ -38,9 +35,6 @@ export default function BlockRenderer({
   pageType,
   header,
 }: IBlockRenderer) {
-  const Component =
-    BLOCK_COMPONENTS[block._type as keyof typeof BLOCK_COMPONENTS];
-
   // Create data attributes for Sanity presentation tool
   const dataAttributes = dataAttr({
     id: pageId,
@@ -48,7 +42,9 @@ export default function BlockRenderer({
     path: `pageBuilder[_key=="${block._key}"]`,
   }).toString();
 
-  // If component doesn't exist, show error message
+  const Component =
+    BLOCK_COMPONENTS[block._type as keyof typeof BLOCK_COMPONENTS];
+
   if (!Component) {
     return (
       <div
@@ -62,12 +58,9 @@ export default function BlockRenderer({
   }
 
   return (
-    <div key={block._key} data-sanity={dataAttributes}>
-      <Component
-        block={block as never}
-        index={index}
-        header={header as never}
-      />
+    <div key={block._key} data-sanity={dataAttributes} className='grid'>
+      {/* @ts-expect-error - Dynamic component props are properly typed in individual components */}
+      <Component block={block} index={index} header={header} />
     </div>
   );
 }

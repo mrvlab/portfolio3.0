@@ -40,33 +40,78 @@
   --color-green-900: #191c17;
   --color-green-950: #0d0e0b;
 
-  --text-scale-0: 0.875rem;
-  /* Step -2: 12px → 12px */
-  --text-scale--2: clamp(0.75rem, 0.75rem + 0vi, 0.75rem);
-  /* Step -1: 14px → 14px */
-  --text-scale--1: clamp(0.875rem, 0.875rem + 0vi, 0.875rem);
-  /* Step 0: 16px → 16px */
-  --text-scale-0: clamp(1rem, 1rem + 0vi, 1rem);
-  /* Step 1: 20px → 20px */
-  --text-scale-1: clamp(1.25rem, 1.25rem + 0vi, 1.25rem);
-  /* Step 2: 24px → 24px */
-  --text-scale-2: clamp(1.5rem, 1.5rem + 0vi, 1.5rem);
-  /* Step 3: 28px → 28px */
-  --text-scale-3: clamp(1.75rem, 1.75rem + 0vi, 1.75rem);
-  /* Step 4: 33.1776px → 33.1776px */
-  --text-scale-4: clamp(2.0736rem, 2.0736rem + 0vi, 2.0736rem);
-  /* Step 5: 40px → 40px */
-  --text-scale-5: clamp(2.5rem, 2.5rem + 0vi, 2.5rem);
-  /* Step 6: 48px →  48px*/
-  --text-scale-6: clamp(3rem, 3rem + 0vi, 3rem);
+  /* Aspect ratios */
+  --aspect-4/5: 4 / 5;
+
+  /* Step -3: 9px → 12px */
+  --text-scale--3: clamp(0.5625rem, 0.1875rem + 0.586vw, 0.75rem);
+
+  /* Step -2: 12px → 13.33px */
+  --text-scale--2: clamp(0.75rem, 0.417rem + 0.434vw, 0.833rem);
+
+  /* Step -1: 13.33px → 16px */
+  --text-scale--1: clamp(0.833rem, 0.63rem + 0.63vw, 1rem);
+
+  /* Step 0: 16px → 19px */
+  --text-scale-0: clamp(1rem, 0.625rem + 0.586vw, 1.1875rem);
+
+  /* Step 1: 19.2px → 23px */
+  --text-scale-1: clamp(1.2rem, 0.88rem + 0.625vw, 1.4375rem);
+
+  /* Step 2: 23.04px → 28px */
+  --text-scale-2: clamp(1.44rem, 1.04rem + 0.77vw, 1.75rem);
+
+  /* Step 3: 27.65px → 33px */
+  --text-scale-3: clamp(1.728rem, 1.25rem + 0.93vw, 2.0736rem);
+
+  /* Step 4: 33.18px → 40px */
+  --text-scale-4: clamp(2.0736rem, 1.55rem + 1.14vw, 2.5rem);
+
+  /* Step 5: 39.81px → 48px */
+  --text-scale-5: clamp(2.488rem, 1.88rem + 1.22vw, 3rem);
 }
 
-html {
-  scroll-behavior: smooth;
+/* @utility body-tiny {
+  font-size: var(--text-scale--3);
+  font-weight: 400;
+  line-height: 120%;
 }
+@utility body-small {
+  font-size: var(--text-scale--2);
+  font-weight: 400;
+  line-height: 120%;
 
-body {
-  @apply min-h-svh lg:min-h-screen;
+  @media (max-width: 768px) {
+    font-size: clamp(.75rem, .93vw, 18px)
+  }
+}
+@utility body-medium {
+  font-size: var(--text-scale--1);
+  font-weight: 400;
+  line-height: 120%;
+}
+@utility body-regular {
+  font-size: var(--text-scale-0);
+  font-weight: 400;
+  line-height: 120%;
+} */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply min-h-svh lg:min-h-screen text-scale--1;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    line-height: 100%;
+  }
 }
 
 .link {

@@ -1,5 +1,11 @@
 import { defineQuery } from 'next-sanity';
 
+const linkReferenceQuery = /* groq */ `
+  _type == "link" => {
+    "page": page->slug.current,
+    "caseStudy": caseStudy->slug.current
+  }
+`;
 export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     title,
@@ -39,61 +45,6 @@ export const headerQuery = defineQuery(`
   }
 `);
 
-const caseStudyFieldsQuery = /* groq */ `
-  _id,
-  "status": select(_originalId in path("drafts.**") => "draft", "published"),
-  name,
-  slug,
-  "date": coalesce(date, _updatedAt),
-  seo{
-    metaTitle,
-    metaDescription,
-    metaImage
-  }
-`;
-
-const linkReferenceQuery = /* groq */ `
-  _type == "link" => {
-    "page": page->slug.current,
-    "caseStudy": caseStudy->slug.current
-  }
-`;
-
-const linkFields = /* groq */ `
-  link {
-      ...,
-      ${linkReferenceQuery}
-      }
-`;
-
-export const getHomePageQuery = defineQuery(`
-  *[_type == 'page' && slug.current == '/'][0]{
-    _id,
-    _type,
-    name,
-    slug,
-    "pageBuilder": pageBuilder[]{
-      ...,
-      _type == "callToAction" => {
-        ${linkFields},
-      },
-      _type == "infoSection" => {
-        content[]{
-          ...,
-          markDefs[]{
-            ...,
-            ${linkReferenceQuery}
-          }
-        }
-      },
-    },
-    seo{
-      metaTitle,
-      metaDescription,
-      metaImage
-    },
-  }
-`);
 export const getPageQuery = defineQuery(`
   *[_type == 'page' && slug.current == $slug][0]{
     _id,
@@ -101,18 +52,172 @@ export const getPageQuery = defineQuery(`
     name,
     slug,
     "pageBuilder": pageBuilder[]{
-      ...,
+      _type,
+      _key,
       _type == "callToAction" => {
-        ${linkFields},
+        heading,
+        text,
+        buttonText,
+        link {
+          _type,
+          _key,
+          linkType,
+          href,
+          page->{
+            name,
+            slug
+          },
+          caseStudy->{
+            name,
+            slug
+          },
+          openInNewTab
+        },
       },
-      _type == "infoSection" => {
-        content[]{
-          ...,
+      _type == "contributions" => {
+        title,
+        agencyWorkList[]->{
+          _type,
+          _key,
+          _id,
+          agencyClient,
+          agencyClientUrl
+        },
+        projectListLabel,
+        projectsList[]->{
+          _type,
+          _key,
+          _id,
+          name,
+          slug,
+          poster,
+          "date": coalesce(date, _updatedAt)
+        }
+      },
+      _type == "caseDetails" => {
+        title,
+        descriptionLabel,
+        description[]{
+          _type,
+          _key,
+          children[]{
+            _type,
+            _key,
+            marks,
+            text
+          },
+          style,
+          listItem,
+          level,
           markDefs[]{
-            ...,
-            ${linkReferenceQuery}
+            _type,
+            _key,
+            _type == "link" => {
+              "page": page->slug.current,
+              "caseStudy": caseStudy->slug.current
+            }
+          }
+        },
+        detailsLabel,
+        detailsItems[]{
+          _type,
+          _key,
+          itemType,
+          title,
+          text,
+          tags[]->{
+            _id,
+            name
+          },
+          linkData{
+            linkLabel,
+            link{
+              linkType,
+              href,
+              page->{
+                name,
+                slug
+              },
+              caseStudy->{
+                name,
+                slug
+              },
+              openInNewTab
+            }
+          }
+        },
+        creditsLabel,
+        creditsItems[]{
+          _type,
+          _key,
+          itemType,
+          title,
+          text,
+          tags[]->{
+            _id,
+            name
+          },
+          linkData{
+            linkLabel,
+            link{
+              linkType,
+              href,
+              page->{
+                name,
+                slug
+              },
+              caseStudy->{
+                name,
+                slug
+              },
+              openInNewTab
+            }
           }
         }
+      },
+      _type == "mediaGroup" => {
+        mediaItems[]{
+          _type,
+          _key,
+          media{
+            asset->{
+              _id,
+              url,
+              metadata{
+                dimensions,
+                lqip
+              }
+            },
+            alt
+          }
+        }
+      },
+      _type == "nameHero" => {
+        logo,
+        description[]{
+          _type,
+          _key,
+          children[]{
+            _type,
+            _key,
+            marks,
+            text
+          },
+          style,
+          listItem,
+          level,
+          markDefs[]{
+            _type,
+            _key,
+            _type == "link" => {
+              "page": page->slug.current,
+              "caseStudy": caseStudy->slug.current
+            }
+          }
+        }
+      },
+      _type == "navBar" => {
+        logo
       },
     },
     seo{
@@ -133,26 +238,67 @@ export const sitemapData = defineQuery(`
 
 export const allCaseStudiesQuery = defineQuery(`
   *[_type == "caseStudy" && defined(slug.current)] | order(date desc, _updatedAt desc) {
-    ${caseStudyFieldsQuery}
+    _id,
+    "status": select(_originalId in path("drafts.**") => "draft", "published"),
+    name,
+    slug,
+    "date": coalesce(date, _updatedAt),
+    seo{
+      metaTitle,
+      metaDescription,
+      metaImage
+    }
   }
 `);
 
 export const moreCaseStudiesQuery = defineQuery(`
   *[_type == "caseStudy" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
-    ${caseStudyFieldsQuery}
+    _id,
+    "status": select(_originalId in path("drafts.**") => "draft", "published"),
+    name,
+    slug,
+    "date": coalesce(date, _updatedAt),
+    seo{
+      metaTitle,
+      metaDescription,
+      metaImage
+    }
   }
 `);
 
 export const caseStudyQuery = defineQuery(`
   *[_type == "caseStudy" && slug.current == $slug] [0] {
     content[]{
-    ...,
+    _type,
+    _key,
+    children[]{
+      _type,
+      _key,
+      marks,
+      text
+    },
+    style,
+    listItem,
+    level,
     markDefs[]{
-      ...,
-      ${linkReferenceQuery}
+      _type,
+      _key,
+      _type == "link" => {
+        "page": page->slug.current,
+        "caseStudy": caseStudy->slug.current
+      }
     }
   },
-    ${caseStudyFieldsQuery}
+    _id,
+    "status": select(_originalId in path("drafts.**") => "draft", "published"),
+    name,
+    slug,
+    "date": coalesce(date, _updatedAt),
+    seo{
+      metaTitle,
+      metaDescription,
+      metaImage
+    }
   }
 `);
 

@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html
       lang='en'
-      className={`${syne.variable} ${plusJakartaSans.className}`}
+      className={`${syne.variable} ${plusJakartaSans.variable}`}
       suppressHydrationWarning
     >
       <body className='bg-gray-500 text-gray-900 dark:bg-green-500 dark:text-white'>

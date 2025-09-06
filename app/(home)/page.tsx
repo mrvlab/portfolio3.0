@@ -2,20 +2,12 @@ import Head from 'next/head';
 
 import PageBuilderPage from '@/app/components/PageBuilder/PageBuilderPage/index';
 import { sanityFetch } from '@/sanity/lib/live';
-import {
-  getHomePageQuery,
-  pagesSlugs,
-  headerQuery,
-} from '@/sanity/lib/queries';
-import { GetPageQueryResult, Header, HeaderQueryResult } from '@/sanity.types';
+import { getPageQuery, pagesSlugs, headerQuery } from '@/sanity/lib/queries';
+import { GetPageQueryResult, HeaderQueryResult } from '@/sanity.types';
 
 import { generateMetadata } from '@/utils/generateMetadata';
-import { Fragment, Suspense } from 'react';
+import { Fragment } from 'react';
 import { notFound } from 'next/navigation';
-
-type Props = {
-  params: Promise<{ slug: string }>;
-};
 
 export { generateMetadata };
 
@@ -28,10 +20,9 @@ export async function generateStaticParams() {
   return data;
 }
 
-export default async function Page(props: Props) {
-  const params = await props.params;
+export default async function Page() {
   const [{ data: page }, { data: header }] = await Promise.all([
-    sanityFetch({ query: getHomePageQuery, params }),
+    sanityFetch({ query: getPageQuery, params: { slug: '/' } }),
     sanityFetch({ query: headerQuery }),
   ]);
 

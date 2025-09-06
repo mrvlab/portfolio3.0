@@ -1,10 +1,13 @@
 import React from 'react';
-import { MediaGroup as MediaGroupType } from '@/sanity.types';
+import {
+  MediaGroup as MediaGroupType,
+  HeaderQueryResult,
+} from '@/sanity.types';
 
 type IMediaGroup = {
   block: MediaGroupType;
   index: number;
-  header?: unknown;
+  header?: HeaderQueryResult;
 };
 
 const MediaGroup = ({ block }: IMediaGroup) => {

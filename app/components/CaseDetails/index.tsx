@@ -1,11 +1,14 @@
 import React from 'react';
-import { CaseDetails as CaseDetailsType } from '@/sanity.types';
+import {
+  CaseDetails as CaseDetailsType,
+  HeaderQueryResult,
+} from '@/sanity.types';
 import { PortableText } from '@portabletext/react';
 
 type ICaseDetails = {
   block: CaseDetailsType;
   index: number;
-  header?: unknown;
+  header?: HeaderQueryResult;
 };
 
 const CaseDetails = ({ block }: ICaseDetails) => {
