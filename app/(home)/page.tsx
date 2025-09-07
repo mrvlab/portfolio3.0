@@ -32,21 +32,7 @@ export default async function Page() {
 
   return (
     <Fragment>
-      <Head>
-        <title>{page.name}</title>
-      </Head>
-
-      <PageBuilderPage
-        page={page as GetPageQueryResult}
-        header={header as HeaderQueryResult}
-      />
-      {/* <div className='border-t border-gray-100 bg-gray-50'>
-        <div className='container'>
-          <aside className='py-12 sm:py-20'>
-            <Suspense>{await AllCaseStudies()}</Suspense>
-          </aside>
-        </div>
-      </div> */}
+      <PageBuilderPage page={page} header={header} />
     </Fragment>
   );
 }

@@ -4,6 +4,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className='grid p-5 gap-5 min-h-svh lg:min-h-vh'>{children}</main>
+    <main className='grid p-5 gap-5 min-h-svh 2xl:h-screen '>{children}</main>
   );
 }

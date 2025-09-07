@@ -257,7 +257,7 @@ export type AgencyWork = {
   _updatedAt: string;
   _rev: string;
   agencyClient?: string;
-  agencyClientUrl?: string;
+  agencyClientLink?: Link;
 };
 
 export type Page = {
@@ -303,8 +303,6 @@ export type CaseStudy = {
   } & CallToAction | {
     _key: string;
   } & CaseDetails | {
-    _key: string;
-  } & Contributions | {
     _key: string;
   } & MediaGroup | {
     _key: string;
@@ -515,7 +513,7 @@ export type HeaderQueryResult = {
   }> | null;
 } | null;
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{      _type,      _key,      _type == "callToAction" => {        heading,        text,        buttonText,        link {          _type,          _key,          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        },      },      _type == "contributions" => {        title,        agencyWorkList[]->{          _type,          _key,          _id,          agencyClient,          agencyClientUrl        },        projectListLabel,        projectsList[]->{          _type,          _key,          _id,          name,          slug,          poster,          "date": coalesce(date, _updatedAt)        }      },      _type == "caseDetails" => {        title,        descriptionLabel,        description[]{          _type,          _key,          children[]{            _type,            _key,            marks,            text          },          style,          listItem,          level,          markDefs[]{            _type,            _key,            _type == "link" => {              "page": page->slug.current,              "caseStudy": caseStudy->slug.current            }          }        },        detailsLabel,        detailsItems[]{          _type,          _key,          itemType,          title,          text,          tags[]->{            _id,            name          },          linkData{            linkLabel,            link{              linkType,              href,              page->{                name,                slug              },              caseStudy->{                name,                slug              },              openInNewTab            }          }        },        creditsLabel,        creditsItems[]{          _type,          _key,          itemType,          title,          text,          tags[]->{            _id,            name          },          linkData{            linkLabel,            link{              linkType,              href,              page->{                name,                slug              },              caseStudy->{                name,                slug              },              openInNewTab            }          }        }      },      _type == "mediaGroup" => {        mediaItems[]{          _type,          _key,          media{            asset->{              _id,              url,              metadata{                dimensions,                lqip              }            },            alt          }        }      },      _type == "nameHero" => {        logo,        description[]{          _type,          _key,          children[]{            _type,            _key,            marks,            text          },          style,          listItem,          level,          markDefs[]{            _type,            _key,            _type == "link" => {              "page": page->slug.current,              "caseStudy": caseStudy->slug.current            }          }        }      },      _type == "navBar" => {        logo      },    },    seo{      metaTitle,      metaDescription,      metaImage    },  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "navBar" => {    navigationItems[]{      _type,      _key,      label,      link {        _type,        _key,        linkType,        href,        page->{          name,          slug        },        caseStudy->{          name,          slug        },        openInNewTab      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        name      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        name      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaGroup" => {    mediaItems[]{      _type,      _key,      media{        asset->{          ...,          metadata        },        hotspot,        crop,        alt      }    }  },  _type == "contributions" => {    title,    projectListLabel,    projectsList[]->{      _type,      _key,      _id,      name,      slug,      poster,      "date": coalesce(date, _updatedAt),      "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "navBar" => {    navigationItems[]{      _type,      _key,      label,      link {        _type,        _key,        linkType,        href,        page->{          name,          slug        },        caseStudy->{          name,          slug        },        openInNewTab      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        name      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        name      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaGroup" => {    mediaItems[]{      _type,      _key,      media{        asset->{          ...,          metadata        },        hotspot,        crop,        alt      }    }  }}    },    agencyWorkList[]->{      _type,      _key,      _id,      agencyClient,      agencyClientLink    }  }},    seo{      metaTitle,      metaDescription,      metaImage    }  }
 export type GetPageQueryResult = {
   _id: string;
   _type: "page";
@@ -626,13 +624,6 @@ export type GetPageQueryResult = {
     _type: "contributions";
     _key: string;
     title: string | null;
-    agencyWorkList: Array<{
-      _type: "agencyWork";
-      _key: null;
-      _id: string;
-      agencyClient: string | null;
-      agencyClientUrl: string | null;
-    }> | null;
     projectListLabel: string | null;
     projectsList: Array<{
       _type: "caseStudy";
@@ -642,6 +633,184 @@ export type GetPageQueryResult = {
       slug: Slug | null;
       poster: MediaType | null;
       date: string;
+      pageBuilder: Array<{
+        _type: "callToAction";
+        _key: string;
+        heading: string | null;
+        text: string | null;
+        buttonText: string | null;
+        link: {
+          _type: "link";
+          _key: null;
+          linkType: "caseStudy" | "href" | "page" | null;
+          href: string | null;
+          page: {
+            name: string | null;
+            slug: Slug | null;
+          } | null;
+          caseStudy: {
+            name: string | null;
+            slug: Slug | null;
+          } | null;
+          openInNewTab: boolean | null;
+        } | null;
+      } | {
+        _type: "caseDetails";
+        _key: string;
+        title: string | null;
+        descriptionLabel: string | null;
+        description: Array<{
+          _type: "block";
+          _key: string;
+          children: Array<{
+            _type: "span";
+            _key: string;
+            marks: Array<string> | null;
+            text: string | null;
+          }> | null;
+          style: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal" | null;
+          listItem: "bullet" | "number" | null;
+          level: number | null;
+          markDefs: Array<{
+            _type: "link";
+            _key: string;
+            page: string | null;
+            caseStudy: string | null;
+          }> | null;
+        }> | null;
+        detailsLabel: string | null;
+        detailsItems: Array<{
+          _type: "detailsItem";
+          _key: string;
+          itemType: "titleWithLink" | "titleWithReferences" | "titleWithText" | null;
+          title: string | null;
+          text: string | null;
+          tags: Array<{
+            _id: string;
+            name: string | null;
+          }> | null;
+          linkData: {
+            linkLabel: string | null;
+            link: {
+              linkType: "caseStudy" | "href" | "page" | null;
+              href: string | null;
+              page: {
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              caseStudy: {
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              openInNewTab: boolean | null;
+            } | null;
+          } | null;
+        }> | null;
+        creditsLabel: string | null;
+        creditsItems: Array<{
+          _type: "detailsItem";
+          _key: string;
+          itemType: "titleWithLink" | "titleWithReferences" | "titleWithText" | null;
+          title: string | null;
+          text: string | null;
+          tags: Array<{
+            _id: string;
+            name: string | null;
+          }> | null;
+          linkData: {
+            linkLabel: string | null;
+            link: {
+              linkType: "caseStudy" | "href" | "page" | null;
+              href: string | null;
+              page: {
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              caseStudy: {
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              openInNewTab: boolean | null;
+            } | null;
+          } | null;
+        }> | null;
+      } | {
+        _type: "mediaGroup";
+        _key: string;
+        mediaItems: Array<{
+          _type: "mediaType";
+          _key: string;
+          media: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata: SanityImageMetadata | null;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+            alt: string | null;
+          } | null;
+        }> | null;
+      } | {
+        _type: "nameHero";
+        _key: string;
+        logo: string | null;
+        description: Array<{
+          _type: "block";
+          _key: string;
+          children: Array<{
+            _type: "span";
+            _key: string;
+            marks: Array<string> | null;
+            text: string | null;
+          }> | null;
+          style: "blockquote" | "h2" | "h3" | "normal" | null;
+          listItem: "bullet" | null;
+          level: number | null;
+          markDefs: Array<{
+            _type: "link";
+            _key: string;
+            page: string | null;
+            caseStudy: string | null;
+          }> | null;
+        } | {
+          _type: "mediaType";
+          _key: string;
+          children: null;
+          style: null;
+          listItem: null;
+          level: null;
+          markDefs: null;
+        }> | null;
+      } | {
+        _type: "navBar";
+        _key: string;
+        navigationItems: null;
+      }> | null;
+    }> | null;
+    agencyWorkList: Array<{
+      _type: "agencyWork";
+      _key: null;
+      _id: string;
+      agencyClient: string | null;
+      agencyClientLink: Link | null;
     }> | null;
   } | {
     _type: "mediaGroup";
@@ -652,12 +821,28 @@ export type GetPageQueryResult = {
       media: {
         asset: {
           _id: string;
-          url: string | null;
-          metadata: {
-            dimensions: SanityImageDimensions | null;
-            lqip: string | null;
-          } | null;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata: SanityImageMetadata | null;
+          source?: SanityAssetSourceData;
         } | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
         alt: string | null;
       } | null;
     }> | null;
@@ -695,7 +880,7 @@ export type GetPageQueryResult = {
   } | {
     _type: "navBar";
     _key: string;
-    logo: string | null;
+    navigationItems: null;
   }> | null;
   seo: {
     metaTitle: string | null;
@@ -743,14 +928,186 @@ export type MoreCaseStudiesQueryResult = Array<{
   } | null;
 }>;
 // Variable: caseStudyQuery
-// Query: *[_type == "caseStudy" && slug.current == $slug] [0] {    content[]{    _type,    _key,    children[]{      _type,      _key,      marks,      text    },    style,    listItem,    level,    markDefs[]{      _type,      _key,      _type == "link" => {        "page": page->slug.current,        "caseStudy": caseStudy->slug.current      }    }  },    _id,    "status": select(_originalId in path("drafts.**") => "draft", "published"),    name,    slug,    "date": coalesce(date, _updatedAt),    seo{      metaTitle,      metaDescription,      metaImage    }  }
+// Query: *[_type == "caseStudy" && slug.current == $slug] [0] {    _id,    _type,    "status": select(_originalId in path("drafts.**") => "draft", "published"),    name,    slug,    poster,    "date": coalesce(date, _updatedAt),    "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "navBar" => {    navigationItems[]{      _type,      _key,      label,      link {        _type,        _key,        linkType,        href,        page->{          name,          slug        },        caseStudy->{          name,          slug        },        openInNewTab      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        name      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        name      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaGroup" => {    mediaItems[]{      _type,      _key,      media{        asset->{          ...,          metadata        },        hotspot,        crop,        alt      }    }  }},    seo{      metaTitle,      metaDescription,      metaImage    }  }
 export type CaseStudyQueryResult = {
-  content: null;
   _id: string;
+  _type: "caseStudy";
   status: "draft" | "published";
   name: string | null;
   slug: Slug | null;
+  poster: MediaType | null;
   date: string;
+  pageBuilder: Array<{
+    _type: "callToAction";
+    _key: string;
+    heading: string | null;
+    text: string | null;
+    buttonText: string | null;
+    link: {
+      _type: "link";
+      _key: null;
+      linkType: "caseStudy" | "href" | "page" | null;
+      href: string | null;
+      page: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      caseStudy: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      openInNewTab: boolean | null;
+    } | null;
+  } | {
+    _type: "caseDetails";
+    _key: string;
+    title: string | null;
+    descriptionLabel: string | null;
+    description: Array<{
+      _type: "block";
+      _key: string;
+      children: Array<{
+        _type: "span";
+        _key: string;
+        marks: Array<string> | null;
+        text: string | null;
+      }> | null;
+      style: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal" | null;
+      listItem: "bullet" | "number" | null;
+      level: number | null;
+      markDefs: Array<{
+        _type: "link";
+        _key: string;
+        page: string | null;
+        caseStudy: string | null;
+      }> | null;
+    }> | null;
+    detailsLabel: string | null;
+    detailsItems: Array<{
+      _type: "detailsItem";
+      _key: string;
+      itemType: "titleWithLink" | "titleWithReferences" | "titleWithText" | null;
+      title: string | null;
+      text: string | null;
+      tags: Array<{
+        _id: string;
+        name: string | null;
+      }> | null;
+      linkData: {
+        linkLabel: string | null;
+        link: {
+          linkType: "caseStudy" | "href" | "page" | null;
+          href: string | null;
+          page: {
+            name: string | null;
+            slug: Slug | null;
+          } | null;
+          caseStudy: {
+            name: string | null;
+            slug: Slug | null;
+          } | null;
+          openInNewTab: boolean | null;
+        } | null;
+      } | null;
+    }> | null;
+    creditsLabel: string | null;
+    creditsItems: Array<{
+      _type: "detailsItem";
+      _key: string;
+      itemType: "titleWithLink" | "titleWithReferences" | "titleWithText" | null;
+      title: string | null;
+      text: string | null;
+      tags: Array<{
+        _id: string;
+        name: string | null;
+      }> | null;
+      linkData: {
+        linkLabel: string | null;
+        link: {
+          linkType: "caseStudy" | "href" | "page" | null;
+          href: string | null;
+          page: {
+            name: string | null;
+            slug: Slug | null;
+          } | null;
+          caseStudy: {
+            name: string | null;
+            slug: Slug | null;
+          } | null;
+          openInNewTab: boolean | null;
+        } | null;
+      } | null;
+    }> | null;
+  } | {
+    _type: "mediaGroup";
+    _key: string;
+    mediaItems: Array<{
+      _type: "mediaType";
+      _key: string;
+      media: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata: SanityImageMetadata | null;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+        alt: string | null;
+      } | null;
+    }> | null;
+  } | {
+    _type: "nameHero";
+    _key: string;
+    logo: string | null;
+    description: Array<{
+      _type: "block";
+      _key: string;
+      children: Array<{
+        _type: "span";
+        _key: string;
+        marks: Array<string> | null;
+        text: string | null;
+      }> | null;
+      style: "blockquote" | "h2" | "h3" | "normal" | null;
+      listItem: "bullet" | null;
+      level: number | null;
+      markDefs: Array<{
+        _type: "link";
+        _key: string;
+        page: string | null;
+        caseStudy: string | null;
+      }> | null;
+    } | {
+      _type: "mediaType";
+      _key: string;
+      children: null;
+      style: null;
+      listItem: null;
+      level: null;
+      markDefs: null;
+    }> | null;
+  } | {
+    _type: "navBar";
+    _key: string;
+    navigationItems: null;
+  }> | null;
   seo: {
     metaTitle: string | null;
     metaDescription: string | null;
@@ -774,11 +1131,11 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"settings\"][0]{\n    title,\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": SettingsQueryResult;
     "\n  *[_type == \"header\"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    _rev,\n    navigationItems[]{\n      _type,\n      _key,\n      label,\n      link{\n        linkType,\n        href,\n        page->{\n          name,\n          slug\n        },\n        caseStudy->{\n          name,\n          slug\n        },\n        openInNewTab\n      }\n    }\n  }\n": HeaderQueryResult;
-    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    \"pageBuilder\": pageBuilder[]{\n      _type,\n      _key,\n      _type == \"callToAction\" => {\n        heading,\n        text,\n        buttonText,\n        link {\n          _type,\n          _key,\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        },\n      },\n      _type == \"contributions\" => {\n        title,\n        agencyWorkList[]->{\n          _type,\n          _key,\n          _id,\n          agencyClient,\n          agencyClientUrl\n        },\n        projectListLabel,\n        projectsList[]->{\n          _type,\n          _key,\n          _id,\n          name,\n          slug,\n          poster,\n          \"date\": coalesce(date, _updatedAt)\n        }\n      },\n      _type == \"caseDetails\" => {\n        title,\n        descriptionLabel,\n        description[]{\n          _type,\n          _key,\n          children[]{\n            _type,\n            _key,\n            marks,\n            text\n          },\n          style,\n          listItem,\n          level,\n          markDefs[]{\n            _type,\n            _key,\n            _type == \"link\" => {\n              \"page\": page->slug.current,\n              \"caseStudy\": caseStudy->slug.current\n            }\n          }\n        },\n        detailsLabel,\n        detailsItems[]{\n          _type,\n          _key,\n          itemType,\n          title,\n          text,\n          tags[]->{\n            _id,\n            name\n          },\n          linkData{\n            linkLabel,\n            link{\n              linkType,\n              href,\n              page->{\n                name,\n                slug\n              },\n              caseStudy->{\n                name,\n                slug\n              },\n              openInNewTab\n            }\n          }\n        },\n        creditsLabel,\n        creditsItems[]{\n          _type,\n          _key,\n          itemType,\n          title,\n          text,\n          tags[]->{\n            _id,\n            name\n          },\n          linkData{\n            linkLabel,\n            link{\n              linkType,\n              href,\n              page->{\n                name,\n                slug\n              },\n              caseStudy->{\n                name,\n                slug\n              },\n              openInNewTab\n            }\n          }\n        }\n      },\n      _type == \"mediaGroup\" => {\n        mediaItems[]{\n          _type,\n          _key,\n          media{\n            asset->{\n              _id,\n              url,\n              metadata{\n                dimensions,\n                lqip\n              }\n            },\n            alt\n          }\n        }\n      },\n      _type == \"nameHero\" => {\n        logo,\n        description[]{\n          _type,\n          _key,\n          children[]{\n            _type,\n            _key,\n            marks,\n            text\n          },\n          style,\n          listItem,\n          level,\n          markDefs[]{\n            _type,\n            _key,\n            _type == \"link\" => {\n              \"page\": page->slug.current,\n              \"caseStudy\": caseStudy->slug.current\n            }\n          }\n        }\n      },\n      _type == \"navBar\" => {\n        logo\n      },\n    },\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    },\n  }\n": GetPageQueryResult;
+    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"navBar\" => {\n    navigationItems[]{\n      _type,\n      _key,\n      label,\n      link {\n        _type,\n        _key,\n        linkType,\n        href,\n        page->{\n          name,\n          slug\n        },\n        caseStudy->{\n          name,\n          slug\n        },\n        openInNewTab\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        name\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        name\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaGroup\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      media{\n        asset->{\n          ...,\n          metadata\n        },\n        hotspot,\n        crop,\n        alt\n      }\n    }\n  },\n  _type == \"contributions\" => {\n    title,\n    projectListLabel,\n    projectsList[]->{\n      _type,\n      _key,\n      _id,\n      name,\n      slug,\n      poster,\n      \"date\": coalesce(date, _updatedAt),\n      \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"navBar\" => {\n    navigationItems[]{\n      _type,\n      _key,\n      label,\n      link {\n        _type,\n        _key,\n        linkType,\n        href,\n        page->{\n          name,\n          slug\n        },\n        caseStudy->{\n          name,\n          slug\n        },\n        openInNewTab\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        name\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        name\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaGroup\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      media{\n        asset->{\n          ...,\n          metadata\n        },\n        hotspot,\n        crop,\n        alt\n      }\n    }\n  }\n}\n    },\n    agencyWorkList[]->{\n      _type,\n      _key,\n      _id,\n      agencyClient,\n      agencyClientLink\n    }\n  }\n},\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": GetPageQueryResult;
     "\n  *[_type == \"page\" || _type == \"caseStudy\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;
     "\n  *[_type == \"caseStudy\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    _id,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    \"date\": coalesce(date, _updatedAt),\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": AllCaseStudiesQueryResult;
     "\n  *[_type == \"caseStudy\" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    _id,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    \"date\": coalesce(date, _updatedAt),\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": MoreCaseStudiesQueryResult;
-    "\n  *[_type == \"caseStudy\" && slug.current == $slug] [0] {\n    content[]{\n    _type,\n    _key,\n    children[]{\n      _type,\n      _key,\n      marks,\n      text\n    },\n    style,\n    listItem,\n    level,\n    markDefs[]{\n      _type,\n      _key,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"caseStudy\": caseStudy->slug.current\n      }\n    }\n  },\n    _id,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    \"date\": coalesce(date, _updatedAt),\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": CaseStudyQueryResult;
+    "\n  *[_type == \"caseStudy\" && slug.current == $slug] [0] {\n    _id,\n    _type,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    poster,\n    \"date\": coalesce(date, _updatedAt),\n    \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"navBar\" => {\n    navigationItems[]{\n      _type,\n      _key,\n      label,\n      link {\n        _type,\n        _key,\n        linkType,\n        href,\n        page->{\n          name,\n          slug\n        },\n        caseStudy->{\n          name,\n          slug\n        },\n        openInNewTab\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        name\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        name\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaGroup\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      media{\n        asset->{\n          ...,\n          metadata\n        },\n        hotspot,\n        crop,\n        alt\n      }\n    }\n  }\n},\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": CaseStudyQueryResult;
     "\n  *[_type == \"caseStudy\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": CaseStudyPagesSlugsResult;
     "\n  *[_type == \"page\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": PagesSlugsResult;
   }

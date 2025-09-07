@@ -44,9 +44,11 @@ export const caseStudy = defineType({
       name: 'pageBuilder',
       title: 'Page builder',
       type: 'array',
-      of: Object.values(blocks).map((block) => ({
-        type: block.name,
-      })),
+      of: Object.values(blocks)
+        .filter((block) => block.name !== 'contributions')
+        .map((block) => ({
+          type: block.name,
+        })),
       options: {
         insertMenu: {
           // Configure the "Add Item" menu to display a thumbnail preview of the content type. https://www.sanity.io/docs/array-type#efb1fe03459d

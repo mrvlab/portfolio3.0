@@ -1668,10 +1668,11 @@
         },
         "optional": true
       },
-      "agencyClientUrl": {
+      "agencyClientLink": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
+          "type": "inline",
+          "name": "link"
         },
         "optional": true
       }
@@ -1962,21 +1963,6 @@
                 "rest": {
                   "type": "inline",
                   "name": "caseDetails"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "contributions"
                 }
               },
               {

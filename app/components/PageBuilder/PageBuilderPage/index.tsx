@@ -2,10 +2,14 @@
 
 import BlockRenderer from '../BlockRender';
 import EmptyPageState from './EmptyPageState';
-import { GetPageQueryResult, HeaderQueryResult } from '@/sanity.types';
+import {
+  GetPageQueryResult,
+  CaseStudyQueryResult,
+  HeaderQueryResult,
+} from '@/sanity.types';
 
 type IPageBuilderPage = {
-  page: GetPageQueryResult;
+  page: GetPageQueryResult | CaseStudyQueryResult;
   header?: HeaderQueryResult;
 };
 
@@ -30,6 +34,7 @@ export default function PageBuilderPage({ page, header }: IPageBuilderPage) {
           block={block}
           pageId={page._id}
           pageType={page._type}
+          pageSlug={page.slug?.current}
           header={header}
         />
       ))}

@@ -6,6 +6,7 @@ import CaseDetailsComponent from '../../CaseDetails';
 import ContributionsComponent from '../../Contributions';
 import MediaGroupComponent from '../../MediaGroup';
 import NameHeroComponent from '../../NameHero';
+import NavBarComponent from '../../NavBar';
 
 type IBlockType = NonNullable<
   NonNullable<GetPageQueryResult>['pageBuilder']
@@ -16,6 +17,7 @@ type IBlockRenderer = {
   block: IBlockType;
   pageId: string;
   pageType: string;
+  pageSlug?: string;
   header?: HeaderQueryResult | null;
 };
 
@@ -26,6 +28,7 @@ const BLOCK_COMPONENTS = {
   contributions: ContributionsComponent,
   caseDetails: CaseDetailsComponent,
   mediaGroup: MediaGroupComponent,
+  navBar: NavBarComponent,
 } as const;
 
 export default function BlockRenderer({
@@ -33,6 +36,7 @@ export default function BlockRenderer({
   index,
   pageId,
   pageType,
+  pageSlug,
   header,
 }: IBlockRenderer) {
   // Create data attributes for Sanity presentation tool
@@ -58,7 +62,11 @@ export default function BlockRenderer({
   }
 
   return (
-    <div key={block._key} data-sanity={dataAttributes} className='grid'>
+    <div
+      key={block._key}
+      data-sanity={dataAttributes}
+      className={`grid ${pageSlug === '/' ? 'lg:overflow-hidden lg:scrollbar-hide' : ''}`}
+    >
       {/* @ts-expect-error - Dynamic component props are properly typed in individual components */}
       <Component block={block} index={index} header={header} />
     </div>

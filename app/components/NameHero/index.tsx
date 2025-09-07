@@ -22,7 +22,7 @@ const NameHero = ({ block, header }: INameHero) => {
         <Link href='/'>{logo}</Link>
       </h1>
       <div className='grid col-span-1 row-start-1 row-span-3 col-start-4 sm:col-span-3 sm:row-span-full  sm:whitespace-nowrap lg:col-start-10'>
-        <div className='sticky top-0 flex flex-1 flex-col items-end h-fit p-6 gap-6 sm:items-center sm:flex-row-reverse sm:px-0 sm:py-6 sm:gap-6 md:gap-6'>
+        <div className='sticky top-0 flex flex-1 flex-col items-end h-fit p-6 gap-6 sm:items-center sm:flex-row-reverse sm:px-0 sm:py-6 sm:gap-6 md:gap-6 lg:pr-3'>
           <DarkModeToggle />
 
           {header?.navigationItems?.map((item, index: number) => (

@@ -14,14 +14,9 @@ export const agencyWork = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'agencyClientUrl',
-      title: 'Agency Client URL',
-      description: 'The URL of the agency client',
-      type: 'url',
-      validation: (rule) =>
-        rule.required().uri({
-          scheme: ['http', 'https'],
-        }),
+      name: 'agencyClientLink',
+      title: 'Link',
+      type: 'link',
     }),
   ],
   preview: {

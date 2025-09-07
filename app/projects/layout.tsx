@@ -1,7 +1,7 @@
-export default async function RootLayout({
+export default async function ProjectsLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <>{children}</>;
+  return <main className='grid p-5 gap-5 min-h-svh '>{children}</main>;
 }

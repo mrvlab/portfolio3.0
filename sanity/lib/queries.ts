@@ -6,6 +6,363 @@ const linkReferenceQuery = /* groq */ `
     "caseStudy": caseStudy->slug.current
   }
 `;
+
+// Base blocks query (without contributions)
+const caseStudyBlocksQuery = /* groq */ `
+  _type,
+  _key,
+  _type == "callToAction" => {
+    heading,
+    text,
+    buttonText,
+    link {
+      _type,
+      _key,
+      linkType,
+      href,
+      page->{
+        name,
+        slug
+      },
+      caseStudy->{
+        name,
+        slug
+      },
+      openInNewTab
+    }
+  },
+  _type == "nameHero" => {
+    logo,
+    description[]{
+      _type,
+      _key,
+      children[]{
+        _type,
+        _key,
+        marks,
+        text
+      },
+      style,
+      listItem,
+      level,
+      markDefs[]{
+        _type,
+        _key,
+        _type == "link" => {
+          "page": page->slug.current,
+          "caseStudy": caseStudy->slug.current
+        }
+      }
+    }
+  },
+  _type == "navBar" => {
+    navigationItems[]{
+      _type,
+      _key,
+      label,
+      link {
+        _type,
+        _key,
+        linkType,
+        href,
+        page->{
+          name,
+          slug
+        },
+        caseStudy->{
+          name,
+          slug
+        },
+        openInNewTab
+      }
+    }
+  },
+  _type == "caseDetails" => {
+    title,
+    descriptionLabel,
+    description[]{
+      _type,
+      _key,
+      children[]{
+        _type,
+        _key,
+        marks,
+        text
+      },
+      style,
+      listItem,
+      level,
+      markDefs[]{
+        _type,
+        _key,
+        _type == "link" => {
+          "page": page->slug.current,
+          "caseStudy": caseStudy->slug.current
+        }
+      }
+    },
+    detailsLabel,
+    detailsItems[]{
+      _type,
+      _key,
+      itemType,
+      title,
+      text,
+      tags[]->{
+        _id,
+        name
+      },
+      linkData{
+        linkLabel,
+        link{
+          linkType,
+          href,
+          page->{
+            name,
+            slug
+          },
+          caseStudy->{
+            name,
+            slug
+          },
+          openInNewTab
+        }
+      }
+    },
+    creditsLabel,
+    creditsItems[]{
+      _type,
+      _key,
+      itemType,
+      title,
+      text,
+      tags[]->{
+        _id,
+        name
+      },
+      linkData{
+        linkLabel,
+        link{
+          linkType,
+          href,
+          page->{
+            name,
+            slug
+          },
+          caseStudy->{
+            name,
+            slug
+          },
+          openInNewTab
+        }
+      }
+    }
+  },
+  _type == "mediaGroup" => {
+    mediaItems[]{
+      _type,
+      _key,
+      media{
+        asset->{
+          ...,
+          metadata
+        },
+        hotspot,
+        crop,
+        alt
+      }
+    }
+  }
+`;
+
+// Full blocks query (includes contributions for regular pages)
+const blocksQuery = /* groq */ `
+  _type,
+  _key,
+  _type == "callToAction" => {
+    heading,
+    text,
+    buttonText,
+    link {
+      _type,
+      _key,
+      linkType,
+      href,
+      page->{
+        name,
+        slug
+      },
+      caseStudy->{
+        name,
+        slug
+      },
+      openInNewTab
+    }
+  },
+  _type == "nameHero" => {
+    logo,
+    description[]{
+      _type,
+      _key,
+      children[]{
+        _type,
+        _key,
+        marks,
+        text
+      },
+      style,
+      listItem,
+      level,
+      markDefs[]{
+        _type,
+        _key,
+        _type == "link" => {
+          "page": page->slug.current,
+          "caseStudy": caseStudy->slug.current
+        }
+      }
+    }
+  },
+  _type == "navBar" => {
+    navigationItems[]{
+      _type,
+      _key,
+      label,
+      link {
+        _type,
+        _key,
+        linkType,
+        href,
+        page->{
+          name,
+          slug
+        },
+        caseStudy->{
+          name,
+          slug
+        },
+        openInNewTab
+      }
+    }
+  },
+  _type == "caseDetails" => {
+    title,
+    descriptionLabel,
+    description[]{
+      _type,
+      _key,
+      children[]{
+        _type,
+        _key,
+        marks,
+        text
+      },
+      style,
+      listItem,
+      level,
+      markDefs[]{
+        _type,
+        _key,
+        _type == "link" => {
+          "page": page->slug.current,
+          "caseStudy": caseStudy->slug.current
+        }
+      }
+    },
+    detailsLabel,
+    detailsItems[]{
+      _type,
+      _key,
+      itemType,
+      title,
+      text,
+      tags[]->{
+        _id,
+        name
+      },
+      linkData{
+        linkLabel,
+        link{
+          linkType,
+          href,
+          page->{
+            name,
+            slug
+          },
+          caseStudy->{
+            name,
+            slug
+          },
+          openInNewTab
+        }
+      }
+    },
+    creditsLabel,
+    creditsItems[]{
+      _type,
+      _key,
+      itemType,
+      title,
+      text,
+      tags[]->{
+        _id,
+        name
+      },
+      linkData{
+        linkLabel,
+        link{
+          linkType,
+          href,
+          page->{
+            name,
+            slug
+          },
+          caseStudy->{
+            name,
+            slug
+          },
+          openInNewTab
+        }
+      }
+    }
+  },
+  _type == "mediaGroup" => {
+    mediaItems[]{
+      _type,
+      _key,
+      media{
+        asset->{
+          ...,
+          metadata
+        },
+        hotspot,
+        crop,
+        alt
+      }
+    }
+  },
+  _type == "contributions" => {
+    title,
+    projectListLabel,
+    projectsList[]->{
+      _type,
+      _key,
+      _id,
+      name,
+      slug,
+      poster,
+      "date": coalesce(date, _updatedAt),
+      "pageBuilder": pageBuilder[]{${caseStudyBlocksQuery}}
+    },
+    agencyWorkList[]->{
+      _type,
+      _key,
+      _id,
+      agencyClient,
+      agencyClientLink
+    }
+  }
+`;
 export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     title,
@@ -51,180 +408,12 @@ export const getPageQuery = defineQuery(`
     _type,
     name,
     slug,
-    "pageBuilder": pageBuilder[]{
-      _type,
-      _key,
-      _type == "callToAction" => {
-        heading,
-        text,
-        buttonText,
-        link {
-          _type,
-          _key,
-          linkType,
-          href,
-          page->{
-            name,
-            slug
-          },
-          caseStudy->{
-            name,
-            slug
-          },
-          openInNewTab
-        },
-      },
-      _type == "contributions" => {
-        title,
-        agencyWorkList[]->{
-          _type,
-          _key,
-          _id,
-          agencyClient,
-          agencyClientUrl
-        },
-        projectListLabel,
-        projectsList[]->{
-          _type,
-          _key,
-          _id,
-          name,
-          slug,
-          poster,
-          "date": coalesce(date, _updatedAt)
-        }
-      },
-      _type == "caseDetails" => {
-        title,
-        descriptionLabel,
-        description[]{
-          _type,
-          _key,
-          children[]{
-            _type,
-            _key,
-            marks,
-            text
-          },
-          style,
-          listItem,
-          level,
-          markDefs[]{
-            _type,
-            _key,
-            _type == "link" => {
-              "page": page->slug.current,
-              "caseStudy": caseStudy->slug.current
-            }
-          }
-        },
-        detailsLabel,
-        detailsItems[]{
-          _type,
-          _key,
-          itemType,
-          title,
-          text,
-          tags[]->{
-            _id,
-            name
-          },
-          linkData{
-            linkLabel,
-            link{
-              linkType,
-              href,
-              page->{
-                name,
-                slug
-              },
-              caseStudy->{
-                name,
-                slug
-              },
-              openInNewTab
-            }
-          }
-        },
-        creditsLabel,
-        creditsItems[]{
-          _type,
-          _key,
-          itemType,
-          title,
-          text,
-          tags[]->{
-            _id,
-            name
-          },
-          linkData{
-            linkLabel,
-            link{
-              linkType,
-              href,
-              page->{
-                name,
-                slug
-              },
-              caseStudy->{
-                name,
-                slug
-              },
-              openInNewTab
-            }
-          }
-        }
-      },
-      _type == "mediaGroup" => {
-        mediaItems[]{
-          _type,
-          _key,
-          media{
-            asset->{
-              _id,
-              url,
-              metadata{
-                dimensions,
-                lqip
-              }
-            },
-            alt
-          }
-        }
-      },
-      _type == "nameHero" => {
-        logo,
-        description[]{
-          _type,
-          _key,
-          children[]{
-            _type,
-            _key,
-            marks,
-            text
-          },
-          style,
-          listItem,
-          level,
-          markDefs[]{
-            _type,
-            _key,
-            _type == "link" => {
-              "page": page->slug.current,
-              "caseStudy": caseStudy->slug.current
-            }
-          }
-        }
-      },
-      _type == "navBar" => {
-        logo
-      },
-    },
+    "pageBuilder": pageBuilder[]{${blocksQuery}},
     seo{
       metaTitle,
       metaDescription,
       metaImage
-    },
+    }
   }
 `);
 
@@ -268,32 +457,14 @@ export const moreCaseStudiesQuery = defineQuery(`
 
 export const caseStudyQuery = defineQuery(`
   *[_type == "caseStudy" && slug.current == $slug] [0] {
-    content[]{
-    _type,
-    _key,
-    children[]{
-      _type,
-      _key,
-      marks,
-      text
-    },
-    style,
-    listItem,
-    level,
-    markDefs[]{
-      _type,
-      _key,
-      _type == "link" => {
-        "page": page->slug.current,
-        "caseStudy": caseStudy->slug.current
-      }
-    }
-  },
     _id,
+    _type,
     "status": select(_originalId in path("drafts.**") => "draft", "published"),
     name,
     slug,
+    poster,
     "date": coalesce(date, _updatedAt),
+    "pageBuilder": pageBuilder[]{${caseStudyBlocksQuery}},
     seo{
       metaTitle,
       metaDescription,

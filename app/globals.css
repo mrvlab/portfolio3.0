@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar-hide";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -15,30 +16,30 @@
   --font-syne: var(--font-syne);
 
   /* light */
-  --color-gray-50: #f2f2f2;
-  --color-gray-100: #e6e6e6;
-  --color-gray-200: #cccccc;
-  --color-gray-300: #b3b3b3;
-  --color-gray-400: #999999;
-  --color-gray-500: #f3f3f3;
-  --color-gray-600: #666666;
-  --color-gray-700: #4d4d4d;
-  --color-gray-800: #333333;
-  --color-gray-900: #1a1a1a;
-  --color-gray-950: #0d0d0d;
+  --color-gray-50: rgba(242, 242, 242, 1);
+  --color-gray-100: rgba(230, 230, 230, 1);
+  --color-gray-200: rgba(204, 204, 204, 1);
+  --color-gray-300: rgba(179, 179, 179, 1);
+  --color-gray-400: rgba(153, 153, 153, 1);
+  --color-gray-500: rgba(243, 243, 243, 1);
+  --color-gray-600: rgba(102, 102, 102, 1);
+  --color-gray-700: rgba(77, 77, 77, 1);
+  --color-gray-800: rgba(51, 51, 51, 1);
+  --color-gray-900: rgba(26, 26, 26, 1);
+  --color-gray-950: rgba(13, 13, 13, 1);
 
   /* dark */
-  --color-green-50: #f2f4f1;
-  --color-green-100: #e5e8e3;
-  --color-green-200: #cbd1c7;
-  --color-green-300: #b2bbaa;
-  --color-green-400: #98a48e;
-  --color-green-500: #2a2f26;
-  --color-green-600: #65715b;
-  --color-green-700: #4c5544;
-  --color-green-800: #32382e;
-  --color-green-900: #191c17;
-  --color-green-950: #0d0e0b;
+  --color-green-50: rgba(242, 244, 241, 1);
+  --color-green-100: rgba(229, 232, 227, 1);
+  --color-green-200: rgba(203, 209, 199, 1);
+  --color-green-300: rgba(178, 187, 170, 1);
+  --color-green-400: rgba(152, 164, 142, 1);
+  --color-green-500: rgba(42, 47, 38, 1);
+  --color-green-600: rgba(101, 113, 91, 1);
+  --color-green-700: rgba(76, 85, 68, 1);
+  --color-green-800: rgba(50, 56, 46, 1);
+  --color-green-900: rgba(25, 28, 23, 1);
+  --color-green-950: rgba(13, 14, 11, 1);
 
   /* Aspect ratios */
   --aspect-4/5: 4 / 5;
@@ -109,8 +110,7 @@
   h4,
   h5,
   h6 {
-    font-weight: 600;
-    line-height: 100%;
+    @apply font-semibold leading-[120%];
   }
 }
 
@@ -146,13 +146,13 @@
       background: var(--color-green-200);
     }
 
-    &:hover:after {
+    /* &:hover:after {
       background: var(--color-green-100);
     }
 
     &:active:after {
       background: var(--color-green-50);
-    }
+    } */
   }
 }
 
