@@ -7,6 +7,7 @@ import {
 } from '@/sanity/lib/queries';
 import { generateMetadata } from '@/utils/generateMetadata';
 import PageBuilderPage from '@/app/components/PageBuilder/PageBuilderPage';
+import { Fragment } from 'react';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -35,7 +36,7 @@ export default async function CaseStudyPage(props: Props) {
   }
 
   return (
-    <>
+    <Fragment>
       <PageBuilderPage page={caseStudy} header={header} />
       {/* <div className='border-t border-gray-100 bg-gray-50'>
         <div className='container'>
@@ -44,6 +45,6 @@ export default async function CaseStudyPage(props: Props) {
           </aside>
         </div>
       </div> */}
-    </>
+    </Fragment>
   );
 }

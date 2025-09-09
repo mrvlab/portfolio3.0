@@ -56,26 +56,7 @@ const caseStudyBlocksQuery = /* groq */ `
     }
   },
   _type == "navBar" => {
-    navigationItems[]{
-      _type,
-      _key,
-      label,
-      link {
-        _type,
-        _key,
-        linkType,
-        href,
-        page->{
-          name,
-          slug
-        },
-        caseStudy->{
-          name,
-          slug
-        },
-        openInNewTab
-      }
-    }
+    logo
   },
   _type == "caseDetails" => {
     title,
@@ -224,26 +205,7 @@ const blocksQuery = /* groq */ `
     }
   },
   _type == "navBar" => {
-    navigationItems[]{
-      _type,
-      _key,
-      label,
-      link {
-        _type,
-        _key,
-        linkType,
-        href,
-        page->{
-          name,
-          slug
-        },
-        caseStudy->{
-          name,
-          slug
-        },
-        openInNewTab
-      }
-    }
+    logo
   },
   _type == "caseDetails" => {
     title,
