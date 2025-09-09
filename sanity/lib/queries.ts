@@ -155,6 +155,21 @@ const caseStudyBlocksQuery = /* groq */ `
         alt
       }
     }
+  },
+  _type == "mediaColumn" => {
+    mediaItem{
+      _type,
+      _key,
+      media{
+        asset->{
+          ...,
+          metadata
+        },
+        hotspot,
+        crop,
+        alt
+      }
+    }
   }
 `;
 
@@ -294,6 +309,21 @@ const blocksQuery = /* groq */ `
   },
   _type == "mediaGroup" => {
     mediaItems[]{
+      _type,
+      _key,
+      media{
+        asset->{
+          ...,
+          metadata
+        },
+        hotspot,
+        crop,
+        alt
+      }
+    }
+  },
+  _type == "mediaColumn" => {
+    mediaItem{
       _type,
       _key,
       media{

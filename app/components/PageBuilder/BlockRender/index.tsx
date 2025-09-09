@@ -7,6 +7,7 @@ import ContributionsComponent from '../../Contributions';
 import MediaGroupComponent from '../../MediaGroup';
 import NameHeroComponent from '../../NameHero';
 import NavBarComponent from '../../NavBar';
+import MediaColumnComponent from '../../MediaColumn';
 
 type IBlockType = NonNullable<
   NonNullable<GetPageQueryResult>['pageBuilder']
@@ -29,6 +30,7 @@ const BLOCK_COMPONENTS = {
   caseDetails: CaseDetailsComponent,
   mediaGroup: MediaGroupComponent,
   navBar: NavBarComponent,
+  mediaColumn: MediaColumnComponent,
 } as const;
 
 export default function BlockRenderer({

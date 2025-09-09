@@ -9,13 +9,19 @@ import {
   SanityImageAsset,
   SanityImageHotspot,
   SanityImageCrop,
+  GetPageQueryResult,
 } from '@/sanity.types';
 
+// Create a more flexible asset type that matches the query result
+type FlexibleSanityImageAsset = Omit<SanityImageAsset, 'metadata'> & {
+  metadata?: SanityImageAsset['metadata'] | null;
+};
+
 type SanityImageSource = {
-  asset?: SanityImageAsset | { _ref: string; _type: string };
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
+  asset?: FlexibleSanityImageAsset | { _ref: string; _type: string } | null;
+  hotspot?: SanityImageHotspot | null;
+  crop?: SanityImageCrop | null;
+  alt?: string | null;
   _type?: string;
 } | null;
 
