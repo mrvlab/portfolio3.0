@@ -70,6 +70,15 @@
 
   /* Step 5: 39.81px → 48px */
   --text-scale-5: clamp(2.488rem, 1.88rem + 1.22vw, 3rem);
+
+  /* Step 6: 47.78px → 57px */
+  --text-scale-6: clamp(2.986rem, 2.25rem + 1.47vw, 3.5625rem);
+
+  /* Step 7: 57.33px → 69px */
+  --text-scale-7: clamp(3.583rem, 2.7rem + 1.77vw, 4.3125rem);
+
+  /* Step 8: 68.8px → 83px */
+  --text-scale-8: clamp(4.3rem, 3.24rem + 2.12vw, 5.1875rem);
 }
 
 /* @utility body-tiny {

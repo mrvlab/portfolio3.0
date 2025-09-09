@@ -91,7 +91,8 @@ const caseStudyBlocksQuery = /* groq */ `
       text,
       tags[]->{
         _id,
-        name
+        _ref,
+        name,
       },
       linkData{
         linkLabel,
@@ -119,7 +120,8 @@ const caseStudyBlocksQuery = /* groq */ `
       text,
       tags[]->{
         _id,
-        name
+        _ref,
+        name,
       },
       linkData{
         linkLabel,
@@ -240,7 +242,8 @@ const blocksQuery = /* groq */ `
       text,
       tags[]->{
         _id,
-        name
+        _ref,
+        name,
       },
       linkData{
         linkLabel,
@@ -268,7 +271,8 @@ const blocksQuery = /* groq */ `
       text,
       tags[]->{
         _id,
-        name
+        _ref,
+        name,
       },
       linkData{
         linkLabel,

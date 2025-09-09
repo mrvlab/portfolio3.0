@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { IContributionsBlock } from '../index';
 import ResolvedLink from '@/app/components/ResolvedLink';
-import OpenLinkIcon from '@/app/components/Icons/OpenLinkIcon';
+import OpenLinkCircleIcon from '@/app/components/Icons/OpenLinkCircleIcon';
 
 type IAgencyLink = {
   agencyWorkList: NonNullable<IContributionsBlock['agencyWorkList']>;
@@ -43,7 +43,7 @@ const AgencyLinks = ({ agencyWorkList }: IAgencyLink) => {
               link={work.agencyClientLink}
             >
               {work.agencyClient}
-              <OpenLinkIcon
+              <OpenLinkCircleIcon
                 color='var(--color-gray-200)'
                 hoverColor='var(--color-gray-600)'
                 darkColor='rgba(255, 255, 255, 0.2)'
