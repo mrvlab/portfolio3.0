@@ -17,7 +17,7 @@ const Projects = ({ projectsList }: IProjectsList) => {
         const hasPageBuilder = pageBuilder?.length && pageBuilder?.length > 0;
         const projectUrl = `/projects/${project.slug?.current}`;
         const containerClasses =
-          'group relative flex items-center justify-center aspect-4/5 text-gray-900 hover:bg-gray-100 dark:text-green-100 dark:hover:bg-green-700 transition-all duration-300 text-scale--1';
+          'group relative flex items-center justify-center aspect-4/5 text-gray-900 hover:bg-gray-100 dark:text-green-100 dark:hover:bg-green-700 transition-all duration-300 text-scale--1 md:h-full';
 
         return (
           <li key={project._id}>
@@ -27,6 +27,7 @@ const Projects = ({ projectsList }: IProjectsList) => {
                   key={project._id}
                   project={project}
                   index={index}
+                  hasPageBuilder={hasPageBuilder}
                 />
               </Link>
             ) : (
@@ -35,6 +36,7 @@ const Projects = ({ projectsList }: IProjectsList) => {
                   key={project._id}
                   project={project}
                   index={index}
+                  hasPageBuilder={hasPageBuilder}
                 />
               </div>
             )}

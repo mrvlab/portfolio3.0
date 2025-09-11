@@ -10,9 +10,10 @@ type ProjectType = NonNullable<
 type IProjectCard = {
   project: ProjectType;
   index: number;
+  hasPageBuilder: boolean;
 };
 
-const ProjectCard = ({ project, index }: IProjectCard) => {
+const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
   if (!project) return null;
   const { name, poster, date } = project;
 
@@ -26,16 +27,20 @@ const ProjectCard = ({ project, index }: IProjectCard) => {
           <SanityImage
             image={poster.media}
             alt={poster.media.alt || 'Project image'}
-            className='transition-transform duration-300 group-hover:scale-105'
+            className={`transition-transform duration-300 ${hasPageBuilder ? 'group-hover:scale-105' : ''}`}
             priority={index < 3}
           />
         )}
       </div>
       <div className='absolute bottom-6 left-6 right-6 flex justify-between opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
-        <span>{new Date(date || '').getFullYear()}</span>
-        <span>
-          <RightArrow />
+        <span className={`${hasPageBuilder ? '' : 'w-full flex justify-end'}`}>
+          {new Date(date || '').getFullYear()}
         </span>
+        {hasPageBuilder && (
+          <span>
+            <RightArrow />
+          </span>
+        )}
       </div>
     </>
   );
