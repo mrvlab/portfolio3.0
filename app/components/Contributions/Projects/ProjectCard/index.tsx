@@ -19,7 +19,7 @@ const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
 
   return (
     <>
-      <div className='absolute top-6 left-6 right-6 flex opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
+      <div className='absolute top-6 left-6 right-6 flex lg:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
         <span>{name}</span>
       </div>
       <div className='aspect-4/5 w-1/2 relative overflow-hidden'>
@@ -32,7 +32,7 @@ const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
           />
         )}
       </div>
-      <div className='absolute bottom-6 left-6 right-6 flex justify-between opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
+      <div className='absolute bottom-6 left-6 right-6 flex justify-between lg:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
         <span className={`${hasPageBuilder ? '' : 'w-full flex justify-end'}`}>
           {new Date(date || '').getFullYear()}
         </span>
