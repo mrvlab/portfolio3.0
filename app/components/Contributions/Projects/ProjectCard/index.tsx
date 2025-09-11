@@ -10,7 +10,7 @@ type ProjectType = NonNullable<
 type IProjectCard = {
   project: ProjectType;
   index: number;
-  hasPageBuilder: boolean;
+  hasPageBuilder?: boolean;
 };
 
 const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {

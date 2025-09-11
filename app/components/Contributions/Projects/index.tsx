@@ -36,7 +36,6 @@ const Projects = ({ projectsList }: IProjectsList) => {
                   key={project._id}
                   project={project}
                   index={index}
-                  hasPageBuilder={hasPageBuilder}
                 />
               </div>
             )}
