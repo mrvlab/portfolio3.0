@@ -23,7 +23,7 @@ const MediaColumn = ({ block }: IMediaColumn) => {
         <SanityImage
           image={mediaItem.media}
           alt={mediaItem.media.alt || 'Media column image'}
-          className='transition-transform duration-300 group-hover:scale-105'
+          className='w-full'
           priority={true}
         />
       )}
