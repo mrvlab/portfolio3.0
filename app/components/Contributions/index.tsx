@@ -28,7 +28,7 @@ const Contributions = ({ block }: IContributions) => {
         {title}
       </h2>
       <div className='flex flex-col col-start-2 col-span-full row-span-5 pb-7 relative sm:col-start-6 sm:col-span-3 sm:row-start-1 sm:row-span-full  lg:pb-0 lg:col-start-1 lg:col-span-3 lg:row-start-3 lg:row-span-full'>
-        <ul className='flex flex-col lg:col-span-3 lg:row-start-2 lg:row-span-full lg:h-full lg:overflow-scroll scrollbar-hide'>
+        <ul className='flex flex-col lg:col-span-3 lg:row-start-2 lg:row-span-full lg:h-full lg:overflow-y-scroll scrollbar-hide  overflow-x-hidden'>
           {agencyWorkList && agencyWorkList.length > 0 && (
             <AgencyLinks agencyWorkList={agencyWorkList} />
           )}
@@ -42,7 +42,7 @@ const Contributions = ({ block }: IContributions) => {
         </div>
       </h3>
       <div className='flex flex-col col-span-full row-span-5 pb-7 relative text-scale--1 sm:col-start-1 sm:col-span-4 sm:row-start-3 sm:row-span-full  lg:pb-0 lg:col-start-5 lg:col-span-8 lg:row-span-full lg:row-start-2'>
-        <ul className='flex flex-col gap-6 h-full lg:flex-row lg:overflow-scroll scrollbar-hide'>
+        <ul className='flex flex-col gap-6 h-full lg:flex-row lg:overflow-x-scroll scrollbar-hide'>
           {projectsList && projectsList.length > 0 && (
             <Projects projectsList={projectsList} />
           )}

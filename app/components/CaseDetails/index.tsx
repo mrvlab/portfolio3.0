@@ -48,12 +48,12 @@ const CaseDetails = ({ block }: ICaseDetails) => {
         <div className='flex flex-col gap-5 md:col-start-2 md:col-span-1 md:row-start-1 md:row-span-1 lg:col-start-2 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
           {detailsLabel && <h3 className='text-scale--1'>{detailsLabel}</h3>}
           {detailsItems && (
-            <table className='w-full border-collapse'>
-              <tbody className='flex flex-col'>
+            <table className='flex flex-col h-full w-full border-collapse'>
+              <tbody className='flex flex-col h-full'>
                 {detailsItems.map((item, index) => (
                   <tr
                     key={item._key}
-                    className={`flex gap-2.5 border-b border-gray-200 dark:border-white/20 ${
+                    className={`flex flex-1 gap-2.5 border-b border-gray-200 dark:border-white/20 ${
                       index === 0 ? 'border-t' : ''
                     }`}
                   >
@@ -72,12 +72,12 @@ const CaseDetails = ({ block }: ICaseDetails) => {
         <div className='flex flex-col gap-5 md:col-start-2 md:col-span-1 md:row-start-2 md:row-span-1 lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
           {creditsLabel && <h3 className='text-scale--1 '>{creditsLabel}</h3>}
           {creditsItems && (
-            <table className='w-full border-collapse'>
-              <tbody className='flex flex-col'>
+            <table className='flex flex-col h-full w-full border-collapse'>
+              <tbody className='flex flex-col h-full'>
                 {creditsItems.map((item, index) => (
                   <tr
                     key={item._key}
-                    className={`flex gap-2.5 border-b border-gray-200 dark:border-white/20 ${
+                    className={`flex flex-1 gap-2.5 border-b border-gray-200 dark:border-white/20 ${
                       index === 0 ? 'border-t' : ''
                     }`}
                   >

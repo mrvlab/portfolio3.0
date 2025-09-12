@@ -2,6 +2,7 @@ import React from 'react';
 import { IContributionsBlock } from '../index';
 import ProjectCard from './ProjectCard';
 import Link from 'next/link';
+import { motion } from 'motion/react';
 
 type IProjectsList = {
   projectsList: NonNullable<IContributionsBlock['projectsList']>;
@@ -20,7 +21,12 @@ const Projects = ({ projectsList }: IProjectsList) => {
           'group relative flex items-center justify-center aspect-4/5 max-lg:bg-gray-100 max-lg:dark:bg-green-700 lg:text-gray-900 hover:bg-gray-100 lg:dark:text-green-100 dark:hover:bg-green-700 transition-all duration-300 text-scale--1 md:h-full';
 
         return (
-          <li key={project._id}>
+          <motion.li
+            key={project._id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.2 + 0.6, duration: 0.5 }}
+          >
             {hasPageBuilder ? (
               <Link href={projectUrl} className={containerClasses}>
                 <ProjectCard
@@ -39,7 +45,7 @@ const Projects = ({ projectsList }: IProjectsList) => {
                 />
               </div>
             )}
-          </li>
+          </motion.li>
         );
       })}
     </>

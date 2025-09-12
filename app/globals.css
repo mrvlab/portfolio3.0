@@ -109,6 +109,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    @apply scrollbar-hide;
   }
   body {
     @apply min-h-svh lg:min-h-screen text-scale--1;
