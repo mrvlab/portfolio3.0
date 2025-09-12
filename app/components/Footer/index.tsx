@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/sanity/lib/live';
-import { getPageQuery, footerQuery } from '@/sanity/lib/queries';
+import { footerQuery } from '@/sanity/lib/queries';
 import React from 'react';
 
 const Footer = async () => {
