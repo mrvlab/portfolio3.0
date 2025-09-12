@@ -475,6 +475,12 @@ export const caseStudyPagesSlugs = defineQuery(`
 `);
 
 export const pagesSlugs = defineQuery(`
-  *[_type == "page" && defined(slug.current)]
-  {"slug": slug.current}
+    *[_type == "page" && defined(slug.current)]
+    {"slug": slug.current}
+  `);
+
+export const footerQuery = defineQuery(`
+  *[_type == "footer"][0]{
+    rights
+  }
 `);

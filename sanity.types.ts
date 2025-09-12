@@ -1237,10 +1237,15 @@ export type CaseStudyPagesSlugsResult = Array<{
   slug: string | null;
 }>;
 // Variable: pagesSlugs
-// Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "page" && defined(slug.current)]    {"slug": slug.current}
 export type PagesSlugsResult = Array<{
   slug: string | null;
 }>;
+// Variable: footerQuery
+// Query: *[_type == "footer"][0]{    rights  }
+export type FooterQueryResult = {
+  rights: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1254,6 +1259,7 @@ declare module "@sanity/client" {
     "\n  *[_type == \"caseStudy\" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    _id,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    \"date\": coalesce(date, _updatedAt),\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": MoreCaseStudiesQueryResult;
     "\n  *[_type == \"caseStudy\" && slug.current == $slug] [0] {\n    _id,\n    _type,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    poster,\n    \"date\": coalesce(date, _updatedAt),\n    \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"navBar\" => {\n    logo\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaGroup\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      media{\n        asset->{\n          ...,\n          metadata\n        },\n        hotspot,\n        crop,\n        alt\n      }\n    }\n  },\n  _type == \"mediaColumn\" => {\n    mediaItem{\n      _type,\n      _key,\n      media{\n        asset->{\n          ...,\n          metadata\n        },\n        hotspot,\n        crop,\n        alt\n      }\n    }\n  }\n},\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage\n    }\n  }\n": CaseStudyQueryResult;
     "\n  *[_type == \"caseStudy\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": CaseStudyPagesSlugsResult;
-    "\n  *[_type == \"page\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": PagesSlugsResult;
+    "\n    *[_type == \"page\" && defined(slug.current)]\n    {\"slug\": slug.current}\n  ": PagesSlugsResult;
+    "\n  *[_type == \"footer\"][0]{\n    rights\n  }\n": FooterQueryResult;
   }
 }

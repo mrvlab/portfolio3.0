@@ -41,7 +41,7 @@ const Contributions = ({ block }: IContributions) => {
           <div>{projectListLabel}</div>
         </div>
       </h3>
-      <div className='flex flex-col col-span-full row-span-5 pb-7 relative text-scale--1 sm:col-start-1 sm:col-span-4 sm:row-start-3 sm:row-span-full  lg:pb-0 lg:col-start-5 lg:col-span-8 lg:row-span-full lg:row-start-2'>
+      <div className='flex flex-col col-span-full row-span-5 relative text-scale--1 sm:col-start-1 sm:col-span-4 sm:row-start-3 sm:row-span-full  lg:pb-0 lg:col-start-5 lg:col-span-8 lg:row-span-full lg:row-start-2'>
         <ul className='flex flex-col gap-6 h-full lg:flex-row lg:overflow-x-scroll scrollbar-hide'>
           {projectsList && projectsList.length > 0 && (
             <Projects projectsList={projectsList} />

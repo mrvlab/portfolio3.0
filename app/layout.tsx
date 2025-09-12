@@ -7,6 +7,7 @@ import { VisualEditing } from 'next-sanity';
 import { DisableDraftMode } from './components/DisableDraftMode';
 import { ThemeProvider } from './components/ThemeProvider';
 import { ThemeScript } from './components/ThemeScript';
+import Footer from './components/Footer';
 
 const syne = Syne({ subsets: ['latin'], variable: '--font-syne' });
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -43,6 +44,7 @@ export default async function RootLayout({
 
           <SanityLive />
           <>{children}</>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
