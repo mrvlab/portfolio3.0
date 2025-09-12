@@ -2,6 +2,7 @@ import SanityImage from '@/app/components/SanityImage';
 import RightArrow from '@/app/components/Icons/RightArrow';
 import React from 'react';
 import { IContributionsBlock } from '../..';
+import { motion } from 'motion/react';
 
 type ProjectType = NonNullable<
   NonNullable<IContributionsBlock['projectsList']>[number]
@@ -27,7 +28,7 @@ const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
           <SanityImage
             image={poster.media}
             alt={poster.media.alt || 'Project image'}
-            className={`transition-transform duration-300 ${hasPageBuilder ? 'group-hover:scale-105' : ''}`}
+            className={`w-full h-full object-cover transition-transform duration-300 ${hasPageBuilder ? 'group-hover:scale-105' : ''}`}
             priority={index < 3}
           />
         )}
