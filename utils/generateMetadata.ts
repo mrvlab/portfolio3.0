@@ -98,9 +98,9 @@ export async function generateMetadata(
 
   // Image
   const image =
-    caseStudySeo?.metaImage?.media ||
-    pageSeo?.metaImage?.media ||
-    settingsSeo?.metaImage?.media;
+    caseStudySeo?.metaImage?.image ||
+    pageSeo?.metaImage?.image ||
+    settingsSeo?.metaImage?.image;
   const ogImage =
     resolveOpenGraphImage(image, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT) ||
     DEFAULT_IMAGE;

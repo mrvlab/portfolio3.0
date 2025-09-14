@@ -1,8 +1,7 @@
-import SanityImage from '@/app/components/SanityImage';
+import Media from '@/app/components/Media';
 import RightArrow from '@/app/components/Icons/RightArrow';
 import React from 'react';
 import { IContributionsBlock } from '../..';
-import { motion } from 'motion/react';
 
 type ProjectType = NonNullable<
   NonNullable<IContributionsBlock['projectsList']>[number]
@@ -17,6 +16,7 @@ type IProjectCard = {
 const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
   if (!project) return null;
   const { name, poster, date } = project;
+  const isPageBuilder = hasPageBuilder ? 'group-hover:scale-105' : '';
 
   return (
     <>
@@ -24,11 +24,11 @@ const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
         <span>{name}</span>
       </div>
       <div className='aspect-4/5 w-1/2 relative overflow-hidden'>
-        {poster?.media && (
-          <SanityImage
-            image={poster.media}
-            alt={poster.media.alt || 'Project image'}
-            className={`w-full h-full object-cover transition-transform duration-300 ${hasPageBuilder ? 'group-hover:scale-105' : ''}`}
+        {poster && (
+          <Media
+            media={poster}
+            alt={poster.image?.alt || 'Project image'}
+            className={`w-full h-full object-cover transition-transform duration-300 ${isPageBuilder}`}
             priority={index < 3}
           />
         )}

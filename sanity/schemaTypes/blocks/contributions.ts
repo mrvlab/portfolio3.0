@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { MasterDetailIcon } from '@sanity/icons';
+import { MasterDetailIcon, VideoIcon } from '@sanity/icons';
 
 export const contributions = defineType({
   name: 'contributions',
@@ -57,13 +57,30 @@ export const contributions = defineType({
   preview: {
     select: {
       title: 'title',
-      projectsListFirstPoster: 'projectsList.0.poster.media',
+      projectsListFirstPosterType: 'projectsList.0.poster.type',
+      projectsListFirstPosterImage: 'projectsList.0.poster.image',
+      projectsListFirstPosterVideo: 'projectsList.0.poster.video',
+      projectsListFirstPosterVideoThumbnail:
+        'projectsList.0.poster.video.asset.thumbTime',
     },
-    prepare({ title, projectsListFirstPoster }) {
+    prepare({
+      title,
+      projectsListFirstPosterType,
+      projectsListFirstPosterImage,
+      projectsListFirstPosterVideo,
+      projectsListFirstPosterVideoThumbnail,
+    }) {
+      const isVideo = projectsListFirstPosterType === 'video';
+      const media = isVideo
+        ? projectsListFirstPosterVideoThumbnail
+          ? projectsListFirstPosterVideo
+          : VideoIcon // Use video icon when thumbnail not ready
+        : projectsListFirstPosterImage || MasterDetailIcon;
+
       return {
         title: title || 'Untitled Contributions',
         subtitle: 'Contributions',
-        media: projectsListFirstPoster || MasterDetailIcon,
+        media: media,
       };
     },
   },

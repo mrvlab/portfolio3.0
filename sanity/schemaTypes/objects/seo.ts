@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import InputSlider from '../components/InputSlider';
 
 export const seo = defineType({
   name: 'seo',
@@ -26,7 +27,15 @@ export const seo = defineType({
     defineField({
       name: 'metaImage',
       title: 'Meta Image',
-      type: 'mediaType',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          options: { hotspot: true, metadata: ['lqip'], collapsed: false },
+        }),
+      ],
     }),
   ],
 });

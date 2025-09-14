@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { ImageIcon, ProjectsIcon } from '@sanity/icons';
+import { ImageIcon, ProjectsIcon, VideoIcon } from '@sanity/icons';
 
 export const mediaColumn = defineType({
   name: 'mediaColumn',
@@ -15,21 +15,25 @@ export const mediaColumn = defineType({
   ],
   preview: {
     select: {
-      mediaItem: 'mediaItem.media',
+      type: 'mediaItem.mediaType',
+      image: 'mediaItem.image',
+      video: 'mediaItem.video',
+      videoThumbnail: 'mediaItem.video.asset.thumbTime',
+      alt: 'mediaItem.image.alt',
     },
+    prepare({ type, image, video, videoThumbnail, alt }) {
+      const isVideo = type === 'video';
+      const subtitle = isVideo ? 'Video' : alt || 'Image';
+      const media = isVideo
+        ? videoThumbnail
+          ? video
+          : VideoIcon // Use video icon when thumbnail not ready
+        : image || ImageIcon;
 
-    prepare({ mediaItem }) {
-      let subtitle = '';
-      let media = null;
-
-      if (mediaItem) {
-        subtitle = `${mediaItem.alt}`;
-        media = mediaItem.media;
-      }
       return {
         title: 'Media Column',
         subtitle: subtitle,
-        media: media || ImageIcon,
+        media: media,
       };
     },
   },

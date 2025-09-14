@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetPageQueryResult } from '@/sanity.types';
-import SanityImage from '../SanityImage';
+import Media from '../Media';
 
 type IMediaColumnBlock = Extract<
   NonNullable<NonNullable<GetPageQueryResult>['pageBuilder']>[number],
@@ -15,14 +15,12 @@ const MediaColumn = ({ block }: IMediaColumn) => {
 
   const { mediaItem } = block;
 
-  console.log(mediaItem);
-
   return (
     <section>
-      {mediaItem?.media?.asset && (
-        <SanityImage
-          image={mediaItem.media}
-          alt={mediaItem.media.alt || 'Media column image'}
+      {mediaItem && (
+        <Media
+          media={mediaItem}
+          alt={mediaItem.image?.alt || 'Media column content'}
           className='w-full'
           priority={true}
         />

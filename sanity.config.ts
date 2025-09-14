@@ -8,6 +8,8 @@ import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
+import { muxInput } from 'sanity-plugin-mux-input';
+import { media } from 'sanity-plugin-media';
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId, studioUrl } from './sanity/env';
@@ -34,6 +36,11 @@ export default defineConfig({
           enable: '/api/draft-mode/enable',
         },
       },
+    }),
+    media(),
+    muxInput({
+      // Add configuration to prevent progress field errors
+      mp4_support: 'standard',
     }),
     visionTool({ defaultApiVersion: apiVersion }),
   ],

@@ -1,4 +1,4 @@
-import { ImageIcon, TiersIcon } from '@sanity/icons';
+import { ImageIcon, TiersIcon, VideoIcon } from '@sanity/icons';
 import { format, parseISO } from 'date-fns';
 import { defineField, defineType } from 'sanity';
 import * as blocks from '../blocks';
@@ -79,16 +79,33 @@ export const caseStudy = defineType({
     select: {
       title: 'name',
       date: 'date',
-      media: 'poster.media',
+      posterType: 'poster.type',
+      posterImage: 'poster.image',
+      posterVideo: 'poster.video',
+      posterVideoThumbnail: 'poster.video.asset.thumbTime',
     },
-    prepare({ title, media, date }) {
+    prepare({
+      title,
+      date,
+      posterType,
+      posterImage,
+      posterVideo,
+      posterVideoThumbnail,
+    }) {
       const subtitles = [
         date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
       ].filter(Boolean);
 
+      const isVideo = posterType === 'video';
+      const media = isVideo
+        ? posterVideoThumbnail
+          ? posterVideo
+          : VideoIcon // Use video icon when thumbnail not ready
+        : posterImage || ImageIcon;
+
       return {
         title: title || 'Untitled Case Study',
-        media: media || ImageIcon,
+        media: media,
         subtitle: subtitles.join(' '),
       };
     },

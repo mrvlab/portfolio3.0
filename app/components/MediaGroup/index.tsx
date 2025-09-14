@@ -3,6 +3,7 @@ import {
   MediaGroup as MediaGroupType,
   HeaderQueryResult,
 } from '@/sanity.types';
+import Media from '../Media';
 
 type IMediaGroup = {
   block: MediaGroupType;
@@ -20,8 +21,12 @@ const MediaGroup = ({ block }: IMediaGroup) => {
       <div className='media-group'>
         {mediaItems?.map((mediaItem, idx) => (
           <div key={idx} className='media-item'>
-            {/* Render media item based on its type */}
-            {JSON.stringify(mediaItem)}
+            <Media
+              media={mediaItem}
+              alt={mediaItem.image?.alt || `Media item ${idx + 1}`}
+              className='w-full h-full object-cover'
+              priority={idx < 2}
+            />
           </div>
         ))}
       </div>

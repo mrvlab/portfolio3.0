@@ -55,9 +55,6 @@ const caseStudyBlocksQuery = /* groq */ `
       }
     }
   },
-  _type == "navBar" => {
-    logo
-  },
   _type == "caseDetails" => {
     title,
     descriptionLabel,
@@ -145,14 +142,22 @@ const caseStudyBlocksQuery = /* groq */ `
     mediaItems[]{
       _type,
       _key,
-      media{
+      mediaType,
+      image{
         asset->{
           ...,
           metadata
         },
         hotspot,
         crop,
-        alt
+        alt,
+        imageBrightness,
+        imageQuality
+      },
+      video{
+        asset->{
+          ...,
+        }
       }
     }
   },
@@ -160,14 +165,22 @@ const caseStudyBlocksQuery = /* groq */ `
     mediaItem{
       _type,
       _key,
-      media{
+      mediaType,
+      image{
         asset->{
           ...,
           metadata
         },
         hotspot,
         crop,
-        alt
+        alt,
+        imageBrightness,
+        imageQuality
+      },
+      video{
+        asset->{
+          ...,
+        }
       }
     }
   }
@@ -221,9 +234,6 @@ const blocksQuery = /* groq */ `
       }
     }
   },
-  _type == "navBar" => {
-    logo
-  },
   _type == "caseDetails" => {
     title,
     descriptionLabel,
@@ -311,14 +321,22 @@ const blocksQuery = /* groq */ `
     mediaItems[]{
       _type,
       _key,
-      media{
+      mediaType,
+      image{
         asset->{
           ...,
           metadata
         },
         hotspot,
         crop,
-        alt
+        alt,  
+        imageBrightness,
+        imageQuality
+      },
+      video{
+        asset->{
+          ...,
+        }
       }
     }
   },
@@ -326,14 +344,22 @@ const blocksQuery = /* groq */ `
     mediaItem{
       _type,
       _key,
-      media{
+      mediaType,
+      image{
         asset->{
           ...,
           metadata
         },
         hotspot,
         crop,
-        alt
+        alt,
+        imageBrightness,
+        imageQuality
+      },
+      video{
+        asset->{
+          ...,
+        }
       }
     }
   },
@@ -346,7 +372,25 @@ const blocksQuery = /* groq */ `
       _id,
       name,
       slug,
-      poster,
+      poster{
+        mediaType,
+        image{
+          asset->{
+            ...,
+            metadata
+          },
+          hotspot,
+          crop,
+          alt,
+          imageBrightness,
+          imageQuality
+        },
+        video{
+          asset->{
+            ...,
+          }
+        }
+      },
       "date": coalesce(date, _updatedAt),
       "pageBuilder": pageBuilder[]{${caseStudyBlocksQuery}}
     },
@@ -458,7 +502,25 @@ export const caseStudyQuery = defineQuery(`
     "status": select(_originalId in path("drafts.**") => "draft", "published"),
     name,
     slug,
-    poster,
+    poster{
+      mediaType,
+      image{
+        asset->{
+          ...,
+          metadata
+        },
+        hotspot,
+        crop,
+        alt,
+        imageBrightness,
+        imageQuality
+      },
+      video{
+        asset->{
+          ...,
+        }
+      }
+    },
     "date": coalesce(date, _updatedAt),
     "pageBuilder": pageBuilder[]{${caseStudyBlocksQuery}},
     seo{

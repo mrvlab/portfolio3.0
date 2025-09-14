@@ -20,12 +20,10 @@ export const nameHero = defineType({
   ],
   preview: {
     select: {
-      logoMobile: 'logoMobile.media',
-      logoDesktop: 'logoDesktop.media',
       descriptionChildren: 'description.0.children',
     },
     prepare(selection) {
-      const { logoMobile, logoDesktop, descriptionChildren } = selection;
+      const { descriptionChildren } = selection;
 
       const title = Array.isArray(descriptionChildren)
         ? descriptionChildren
@@ -37,7 +35,7 @@ export const nameHero = defineType({
       return {
         title: title,
         subtitle: 'Name Hero',
-        media: logoMobile || logoDesktop || ImageIcon,
+        media: ImageIcon,
       };
     },
   },

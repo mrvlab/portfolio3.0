@@ -41,10 +41,8 @@ export default async function RootLayout({
               <DisableDraftMode />
             </>
           )}
-
           <SanityLive />
           <>{children}</>
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

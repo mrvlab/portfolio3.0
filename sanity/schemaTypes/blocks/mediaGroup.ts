@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { ProjectsIcon } from '@sanity/icons';
+import { ProjectsIcon, VideoIcon } from '@sanity/icons';
 
 export const mediaGroup = defineType({
   name: 'mediaGroup',
@@ -26,10 +26,21 @@ export const mediaGroup = defineType({
       let subtitle = '';
       let media = null;
 
-      if (mediaItems.length > 0) {
+      if (mediaItems && mediaItems.length > 0) {
+        const firstItem = mediaItems[0];
+        const isVideo = firstItem?.mediaType === 'video';
+
         subtitle = `${mediaItems.length} media item${mediaItems.length > 1 ? 's' : ''}`;
-        media = mediaItems[0].media;
+
+        if (isVideo) {
+          media = firstItem?.video?.asset?.thumbTime
+            ? firstItem.video
+            : VideoIcon; // Use video icon when thumbnail not ready
+        } else {
+          media = firstItem?.image || ProjectsIcon;
+        }
       }
+
       return {
         title: 'Media Group',
         subtitle: subtitle,

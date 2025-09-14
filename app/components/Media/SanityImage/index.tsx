@@ -1,15 +1,11 @@
 import React from 'react';
-import Image from 'next/image';
-import {
-  useNextSanityImage,
-  UseNextSanityImageBuilder,
-} from 'next-sanity-image';
+import Image, { type ImageProps } from 'next/image';
+import { useNextSanityImage } from 'next-sanity-image';
 import { client } from '@/sanity/lib/client-browser';
 import {
   SanityImageAsset,
   SanityImageHotspot,
   SanityImageCrop,
-  GetPageQueryResult,
 } from '@/sanity.types';
 
 // Create a more flexible asset type that matches the query result
@@ -22,21 +18,24 @@ type SanityImageSource = {
   hotspot?: SanityImageHotspot | null;
   crop?: SanityImageCrop | null;
   alt?: string | null;
+  imageQuality?: number | null;
+  imageBrightness?: number | null;
   _type?: string;
 } | null;
 
 type SanityImageProps = {
   image: SanityImageSource;
-  alt: string;
-  className?: string;
-  sizes?: string;
-  priority?: boolean;
-  quality?: number;
-  fill?: boolean;
-  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
-  style?: React.CSSProperties;
-  imageBuilder?: UseNextSanityImageBuilder;
-};
+} & Pick<
+  ImageProps,
+  | 'className'
+  | 'sizes'
+  | 'priority'
+  | 'quality'
+  | 'fill'
+  | 'objectFit'
+  | 'style'
+  | 'alt'
+>;
 
 const SanityImage = ({
   image,
@@ -48,20 +47,22 @@ const SanityImage = ({
   fill = false,
   objectFit = 'cover',
   style,
-  imageBuilder,
 }: SanityImageProps) => {
   const imageProps = useNextSanityImage(client, image, {
-    imageBuilder:
-      imageBuilder ||
-      ((imageUrlBuilder, options) => {
-        return imageUrlBuilder
-          .width(
-            options.width ||
-              Math.min(options.originalImageDimensions.width, 1920)
-          )
-          .quality(options.quality || quality)
-          .fit('clip');
-      }),
+    imageBuilder: (imageUrlBuilder, options) => {
+      // Use imageQuality from image object if available, otherwise fall back to component quality prop
+      const finalQuality =
+        image?.imageQuality ||
+        options.quality ||
+        (typeof quality === 'string' ? parseInt(quality) : quality);
+
+      return imageUrlBuilder
+        .width(
+          options.width || Math.min(options.originalImageDimensions.width, 1920)
+        )
+        .quality(finalQuality)
+        .fit('clip');
+    },
   });
 
   if (!image?.asset || !imageProps) {
@@ -87,6 +88,7 @@ const SanityImage = ({
         objectFit={objectFit}
         alt={image.alt || alt || ''}
         {...commonProps}
+        style={{ ...style, filter: `brightness(${image.imageBrightness}%)` }}
       />
     );
   }
@@ -97,6 +99,7 @@ const SanityImage = ({
       sizes={sizes}
       alt={image.alt || alt || ''}
       {...commonProps}
+      style={{ ...style, filter: `brightness(${image.imageBrightness}%)` }}
     />
   );
 };

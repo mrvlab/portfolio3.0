@@ -1,9 +1,14 @@
+import Footer from '../components/Footer';
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <main className='grid p-5 gap-5 min-h-svh lg:h-screen'>{children}</main>
+    <>
+      <main className='grid p-5 gap-5 min-h-svh lg:h-screen'>{children}</main>
+      <Footer />
+    </>
   );
 }
