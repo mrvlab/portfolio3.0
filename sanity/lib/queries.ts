@@ -409,7 +409,8 @@ export const settingsQuery = defineQuery(`
     seo{
       metaTitle,
       metaDescription,
-      metaImage
+      metaImage,
+      indexable
     }
   }
 `);
@@ -452,7 +453,8 @@ export const getPageQuery = defineQuery(`
     seo{
       metaTitle,
       metaDescription,
-      metaImage
+      metaImage,
+      indexable
     }
   }
 `);
@@ -475,7 +477,8 @@ export const allCaseStudiesQuery = defineQuery(`
     seo{
       metaTitle,
       metaDescription,
-      metaImage
+      metaImage,
+      indexable
     }
   }
 `);
@@ -490,7 +493,8 @@ export const moreCaseStudiesQuery = defineQuery(`
     seo{
       metaTitle,
       metaDescription,
-      metaImage
+      metaImage,
+      indexable
     }
   }
 `);
@@ -526,7 +530,8 @@ export const caseStudyQuery = defineQuery(`
     seo{
       metaTitle,
       metaDescription,
-      metaImage
+      metaImage,
+      indexable
     }
   }
 `);

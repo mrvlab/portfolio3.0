@@ -76,6 +76,9 @@ export async function generateMetadata(
   const caseStudySeo = caseStudy?.seo;
   const settingsSeo = settings?.seo;
 
+  // Check if page should be indexed
+  const shouldNoIndex = caseStudySeo?.indexable || pageSeo?.indexable || false;
+
   // Title
   const titleFromPage =
     caseStudy?.name || pageSeo?.metaTitle || page?.name || DEFAULT_TITLE;
@@ -110,6 +113,7 @@ export async function generateMetadata(
   return {
     title: fullTitle,
     description,
+    robots: shouldNoIndex ? 'noindex' : 'index, follow',
     openGraph: {
       title: fullTitle,
       description,

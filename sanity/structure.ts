@@ -12,7 +12,12 @@ import * as pages from './schemaTypes/pages';
 import * as references from './schemaTypes/references';
 import * as singletons from './schemaTypes/singletons';
 
-const pagesSchemas = Object.values(pages);
+const allPages = Object.values(pages);
+const pagesSchemas = allPages.sort((a, b) => {
+  if (a.name === 'page') return -1; // page always first
+  if (b.name === 'page') return 1; // page always first
+  return 0; // maintain original order for everything else
+});
 const referencesSchemas = Object.values(references);
 const singletonSchemas = Object.values(singletons);
 

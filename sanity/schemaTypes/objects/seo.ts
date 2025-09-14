@@ -37,5 +37,13 @@ export const seo = defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'noIndex',
+      title: 'No Index',
+      type: 'boolean',
+      initialValue: false,
+      description:
+        'Prevent this page from being indexed by search engines. Check this box to add a "noindex" meta tag.',
+    }),
   ],
 });
