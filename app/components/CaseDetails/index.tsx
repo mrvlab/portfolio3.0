@@ -37,7 +37,7 @@ const CaseDetails = ({ block }: ICaseDetails) => {
         <div className='flex flex-col gap-6 text-scale--1  md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-2 lg:col-start-1 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
           <div className='sticky top-5 flex flex-col gap-6'>
             {descriptionLabel && <h2>{descriptionLabel}</h2>}
-            <div className='flex flex-col w-[90%]  dark:text-white/60'>
+            <div className='flex flex-col text-scale--2 w-[90%] dark:text-white/60'>
               {description && (
                 <RichText content={description as unknown as SanityRichText} />
               )}
@@ -45,7 +45,7 @@ const CaseDetails = ({ block }: ICaseDetails) => {
           </div>
         </div>
 
-        <div className='flex flex-col gap-5 md:col-start-2 md:col-span-1 md:row-start-1 md:row-span-1 lg:col-start-2 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
+        <div className='flex flex-col gap-5 text-scale--2 md:col-start-2 md:col-span-1 md:row-start-1 md:row-span-1 lg:col-start-2 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
           {detailsLabel && <h3 className='text-scale--1'>{detailsLabel}</h3>}
           {detailsItems && (
             <table className='flex flex-col h-full w-full border-collapse'>
@@ -69,7 +69,7 @@ const CaseDetails = ({ block }: ICaseDetails) => {
             </table>
           )}
         </div>
-        <div className='flex flex-col gap-5 md:col-start-2 md:col-span-1 md:row-start-2 md:row-span-1 lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
+        <div className='flex flex-col gap-5 text-scale--2 md:col-start-2 md:col-span-1 md:row-start-2 md:row-span-1 lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
           {creditsLabel && <h3 className='text-scale--1 '>{creditsLabel}</h3>}
           {creditsItems && (
             <table className='flex flex-col h-full w-full border-collapse'>
