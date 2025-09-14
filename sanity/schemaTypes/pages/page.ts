@@ -9,7 +9,7 @@ import * as blocks from '../blocks';
 
 export const page = defineType({
   name: 'page',
-  title: 'Page',
+  title: 'Pages',
   type: 'document',
   icon: DocumentTextIcon,
   fieldsets: [
