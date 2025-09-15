@@ -4,12 +4,19 @@ import { useEffect } from 'react';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    const shouldBeDark =
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    document.documentElement.classList.toggle('dark', shouldBeDark);
+    const handleSystemThemeChange = () => {
+      const systemPrefersDark = mediaQuery.matches;
+      localStorage.removeItem('theme');
+      document.documentElement.classList.toggle('dark', systemPrefersDark);
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
+    };
   }, []);
 
   return <>{children}</>;
