@@ -54,6 +54,8 @@ const HIDDEN_CONTROLS_STYLES = {
   '--center-controls': 'none',
   '--top-controls': 'none',
   '--bottom-controls': 'none',
+  '--background-color': 'none',
+  '--media-background-color': 'transparent',
 } as const;
 
 export default function MuxVideo({
