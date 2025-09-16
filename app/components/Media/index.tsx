@@ -9,6 +9,7 @@ import { type ImageProps } from 'next/image';
 // We use 'unknown' to allow resolved media from queries that may not have _type field
 type MediaProps = {
   media: MediaType | MuxVideoAsset | unknown | null;
+  dataSanity?: string;
 } & Pick<
   ImageProps,
   | 'className'
@@ -30,6 +31,7 @@ const Media = ({
   quality,
   fill = false,
   style,
+  dataSanity,
 }: MediaProps) => {
   if (!media) return null;
 
@@ -103,6 +105,7 @@ const Media = ({
             quality={quality}
             fill={fill}
             style={style}
+            dataSanity={dataSanity}
           />
         );
       }
@@ -158,6 +161,7 @@ const Media = ({
           quality={quality}
           fill={fill}
           style={style}
+          dataSanity={dataSanity}
         />
       );
     }

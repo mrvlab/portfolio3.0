@@ -9,7 +9,7 @@ import {
   AllCaseStudiesQueryResult,
   MoreCaseStudiesQueryResult,
 } from '@/sanity.types';
-import { createDataAttribute } from 'next-sanity';
+import { documentDataAttr } from '@/sanity/lib/utils';
 import { notFound } from 'next/navigation';
 
 const CaseStudy = ({
@@ -17,17 +17,11 @@ const CaseStudy = ({
 }: {
   caseStudy: AllCaseStudiesQueryResult[number];
 }) => {
-  const { _id, name, slug, seo } = caseStudy;
-
-  const attr = createDataAttribute({
-    id: _id,
-    type: 'caseStudy',
-    path: 'title',
-  });
+  const { _id, name, slug, seo, _type } = caseStudy;
 
   return (
     <article
-      data-sanity={attr()}
+      data-sanity={documentDataAttr(_id, _type, 'name')}
       key={_id}
       className='border border-gray-200 rounded-sm p-6 bg-gray-50 flex flex-col justify-between transition-colors hover:bg-white relative'
     >

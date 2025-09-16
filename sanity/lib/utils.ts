@@ -112,3 +112,22 @@ export function dataAttr(config: DataAttributeConfig) {
     baseUrl: studioUrl,
   }).combine(config);
 }
+
+/**
+ * Generic helper function to create data attributes for any document type
+ * @param documentId - The ID of the document
+ * @param documentType - The type of the document (e.g., 'caseStudy', 'page', 'agencyWork')
+ * @param fieldPath - The field path within the document
+ * @returns A data attribute string for Sanity presentation tools
+ */
+export function documentDataAttr(
+  documentId: string,
+  documentType: string,
+  fieldPath: string
+) {
+  return dataAttr({
+    id: documentId,
+    type: documentType,
+    path: fieldPath,
+  }).toString();
+}

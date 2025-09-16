@@ -144,10 +144,7 @@ const caseStudyBlocksQuery = /* groq */ `
       _key,
       mediaType,
       image{
-        asset->{
-          ...,
-          metadata
-        },
+        asset->{...,},
         hotspot,
         crop,
         alt,
@@ -155,9 +152,7 @@ const caseStudyBlocksQuery = /* groq */ `
         imageQuality
       },
       video{
-        asset->{
-          ...,
-        }
+        asset->{...,},
       }
     }
   },
@@ -167,10 +162,7 @@ const caseStudyBlocksQuery = /* groq */ `
       _key,
       mediaType,
       image{
-        asset->{
-          ...,
-          metadata
-        },
+        asset->{...,},
         hotspot,
         crop,
         alt,
@@ -178,9 +170,7 @@ const caseStudyBlocksQuery = /* groq */ `
         imageQuality
       },
       video{
-        asset->{
-          ...,
-        }
+        asset->{...,},
       }
     }
   }
@@ -323,10 +313,7 @@ const blocksQuery = /* groq */ `
       _key,
       mediaType,
       image{
-        asset->{
-          ...,
-          metadata
-        },
+        asset->{...,},
         hotspot,
         crop,
         alt,  
@@ -334,9 +321,7 @@ const blocksQuery = /* groq */ `
         imageQuality
       },
       video{
-        asset->{
-          ...,
-        }
+        asset->{...,},
       }
     }
   },
@@ -346,10 +331,7 @@ const blocksQuery = /* groq */ `
       _key,
       mediaType,
       image{
-        asset->{
-          ...,
-          metadata
-        },
+        asset->{...,},
         hotspot,
         crop,
         alt,
@@ -357,9 +339,7 @@ const blocksQuery = /* groq */ `
         imageQuality
       },
       video{
-        asset->{
-          ...,
-        }
+        asset->{...,},
       }
     }
   },
@@ -375,10 +355,7 @@ const blocksQuery = /* groq */ `
       poster{
         mediaType,
         image{
-          asset->{
-            ...,
-            metadata
-          },
+          asset->{...,},
           hotspot,
           crop,
           alt,
@@ -386,9 +363,7 @@ const blocksQuery = /* groq */ `
           imageQuality
         },
         video{
-          asset->{
-            ...,
-          }
+          asset->{...,},
         }
       },
       "date": coalesce(date, _updatedAt),
@@ -470,6 +445,7 @@ export const sitemapData = defineQuery(`
 export const allCaseStudiesQuery = defineQuery(`
   *[_type == "caseStudy" && defined(slug.current)] | order(date desc, _updatedAt desc) {
     _id,
+    _type,
     "status": select(_originalId in path("drafts.**") => "draft", "published"),
     name,
     slug,
@@ -486,6 +462,7 @@ export const allCaseStudiesQuery = defineQuery(`
 export const moreCaseStudiesQuery = defineQuery(`
   *[_type == "caseStudy" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
     _id,
+    _type,
     "status": select(_originalId in path("drafts.**") => "draft", "published"),
     name,
     slug,
@@ -509,10 +486,7 @@ export const caseStudyQuery = defineQuery(`
     poster{
       mediaType,
       image{
-        asset->{
-          ...,
-          metadata
-        },
+        asset->{...,},
         hotspot,
         crop,
         alt,
@@ -520,9 +494,7 @@ export const caseStudyQuery = defineQuery(`
         imageQuality
       },
       video{
-        asset->{
-          ...,
-        }
+        asset->{...,},
       }
     },
     "date": coalesce(date, _updatedAt),

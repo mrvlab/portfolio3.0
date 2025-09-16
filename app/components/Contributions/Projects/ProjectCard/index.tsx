@@ -2,6 +2,7 @@ import Media from '@/app/components/Media';
 import RightArrow from '@/app/components/Icons/RightArrow';
 import React from 'react';
 import { IContributionsBlock } from '../..';
+import { documentDataAttr } from '@/sanity/lib/utils';
 
 type ProjectType = NonNullable<
   NonNullable<IContributionsBlock['projectsList']>[number]
@@ -15,8 +16,11 @@ type IProjectCard = {
 
 const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
   if (!project) return null;
-  const { name, poster, date } = project;
+  const { name, poster, date, _id, _type } = project;
   const isPageBuilder = hasPageBuilder ? 'group-hover:scale-105' : '';
+
+  // Create data attributes for Sanity presentation tool highlighting
+  const posterDataAttr = documentDataAttr(_id, _type, 'poster');
 
   return (
     <>
@@ -30,6 +34,7 @@ const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
             alt={poster.image?.alt || 'Project image'}
             className={`w-full h-full object-cover transition-transform duration-300 ${isPageBuilder}`}
             priority={index < 3}
+            dataSanity={posterDataAttr}
           />
         )}
       </div>

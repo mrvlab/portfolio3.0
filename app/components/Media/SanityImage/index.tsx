@@ -25,6 +25,7 @@ type SanityImageSource = {
 
 type SanityImageProps = {
   image: SanityImageSource;
+  dataSanity?: string;
 } & Pick<
   ImageProps,
   | 'className'
@@ -42,11 +43,11 @@ const SanityImage = ({
   alt,
   className,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw',
-
   priority = false,
   quality = 75,
   fill = false,
   style,
+  dataSanity,
 }: SanityImageProps) => {
   const imageProps = useNextSanityImage(client, image, {
     imageBuilder: (imageUrlBuilder, options) => {
@@ -87,6 +88,7 @@ const SanityImage = ({
         fill
         alt={image.alt || alt || ''}
         {...commonProps}
+        {...(dataSanity && { 'data-sanity': dataSanity })}
         style={{
           ...style,
           ...(image.imageBrightness &&
@@ -105,6 +107,7 @@ const SanityImage = ({
       sizes={sizes}
       alt={image.alt || alt || ''}
       {...commonProps}
+      {...(dataSanity && { 'data-sanity': dataSanity })}
       style={{
         ...style,
         ...(image.imageBrightness &&

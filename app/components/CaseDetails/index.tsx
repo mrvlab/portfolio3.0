@@ -37,7 +37,7 @@ const CaseDetails = ({ block }: ICaseDetails) => {
         <div className='flex flex-col gap-6 text-scale--1 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-2 lg:col-start-1 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
           <div className='sticky top-5 flex flex-col gap-6'>
             {descriptionLabel && <h2>{descriptionLabel}</h2>}
-            <div className='flex flex-col text-scale--2 w-[90%] dark:text-white/60'>
+            <div className='flex flex-col text-scale--0 w-[90%] dark:text-white/60'>
               {description && (
                 <RichText content={description as unknown as SanityRichText} />
               )}
@@ -48,8 +48,8 @@ const CaseDetails = ({ block }: ICaseDetails) => {
         <div className='flex flex-col gap-5 text-scale--2 md:col-start-2 md:col-span-1 md:row-start-1 md:row-span-1 lg:col-start-2 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
           {detailsLabel && <h3 className='text-scale--1'>{detailsLabel}</h3>}
           {detailsItems && (
-            <table className='flex flex-col h-full w-full border-collapse'>
-              <tbody className='flex flex-col h-full'>
+            <table className='flex flex-col h-fit w-full border-collapse'>
+              <tbody className='flex flex-col h-fit'>
                 {detailsItems.map((item, index) => (
                   <tr
                     key={item._key}
@@ -57,10 +57,10 @@ const CaseDetails = ({ block }: ICaseDetails) => {
                       index === 0 ? 'border-t' : ''
                     }`}
                   >
-                    <td className='py-3 font-medium w-1/2 align-top text-gray-600 dark:text-white/60'>
+                    <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-gray-600 dark:text-white/60'>
                       {item.title}
                     </td>
-                    <td className='py-3 align-top w-1/2'>
+                    <td className='py-3 align-top flex-2 xl:flex-1'>
                       <DetailsItem item={item} />
                     </td>
                   </tr>
@@ -72,8 +72,8 @@ const CaseDetails = ({ block }: ICaseDetails) => {
         <div className='flex flex-col gap-5 text-scale--2 md:col-start-2 md:col-span-1 md:row-start-2 md:row-span-1 lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
           {creditsLabel && <h3 className='text-scale--1 '>{creditsLabel}</h3>}
           {creditsItems && (
-            <table className='flex flex-col h-full w-full border-collapse'>
-              <tbody className='flex flex-col h-full'>
+            <table className='flex flex-col h-fit w-full border-collapse'>
+              <tbody className='flex flex-col h-fit'>
                 {creditsItems.map((item, index) => (
                   <tr
                     key={item._key}
@@ -81,10 +81,10 @@ const CaseDetails = ({ block }: ICaseDetails) => {
                       index === 0 ? 'border-t' : ''
                     }`}
                   >
-                    <td className='py-3 font-medium w-1/2 align-top text-gray-600 dark:text-white/60'>
+                    <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-gray-600 dark:text-white/60'>
                       {item.title}
                     </td>
-                    <td className='py-3 align-top w-1/2'>
+                    <td className='py-3 align-top flex-2 xl:flex-1'>
                       <DetailsItem item={item} />
                     </td>
                   </tr>
