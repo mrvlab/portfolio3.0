@@ -41,27 +41,27 @@ const SanityImage = ({
   image,
   alt,
   className,
-  sizes = '(max-width: 800px) 100vw, 800px',
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw',
+
   priority = false,
   quality = 75,
   fill = false,
-  objectFit = 'cover',
   style,
 }: SanityImageProps) => {
   const imageProps = useNextSanityImage(client, image, {
     imageBuilder: (imageUrlBuilder, options) => {
-      // Use imageQuality from image object if available, otherwise fall back to component quality prop
       const finalQuality =
         image?.imageQuality ||
-        options.quality ||
         (typeof quality === 'string' ? parseInt(quality) : quality);
 
+      // Use the requested width or cap at reasonable maximum
+      const optimalWidth = options.width || 1920;
+
       return imageUrlBuilder
-        .width(
-          options.width || Math.min(options.originalImageDimensions.width, 1920)
-        )
+        .width(optimalWidth)
         .quality(finalQuality)
-        .fit('clip');
+        .format('webp')
+        .fit('crop');
     },
   });
 
@@ -85,10 +85,16 @@ const SanityImage = ({
         src={imageProps.src}
         loader={imageProps.loader}
         fill
-        objectFit={objectFit}
         alt={image.alt || alt || ''}
         {...commonProps}
-        style={{ ...style, filter: `brightness(${image.imageBrightness}%)` }}
+        style={{
+          ...style,
+          ...(image.imageBrightness &&
+            image.imageBrightness !== 100 &&
+            image.imageBrightness !== undefined && {
+              filter: `brightness(${image.imageBrightness}%)`,
+            }),
+        }}
       />
     );
   }
@@ -99,7 +105,14 @@ const SanityImage = ({
       sizes={sizes}
       alt={image.alt || alt || ''}
       {...commonProps}
-      style={{ ...style, filter: `brightness(${image.imageBrightness}%)` }}
+      style={{
+        ...style,
+        ...(image.imageBrightness &&
+          image.imageBrightness !== 100 &&
+          image.imageBrightness !== undefined && {
+            filter: `brightness(${image.imageBrightness}%)`,
+          }),
+      }}
     />
   );
 };
