@@ -1,8 +1,8 @@
-import Media from '@/app/components/Media';
-import RightArrow from '@/app/components/Icons/RightArrow';
 import React from 'react';
 import { IContributionsBlock } from '../..';
 import { documentDataAttr } from '@/sanity/lib/utils';
+import Link from 'next/link';
+import CardContent from './CardContent';
 
 type ProjectType = NonNullable<
   NonNullable<IContributionsBlock['projectsList']>[number]
@@ -16,39 +16,39 @@ type IProjectCard = {
 
 const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
   if (!project) return null;
-  const { name, poster, date, _id, _type } = project;
-  const isPageBuilder = hasPageBuilder ? 'group-hover:scale-105' : '';
 
-  // Create data attributes for Sanity presentation tool highlighting
-  const posterDataAttr = documentDataAttr(_id, _type, 'poster');
+  const { _id, _type, slug } = project;
+  const projectUrl = `/projects/${slug?.current}`;
+  const containerClasses =
+    'flex aspect-4/5 justify-center items-center flex-shrink-0 overflow-hidden group relative lg:text-gray-900 lg:dark:text-green-100 text-scale--1 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-green-700';
 
-  return (
-    <>
-      <div className='absolute top-6 left-6 right-6 flex lg:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
-        <span>{name}</span>
-      </div>
-      <div className='aspect-4/5 w-1/2 relative overflow-hidden'>
-        {poster && (
-          <Media
-            media={poster}
-            alt={poster.image?.alt || 'Project image'}
-            className={`w-full h-full object-cover transition-transform duration-300 ${isPageBuilder}`}
-            priority={index < 3}
-            dataSanity={posterDataAttr}
-          />
-        )}
-      </div>
-      <div className='absolute bottom-6 left-6 right-6 flex justify-between lg:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
-        <span className={`${hasPageBuilder ? '' : 'w-full flex justify-end'}`}>
-          {new Date(date || '').getFullYear()}
-        </span>
-        {hasPageBuilder && (
-          <span>
-            <RightArrow />
-          </span>
-        )}
-      </div>
-    </>
+  const projectDataAttr = documentDataAttr(_id, _type, 'name');
+
+  return hasPageBuilder ? (
+    <Link
+      key={project._id}
+      data-sanity={projectDataAttr}
+      href={projectUrl}
+      className={containerClasses}
+    >
+      <CardContent
+        project={project}
+        index={index}
+        hasPageBuilder={hasPageBuilder}
+      />
+    </Link>
+  ) : (
+    <div
+      key={project._id}
+      data-sanity={projectDataAttr}
+      className={containerClasses}
+    >
+      <CardContent
+        project={project}
+        index={index}
+        hasPageBuilder={hasPageBuilder}
+      />
+    </div>
   );
 };
 
