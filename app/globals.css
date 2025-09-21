@@ -1,0 +1,219 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './global-chadcn.css';
+
+@plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar-hide";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@utility container {
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@theme {
+  --font-sans: var(--font-plusJakartaSans);
+  --font-mono: var(--font-plusJakartaSans);
+  --font-syne: var(--font-syne);
+
+  /* light */
+  --color-gray-50: rgba(242, 242, 242, 1);
+  --color-gray-100: rgba(230, 230, 230, 1);
+  --color-gray-200: rgba(204, 204, 204, 1);
+  --color-gray-300: rgba(179, 179, 179, 1);
+  --color-gray-400: rgba(153, 153, 153, 1);
+  --color-gray-500: rgba(243, 243, 243, 1);
+  --color-gray-600: rgba(102, 102, 102, 1);
+  --color-gray-700: rgba(77, 77, 77, 1);
+  --color-gray-800: rgba(51, 51, 51, 1);
+  --color-gray-900: rgba(26, 26, 26, 1);
+  --color-gray-950: rgba(13, 13, 13, 1);
+
+  /* dark */
+  --color-green-50: rgba(242, 244, 241, 1);
+  --color-green-100: rgba(229, 232, 227, 1);
+  --color-green-200: rgba(203, 209, 199, 1);
+  --color-green-300: rgba(178, 187, 170, 1);
+  --color-green-400: rgba(152, 164, 142, 1);
+  --color-green-500: rgba(42, 47, 38, 1);
+  --color-green-600: rgba(101, 113, 91, 1);
+  --color-green-700: rgba(76, 85, 68, 1);
+  --color-green-800: rgba(50, 56, 46, 1);
+  --color-green-900: rgba(25, 28, 23, 1);
+  --color-green-950: rgba(13, 14, 11, 1);
+
+  /* Aspect ratios */
+  --aspect-4/5: 4 / 5;
+
+  /* Step -3: 9px → 12px */
+  /* --text-scale--3: clamp(0.5625rem, 0.1875rem + 0.586vw, 0.75rem); */
+
+  /* Step -2: 12px → 13.33px */
+  /* --text-scale--2: clamp(0.75rem, 0.417rem + 0.434vw, 0.833rem); */
+
+  /* Step -1: 13.33px → 16px */
+  /* --text-scale--1: clamp(0.833rem, 0.63rem + 0.63vw, 1rem); */
+
+  /* Step 0: 16px → 19px */
+  /* --text-scale-0: clamp(1rem, 0.625rem + 0.586vw, 1.1875rem); */
+
+  /* Step 1: 19.2px → 23px */
+  /* --text-scale-1: clamp(1.2rem, 0.88rem + 0.625vw, 1.4375rem); */
+
+  /* Step 2: 23.04px → 28px */
+  /* --text-scale-2: clamp(1.44rem, 1.04rem + 0.77vw, 1.75rem); */
+
+  /* Step 3: 27.65px → 33px */
+  /* --text-scale-3: clamp(1.728rem, 1.25rem + 0.93vw, 2.0736rem); */
+
+  /* Step 4: 33.18px → 40px */
+  /* --text-scale-4: clamp(2.0736rem, 1.55rem + 1.14vw, 2.5rem); */
+
+  /* Step 5: 39.81px → 48px */
+  /* --text-scale-5: clamp(2.488rem, 1.88rem + 1.22vw, 3rem); */
+
+  /* Step 6: 47.78px → 57px */
+  /* --text-scale-6: clamp(2.986rem, 2.25rem + 1.47vw, 3.5625rem); */
+
+  /* Step 7: 57.33px → 69px */
+  /* --text-scale-7: clamp(3.583rem, 2.7rem + 1.77vw, 4.3125rem); */
+
+  /* Step 8: 68.8px → 83px */
+  /* --text-scale-8: clamp(4.3rem, 3.24rem + 2.12vw, 5.1875rem); */
+
+  /* Typography Scale - Responsive fluid scaling */
+
+  /* ~6px - Micro text, legal text */
+  --text-scale--3: clamp(0.44rem, -0.08vi + 0.46rem, 0.38rem);
+
+  /* ~8px - Caption, fine print */
+  --text-scale--2: clamp(0.52rem, -0.06vi + 0.54rem, 0.48rem);
+
+  /* ~10px - Small body text */
+  --text-scale--1: clamp(0.63rem, -0.04vi + 0.64rem, 0.6rem);
+
+  /* ~12px - Base body text */
+  --text-scale-0: clamp(0.76rem, -0.01vi + 0.76rem, 0.75rem);
+
+  /* ~15px - Large body text */
+  --text-scale-1: clamp(0.91rem, 0.04vi + 0.9rem, 0.94rem);
+
+  /* ~18px - Small headings (h6, h5) */
+  --text-scale-2: clamp(1.09rem, 0.12vi + 1.06rem, 1.17rem);
+
+  /* ~23px - Medium headings (h4, h3) */
+  --text-scale-3: clamp(1.3rem, 0.23vi + 1.25rem, 1.46rem);
+
+  /* ~29px - Large headings (h2) */
+  --text-scale-4: clamp(1.57rem, 0.38vi + 1.47rem, 1.83rem);
+
+  /* ~37px - Extra large headings (h1) */
+  --text-scale-5: clamp(1.88rem, 0.58vi + 1.74rem, 2.29rem);
+
+  /* ~46px - Display text */
+  --text-scale-6: clamp(2.26rem, 0.86vi + 2.04rem, 2.86rem);
+
+  /* ~57px - Hero headings */
+  --text-scale-7: clamp(2.71rem, 1.24vi + 2.4rem, 3.58rem);
+
+  /* ~72px - Massive display text */
+  --text-scale-8: clamp(3.25rem, 1.74vi + 2.82rem, 4.47rem);
+}
+
+/* @utility body-tiny {
+  font-size: var(--text-scale--3);
+  font-weight: 400;
+  line-height: 120%;
+}
+@utility body-small {
+  font-size: var(--text-scale--2);
+  font-weight: 400;
+  line-height: 120%;
+
+  @media (max-width: 768px) {
+    font-size: clamp(.75rem, .93vw, 18px)
+  }
+}
+@utility body-medium {
+  font-size: var(--text-scale--1);
+  font-weight: 400;
+  line-height: 120%;
+}
+@utility body-regular {
+  font-size: var(--text-scale-0);
+  font-weight: 400;
+  line-height: 120%;
+} */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    @apply scrollbar-hide;
+  }
+  body {
+    @apply min-h-svh lg:min-h-screen text-scale--1;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold leading-[120%];
+  }
+}
+
+.link {
+  position: relative;
+  /* padding: 0.2rem 0rem; */
+
+  &:after {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 0%;
+    height: 2px;
+    content: '';
+    opacity: 0;
+    background: var(--color-gray-800);
+    transition: all 0.3s ease;
+  }
+
+  &:hover:after {
+    width: 100%;
+    opacity: 0.7;
+  }
+
+  &:active:after {
+    opacity: 1;
+    background: var(--color-gray-600);
+  }
+
+  /* Dark mode support */
+  .dark & {
+    &:after {
+      background: var(--color-green-200);
+    }
+
+    /* &:hover:after {
+      background: var(--color-green-100);
+    }
+
+    &:active:after {
+      background: var(--color-green-50);
+    } */
+  }
+}
+
+/* Custom animation for dark mode toggle ripples */
+@keyframes growAndFade {
+  0% {
+    transform: scale(0);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
