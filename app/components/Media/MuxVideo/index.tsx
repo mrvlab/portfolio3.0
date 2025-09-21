@@ -19,6 +19,7 @@ type IMuxVideo = {
   muted?: boolean;
   autoPlay?: boolean | 'muted' | 'any';
   loop?: boolean | string;
+  videoObjectFitCover?: boolean;
 };
 
 // Constants moved outside component to prevent recreation
@@ -56,6 +57,11 @@ const HIDDEN_CONTROLS_STYLES = {
   '--bottom-controls': 'none',
   '--background-color': 'none',
   '--media-background-color': 'transparent',
+  '--media-object-fit': 'cover',
+} as const;
+const OBJECT_FIT_COVER_STYLES = {
+  ...HIDDEN_CONTROLS_STYLES,
+  '--media-object-fit': 'cover',
 } as const;
 
 export default function MuxVideo({
@@ -67,6 +73,7 @@ export default function MuxVideo({
   muted = true,
   autoPlay = 'muted',
   loop = true,
+  videoObjectFitCover = false,
 }: IMuxVideo) {
   const [isMounted, setIsMounted] = useState(false);
   const videoRef = useRef<ComponentRef<typeof MuxPlayer>>(null);
@@ -87,6 +94,7 @@ export default function MuxVideo({
     () => ({
       aspectRatio: finalAspectRatio,
       ...HIDDEN_CONTROLS_STYLES,
+      ...(videoObjectFitCover ? OBJECT_FIT_COVER_STYLES : {}),
     }),
     [finalAspectRatio]
   );

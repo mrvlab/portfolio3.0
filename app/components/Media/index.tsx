@@ -10,6 +10,7 @@ import { type ImageProps } from 'next/image';
 type MediaProps = {
   media: MediaType | MuxVideoAsset | unknown | null;
   dataSanity?: string;
+  videoObjectFitCover?: boolean;
 } & Pick<
   ImageProps,
   | 'className'
@@ -32,6 +33,7 @@ const Media = ({
   fill = false,
   style,
   dataSanity,
+  videoObjectFitCover = false,
 }: MediaProps) => {
   if (!media) return null;
 
@@ -61,6 +63,7 @@ const Media = ({
           playbackId={videoAsset.playbackId}
           aspectRatio={videoAsset.data?.aspect_ratio}
           className={className}
+          videoObjectFitCover={videoObjectFitCover}
         />
       );
     }
@@ -83,6 +86,7 @@ const Media = ({
               (asset.data as Record<string, unknown>)?.aspect_ratio as string
             }
             className={className}
+            videoObjectFitCover={videoObjectFitCover}
           />
         );
       }
@@ -138,6 +142,7 @@ const Media = ({
                 ?.aspect_ratio as string
             }
             className={className}
+            videoObjectFitCover={videoObjectFitCover}
           />
         );
       }

@@ -13,10 +13,10 @@ const NavBar = ({ header }: INavBar) => {
   return (
     <section>
       <nav className='flex items-start justify-between sm:items-center'>
-        <Link href='/' className='font-syne text-scale-2 font-semibold'>
+        <Link href='/' className='font-syne text-scale-3 font-semibold'>
           {'Marvin Kiyingi'}
         </Link>
-        <div className='flex flex-col items-end gap-6 sm:flex-row-reverse sm:gap-4 sm:items-center '>
+        <div className='flex flex-col items-end gap-6 sm:flex-row-reverse sm:items-center lg:pr-2'>
           <DarkModeToggle />
           {header && <NavigationItems header={header} />}
         </div>

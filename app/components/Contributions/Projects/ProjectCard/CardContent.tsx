@@ -38,6 +38,7 @@ const CardContent = ({ project, index, hasPageBuilder }: ICardContent) => {
             className={`w-full h-full object-cover`}
             priority={index < 3}
             dataSanity={posterDataAttr}
+            videoObjectFitCover={poster.video ? true : false}
           />
         )}
       </div>

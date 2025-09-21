@@ -22,13 +22,13 @@ const NameHero = ({ block, header }: INameHero) => {
         <Link href='/'>{logo}</Link>
       </h1>
       <div className='grid col-span-1 row-start-1 row-span-3 col-start-4 sm:col-span-3 sm:row-span-full sm:whitespace-nowrap lg:col-start-10'>
-        <div className='sticky top-0 flex flex-1 flex-col items-end h-fit py-6 gap-6 sm:items-center sm:flex-row-reverse sm:px-0 sm:py-6 sm:gap-6 md:gap-6 lg:pr-3'>
+        <div className='sticky top-0 flex flex-1 flex-col items-end h-fit py-6 gap-6 sm:items-center sm:flex-row-reverse sm:px-0 sm:py-6 sm:gap-6 md:gap-6 lg:pr-2'>
           <DarkModeToggle />
           <NavigationItems header={header} />
         </div>
       </div>
       <div className='flex col-start-2 col-span-full row-start-5 row-span-2 sm:col-start-3 sm:col-span-3 sm:row-start-5 sm:row-end-[-1] sm:items-start lg:col-start-5 lg:col-span-4 lg:row-start-3 lg:row-span-2'>
-        <div className='flex flex-col justify-center text-scale--2 h-full text-gray-600 dark:text-white/60'>
+        <div className='flex flex-col justify-center text-scale-0 md:text-scale-1 h-full text-gray-600 dark:text-white/60 2xl:w-2/3'>
           {description && <RichText content={description} />}
         </div>
       </div>

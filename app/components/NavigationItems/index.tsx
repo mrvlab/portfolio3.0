@@ -11,7 +11,7 @@ interface NavigationItemsProps {
 const NavigationItems = ({
   header,
   className = '',
-  itemClassName = 'link text-scale--2',
+  itemClassName = 'link text-scale-0 md:text-scale-1',
 }: NavigationItemsProps) => {
   if (!header?.navigationItems?.length) return null;
 

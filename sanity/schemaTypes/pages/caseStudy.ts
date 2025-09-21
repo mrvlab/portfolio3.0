@@ -15,17 +15,33 @@ export const caseStudy = defineType({
       options: { collapsible: true, collapsed: true },
     },
   ],
+  groups: [
+    {
+      name: 'projectCard',
+      title: 'Project Card',
+    },
+    {
+      name: 'pageBuilder',
+      title: 'Page Builder',
+    },
+    {
+      name: 'seo',
+      title: 'SEO',
+    },
+  ],
   fields: [
     defineField({
       name: 'name',
       title: 'Name',
       type: 'string',
       validation: (rule) => rule.required(),
+      group: 'projectCard',
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      group: 'pageBuilder',
       description:
         'A slug is required for the case study to show up in the preview',
       options: {
@@ -39,11 +55,13 @@ export const caseStudy = defineType({
       name: 'poster',
       title: 'Poster',
       type: 'mediaType',
+      group: 'projectCard',
     }),
     defineField({
       name: 'pageBuilder',
       title: 'Page builder',
       type: 'array',
+      group: 'pageBuilder',
       of: Object.values(blocks)
         .filter((block) => block.name !== 'contributions')
         .map((block) => ({
@@ -66,12 +84,14 @@ export const caseStudy = defineType({
       name: 'date',
       title: 'Date',
       type: 'datetime',
+      group: 'projectCard',
       initialValue: () => new Date().toISOString(),
     }),
 
     defineField({
       name: 'seo',
       type: 'seo',
+      group: 'seo',
       fieldset: 'seo',
     }),
   ],
