@@ -41,7 +41,7 @@ const CaseDetails = ({ block }: ICaseDetails) => {
                 {descriptionLabel}
               </h2>
             )}
-            <div className='flex flex-col text-scale-1 md:text-scale-2 w-[90%] dark:text-white/60'>
+            <div className='flex flex-col text-scale-0 md:text-scale-1 w-[90%] dark:text-white/60'>
               {description && (
                 <RichText content={description as unknown as SanityRichText} />
               )}
