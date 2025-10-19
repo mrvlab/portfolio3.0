@@ -13,7 +13,7 @@ type ITitleWithLink = {
 
 const TitleWithLink = ({ linkData }: ITitleWithLink) => {
   return (
-    <div className='flex items-center justify-between gap-2'>
+    <div className='flex items-center justify-between gap-2 group'>
       {linkData?.link && linkData?.linkLabel && (
         <ResolvedLink
           className='flex-1'
@@ -31,7 +31,7 @@ const TitleWithLink = ({ linkData }: ITitleWithLink) => {
           {linkData.linkLabel}
         </ResolvedLink>
       )}
-      <OpenLinkIcon />
+      <OpenLinkIcon className='transition-all duration-300 group-hover:rotate-45' />
     </div>
   );
 };
