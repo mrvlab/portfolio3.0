@@ -9,7 +9,7 @@ const Footer = async () => {
   if (!footer) return null;
   const { rights } = footer;
   return (
-    <footer className='flex justify-center text-scale-0 text-gray-600 dark:text-white/60 py-2.5 mb-5'>
+    <footer className='flex justify-center text-scale-0 text-light-600 dark:text-white/60 py-2.5 mb-5'>
       {rights} &copy; {new Date().getFullYear()}
     </footer>
   );

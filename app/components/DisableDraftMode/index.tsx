@@ -33,7 +33,7 @@ export function DisableDraftMode() {
 
   return (
     <>
-      <div className='fixed bottom-6 right-6 flex gap-6 p-4 bg-white text-black text-b-12 px-4 py-3 rounded-lg shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-200 font-medium text-sm leading-normal backdrop-blur-sm bg-opacity-95 hover:bg-opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 z-50'>
+      <div className='fixed bottom-6 right-6 flex gap-6 p-4 bg-white text-black text-b-12 px-4 py-3 rounded-lg shadow-lg border border-light-200 hover:shadow-xl transition-all duration-200 font-medium text-sm leading-normal backdrop-blur-sm bg-opacity-95 hover:bg-opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 z-50'>
         <div className='flex flex-col justify-center gap-0.5 text-scale--2 '>
           <div>
             {pending

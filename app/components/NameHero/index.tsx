@@ -28,7 +28,7 @@ const NameHero = ({ block, header }: INameHero) => {
         </div>
       </div>
       <div className='flex col-start-2 col-span-full row-start-5 row-span-2 sm:col-start-3 sm:col-span-3 sm:row-start-5 sm:row-end-[-1] sm:items-start lg:col-start-5 lg:col-span-4 lg:row-start-3 lg:row-span-2'>
-        <div className='flex flex-col justify-center text-scale-0 md:text-scale-1 h-full text-gray-600 dark:text-white/60 2xl:w-2/3'>
+        <div className='flex flex-col justify-center text-scale-0 md:text-scale-1 h-full text-light-600 dark:text-white/60 2xl:w-2/3'>
           {description && <RichText content={description} />}
         </div>
       </div>

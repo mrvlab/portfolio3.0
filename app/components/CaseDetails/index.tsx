@@ -59,11 +59,11 @@ const CaseDetails = ({ block }: ICaseDetails) => {
                 {detailsItems.map((item, index) => (
                   <tr
                     key={item._key}
-                    className={`flex flex-1 gap-2.5 border-b border-gray-200 dark:border-white/20 ${
+                    className={`flex flex-1 gap-2.5 border-b border-light-200 dark:border-white/20 ${
                       index === 0 ? 'border-t' : ''
                     }`}
                   >
-                    <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-gray-600 dark:text-white/60'>
+                    <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-light-600 dark:text-white/60'>
                       {item.title}
                     </td>
                     <td className='py-3 align-top flex-2 xl:flex-1'>
@@ -85,11 +85,11 @@ const CaseDetails = ({ block }: ICaseDetails) => {
                 {creditsItems.map((item, index) => (
                   <tr
                     key={item._key}
-                    className={`flex flex-1 gap-2.5 border-b border-gray-200 dark:border-white/20 ${
+                    className={`flex flex-1 gap-2.5 border-b border-light-200 dark:border-white/20 ${
                       index === 0 ? 'border-t' : ''
                     }`}
                   >
-                    <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-gray-600 dark:text-white/60'>
+                    <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-light-600 dark:text-white/60'>
                       {item.title}
                     </td>
                     <td className='py-3 align-top flex-2 xl:flex-1'>

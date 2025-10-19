@@ -65,13 +65,13 @@ export default function DarkModeToggle() {
   if (!mounted) {
     return (
       <button
-        className='flex w-3.5 aspect-square bg-green-900 dark:bg-green-50 rounded-full border-none cursor-pointer relative z-10'
+        className='flex w-3.5 aspect-square bg-light-900 dark:bg-dark-50 rounded-full border-none cursor-pointer relative z-10'
         aria-label='Loading theme...'
       >
         <div className='absolute w-3.5 aspect-square'>
-          <div className='absolute w-full h-full rounded-full bg-green-900 dark:bg-green-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out]'></div>
-          <div className='absolute w-full h-full rounded-full bg-green-900 dark:bg-green-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out_1s]'></div>
-          <div className='absolute w-full h-full rounded-full bg-green-900 dark:bg-green-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out_2s]'></div>
+          <div className='absolute w-full h-full rounded-full bg-light-900 dark:bg-dark-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out]'></div>
+          <div className='absolute w-full h-full rounded-full bg-light-900 dark:bg-dark-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out_1s]'></div>
+          <div className='absolute w-full h-full rounded-full bg-light-900 dark:bg-dark-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out_2s]'></div>
         </div>
       </button>
     );
@@ -80,14 +80,14 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className='flex w-3.5 aspect-square bg-green-900 dark:bg-green-50 rounded-full border-none cursor-pointer relative z-10'
+      className='flex w-3.5 aspect-square bg-light-900 dark:bg-dark-50 rounded-full border-none cursor-pointer relative z-10'
       aria-label={`Toggle theme (current: ${theme})`}
       title={`Current theme: ${theme}`}
     >
       <div className='absolute w-3.5 aspect-square'>
-        <div className='absolute w-full h-full rounded-full bg-green-900 dark:bg-green-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out]'></div>
-        <div className='absolute w-full h-full rounded-full bg-green-900 dark:bg-green-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out_1s]'></div>
-        <div className='absolute w-full h-full rounded-full bg-green-900 dark:bg-green-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out_2s]'></div>
+        <div className='absolute w-full h-full rounded-full bg-light-900 dark:bg-dark-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out]'></div>
+        <div className='absolute w-full h-full rounded-full bg-light-900 dark:bg-dark-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out_1s]'></div>
+        <div className='absolute w-full h-full rounded-full bg-light-900 dark:bg-dark-50 opacity-30 animate-[growAndFade_3s_infinite_ease-out_2s]'></div>
       </div>
     </button>
   );

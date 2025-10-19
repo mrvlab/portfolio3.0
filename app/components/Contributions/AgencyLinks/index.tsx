@@ -44,8 +44,8 @@ const AgencyLinks = ({ agencyWorkList }: IAgencyLink) => {
             >
               {work.agencyClient}
               <OpenLinkCircleIcon
-                color='var(--color-gray-200)'
-                hoverColor='var(--color-gray-600)'
+                color='var(--color-light-200)'
+                hoverColor='var(--color-light-600)'
                 darkColor='rgba(255, 255, 255, 0.2)'
                 darkHoverColor='rgba(255, 255, 255, 0.6)'
                 className='transition-all duration-300 group-hover:rotate-45'

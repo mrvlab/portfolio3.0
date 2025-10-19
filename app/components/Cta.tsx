@@ -11,13 +11,13 @@ type ICta = {
 export default function CTA({ block }: ICta) {
   return (
     <div className='container my-12'>
-      <div className='bg-gray-50 border border-gray-100 rounded-2xl max-w-3xl'>
+      <div className='bg-light-50 border border-light-100 rounded-2xl max-w-3xl'>
         <div className='px-12 py-12 flex flex-col gap-6'>
           <div className='max-w-xl flex flex-col gap-3'>
             <h2 className='text-3xl font-bold tracking-tight text-black sm:text-4xl'>
               {block.heading}
             </h2>
-            <p className='text-lg leading-8 text-gray-600'>{block.text}</p>
+            <p className='text-lg leading-8 text-light-600'>{block.text}</p>
           </div>
 
           <Suspense fallback={null}>
