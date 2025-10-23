@@ -35,7 +35,7 @@ const Contributions = ({ block }: IContributions) => {
         </ul>
       </div>
       <h3 className='col-span-full row-span-1 h-fit font-sans font-normal sm:col-start-1 sm:col-span-4 lg:col-start-5 lg:col-span-8 lg:row-span-full lg:row-start-1'>
-        <div className='flex gap-2 w-fit text-scale-1 text-gray-600 dark:text-white/60'>
+        <div className='flex gap-2 w-fit text-scale-1 text-light-600 dark:text-white/60'>
           <div>{projectsList?.length}</div>
           <div>⏤</div>
           <div>{projectListLabel}</div>

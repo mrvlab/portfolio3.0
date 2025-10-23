@@ -23,7 +23,7 @@ const CaseStudy = ({
     <article
       data-sanity={documentDataAttr(_id, _type, 'name')}
       key={_id}
-      className='border border-gray-200 rounded-sm p-6 bg-gray-50 flex flex-col justify-between transition-colors hover:bg-white relative'
+      className='border border-light-200 rounded-sm p-6 bg-light-50 flex flex-col justify-between transition-colors hover:bg-white relative'
     >
       <Link
         className='hover:text-brand underline transition-colors'
@@ -34,7 +34,7 @@ const CaseStudy = ({
       <div>
         <h3 className='text-2xl font-bold mb-4 leading-tight'>{name}</h3>
 
-        <p className='line-clamp-3 text-sm leading-6 text-gray-600 max-w-[70ch]'>
+        <p className='line-clamp-3 text-sm leading-6 text-light-600 max-w-[70ch]'>
           {seo?.metaDescription}
         </p>
       </div>
@@ -53,12 +53,12 @@ const CaseStudies = ({
 }) => (
   <div>
     {heading && (
-      <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl'>
+      <h2 className='text-3xl font-bold tracking-tight text-light-900 sm:text-4xl lg:text-5xl'>
         {heading}
       </h2>
     )}
     {subHeading && (
-      <p className='mt-2 text-lg leading-8 text-gray-600'>{subHeading}</p>
+      <p className='mt-2 text-lg leading-8 text-light-600'>{subHeading}</p>
     )}
     <div className='pt-6 space-y-6'>{children}</div>
   </div>

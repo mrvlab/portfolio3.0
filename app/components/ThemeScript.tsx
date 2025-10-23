@@ -8,7 +8,7 @@ export function ThemeScript() {
             localStorage.removeItem('theme');
             document.documentElement.classList.toggle('dark', systemPrefersDark);
           } catch (e) {
-            // Fallback to light theme if there's an error
+            console.error('ThemeScript ERROR:', e);
             document.documentElement.classList.remove('dark');
           }
         `,

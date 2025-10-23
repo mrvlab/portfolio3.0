@@ -32,7 +32,7 @@ export default async function RootLayout({
       className={`${syne.variable} ${plusJakartaSans.variable}`}
       suppressHydrationWarning
     >
-      <body className='bg-gray-500 text-gray-900 dark:bg-green-500 dark:text-white'>
+      <body className='bg-light-500 text-light-900 dark:bg-dark-500 dark:text-white'>
         <ThemeScript />
         <ThemeProvider>
           {isDraftMode && (

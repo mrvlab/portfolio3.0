@@ -1,8 +1,8 @@
 import React from 'react';
 
 const OpenLinkCircleIcon = ({
-  color = 'var(--color-gray-200)',
-  hoverColor = 'var(--color-gray-900)',
+  color = 'var(--color-light-200)',
+  hoverColor = 'var(--color-light-600)',
   darkColor,
   darkHoverColor,
   className,

@@ -20,7 +20,7 @@ const ProjectCard = ({ project, index, hasPageBuilder }: IProjectCard) => {
   const { _id, _type, slug } = project;
   const projectUrl = `/projects/${slug?.current}`;
   const containerClasses =
-    'flex aspect-4/5 justify-center items-center flex-shrink-0 overflow-hidden group relative text-scale-1 font-medium max-lg:bg-gray-100 max-lg:dark:bg-green-700 lg:text-gray-900 hover:bg-gray-100 lg:dark:text-green-100 dark:hover:bg-green-700 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-green-700';
+    'flex aspect-4/5 justify-center items-center flex-shrink-0 overflow-hidden group relative text-scale-1 font-medium max-lg:bg-light-100 max-lg:dark:bg-white/10 lg:text-light-900 hover:bg-light-100 lg:dark:text-dark-100 dark:hover:bg-white/10 transition-all duration-300 hover:bg-light-100 dark:hover:bg-white/10';
 
   const projectDataAttr = documentDataAttr(_id, _type, 'name');
 

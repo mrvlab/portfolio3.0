@@ -61,7 +61,6 @@ export default function BlockRenderer({
     );
   }
 
-  console.log(block._type);
   return (
     <div
       key={block._key}

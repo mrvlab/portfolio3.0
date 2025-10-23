@@ -7,10 +7,10 @@ import { studioUrl } from '@/sanity/env';
 export default function EmptyPageState() {
   return (
     <div className='container'>
-      <h1 className='text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl'>
+      <h1 className='text-4xl font-extrabold text-light-900 tracking-tight sm:text-5xl'>
         This page has no content!
       </h1>
-      <p className='mt-2 text-base text-gray-500'>
+      <p className='mt-2 text-base text-light-500'>
         Open the page in Sanity Studio to add content.
       </p>
       <div className='mt-10 flex'>
