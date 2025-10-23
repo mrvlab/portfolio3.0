@@ -59,8 +59,14 @@ const CaseDetails = ({ block }: ICaseDetails) => {
                 {detailsItems.map((item, index) => (
                   <tr
                     key={item._key}
-                    className={`flex flex-1 gap-2.5 border-b border-light-200 dark:border-white/20 ${
-                      index === 0 ? 'border-t' : ''
+                    className={`flex flex-1 gap-2.5 ${
+                      index === 0
+                        ? 'border-t border-light-200 dark:border-white/20'
+                        : ''
+                    } ${
+                      item.itemType === 'titleWithLink'
+                        ? 'group relative cursor-pointer transition-all duration-600 ease-out before:absolute before:left-0 before:bottom-0 before:h-[1.5px] before:w-full before:bg-light-200 dark:before:bg-white/20 after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:w-full after:bg-gray-600 dark:after:bg-white/60 after:origin-left after:scale-x-0 after:transition-all after:duration-300 hover:after:scale-x-100'
+                        : 'border-b border-light-200 dark:border-white/20'
                     }`}
                   >
                     <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-light-600 dark:text-white/60'>
@@ -85,8 +91,14 @@ const CaseDetails = ({ block }: ICaseDetails) => {
                 {creditsItems.map((item, index) => (
                   <tr
                     key={item._key}
-                    className={`flex flex-1 gap-2.5 border-b border-light-200 dark:border-white/20 ${
-                      index === 0 ? 'border-t' : ''
+                    className={`flex flex-1 gap-2.5 ${
+                      index === 0
+                        ? 'border-t border-light-200 dark:border-white/20'
+                        : ''
+                    } ${
+                      item.itemType === 'titleWithLink'
+                        ? 'group relative cursor-pointer transition-all duration-600 ease-out before:absolute before:left-0 before:bottom-0 before:h-[1.5px] before:w-full before:bg-light-200 dark:before:bg-white/20 after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:w-full after:bg-gray-600 dark:after:bg-white/60 after:origin-left after:scale-x-0 after:transition-all after:duration-300 hover:after:scale-x-100'
+                        : 'border-b border-light-200 dark:border-white/20'
                     }`}
                   >
                     <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-light-600 dark:text-white/60'>
