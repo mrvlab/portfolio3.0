@@ -96,7 +96,7 @@ export default function MuxVideo({
       ...HIDDEN_CONTROLS_STYLES,
       ...(videoObjectFitCover ? OBJECT_FIT_COVER_STYLES : {}),
     }),
-    [finalAspectRatio]
+    [finalAspectRatio, videoObjectFitCover]
   );
 
   // Memoize metadata

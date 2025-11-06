@@ -139,9 +139,11 @@ const caseStudyBlocksQuery = /* groq */ `
     }
   },
   _type == "mediaLayout" => {
+    flipLayout,
     mediaItems[]{
       _type,
       _key,
+      columnSpan,
       mediaItems[]{
         _type,
         _key,
@@ -312,20 +314,26 @@ const blocksQuery = /* groq */ `
     }
   },
   _type == "mediaLayout" => {
+    flipLayout,
     mediaItems[]{
       _type,
       _key,
-      mediaType,
-      image{
-        asset->{...,},
-        hotspot,
-        crop,
-        alt,  
-        imageBrightness,
-        imageQuality
-      },
-      video{
-        asset->{...,},
+      columnSpan,
+      mediaItems[]{
+        _type,
+        _key,
+        mediaType,
+        image{
+          asset->{...,},
+          hotspot,
+          crop,
+          alt,
+          imageBrightness,
+          imageQuality
+        },
+        video{
+          asset->{...,},
+        }
       }
     }
   },
