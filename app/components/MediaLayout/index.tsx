@@ -42,9 +42,9 @@ const MediaLayout = ({ block }: IMediaLayout) => {
         <div
           key={groupIdx}
           id={`media-group-${groupIdx + 1}`}
-          className={getColumnSpanClass(
+          className={`grid ${getColumnSpanClass(
             (mediaGroup as { columnSpan?: number })?.columnSpan
-          )}
+          )} gap-5`}
         >
           {mediaGroup?.mediaItems?.map((mediaItem, itemIdx) => (
             <div
@@ -58,7 +58,7 @@ const MediaLayout = ({ block }: IMediaLayout) => {
                   mediaItem.image?.alt ||
                   `Media item ${groupIdx + 1}-${itemIdx + 1}`
                 }
-                className="w-full h-full object-cover"
+                className="w-full object-cover"
                 priority={groupIdx < 1 && itemIdx < 2}
               />
             </div>
