@@ -4,7 +4,7 @@ import { HeaderQueryResult, GetPageQueryResult } from '@/sanity.types';
 import Cta from '../../Cta';
 import CaseDetailsComponent from '../../CaseDetails';
 import ContributionsComponent from '../../Contributions';
-import MediaGroupComponent from '../../MediaGroup';
+import MediaLayoutComponent from '../../MediaLayout';
 import NameHeroComponent from '../../NameHero';
 import MediaColumnComponent from '../../MediaColumn';
 
@@ -27,7 +27,7 @@ const BLOCK_COMPONENTS = {
   nameHero: NameHeroComponent,
   contributions: ContributionsComponent,
   caseDetails: CaseDetailsComponent,
-  mediaGroup: MediaGroupComponent,
+  mediaLayout: MediaLayoutComponent,
   mediaColumn: MediaColumnComponent,
 } as const;
 

@@ -88,11 +88,12 @@ export type NameHero = {
   } & MediaType>;
 };
 
-export type MediaGroup = {
-  _type: "mediaGroup";
+export type MediaLayout = {
+  _type: "mediaLayout";
+  flipLayout?: boolean;
   mediaItems?: Array<{
     _key: string;
-  } & MediaType>;
+  } & MediaGroup>;
 };
 
 export type MediaColumn = {
@@ -218,6 +219,14 @@ export type RichText = Array<{
   _key: string;
 } & MediaType>;
 
+export type MediaGroup = {
+  _type: "mediaGroup";
+  columnSpan?: 1 | 2 | 12;
+  mediaItems?: Array<{
+    _key: string;
+  } & MediaType>;
+};
+
 export type DetailsItem = {
   _type: "detailsItem";
   itemType?: "titleWithText" | "titleWithReferences" | "titleWithLink";
@@ -305,7 +314,7 @@ export type CaseStudy = {
     _key: string;
   } & MediaColumn | {
     _key: string;
-  } & MediaGroup | {
+  } & MediaLayout | {
     _key: string;
   } & NameHero>;
   date?: string;
@@ -349,7 +358,7 @@ export type Page = {
     _key: string;
   } & MediaColumn | {
     _key: string;
-  } & MediaGroup | {
+  } & MediaLayout | {
     _key: string;
   } & NameHero>;
   seo?: {
@@ -625,7 +634,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Settings | Header | Footer | NameHero | MediaGroup | MediaColumn | Contributions | CaseDetails | CallToAction | Seo | RichText | DetailsItem | BlockContent | Tags | AgencyWork | CaseStudy | Page | Link | MediaType | MuxVideo | MuxVideoAsset | MuxAssetData | MuxStaticRenditions | MuxStaticRenditionFile | MuxPlaybackId | MuxTrack | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Settings | Header | Footer | NameHero | MediaLayout | MediaColumn | Contributions | CaseDetails | CallToAction | Seo | RichText | MediaGroup | DetailsItem | BlockContent | Tags | AgencyWork | CaseStudy | Page | Link | MediaType | MuxVideo | MuxVideoAsset | MuxAssetData | MuxStaticRenditions | MuxStaticRenditionFile | MuxPlaybackId | MuxTrack | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -680,7 +689,7 @@ export type HeaderQueryResult = {
   }> | null;
 } | null;
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaGroup" => {    mediaItems[]{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,          imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  },  _type == "mediaColumn" => {    mediaItem{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  },  _type == "contributions" => {    title,    projectListLabel,    projectsList[]->{      _type,      _key,      _id,      name,      slug,      poster{        mediaType,        image{          asset->{...,},          hotspot,          crop,          alt,          imageBrightness,          imageQuality        },        video{          asset->{...,},        }      },      "date": coalesce(date, _updatedAt),      "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaGroup" => {    mediaItems[]{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  },  _type == "mediaColumn" => {    mediaItem{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  }}    },    agencyWorkList[]->{      _type,      _key,      _id,      agencyClient,      agencyClientLink    }  }},    seo{      metaTitle,      metaDescription,      metaImage,      indexable    }  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaLayout" => {    mediaItems[]{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,          imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  },  _type == "mediaColumn" => {    mediaItem{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  },  _type == "contributions" => {    title,    projectListLabel,    projectsList[]->{      _type,      _key,      _id,      name,      slug,      poster{        mediaType,        image{          asset->{...,},          hotspot,          crop,          alt,          imageBrightness,          imageQuality        },        video{          asset->{...,},        }      },      "date": coalesce(date, _updatedAt),      "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaLayout" => {    mediaItems[]{      _type,      _key,      mediaItems[]{        _type,        _key,        mediaType,        image{          asset->{...,},          hotspot,          crop,          alt,          imageBrightness,          imageQuality        },        video{          asset->{...,},        }      }    }  },  _type == "mediaColumn" => {    mediaItem{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  }}    },    agencyWorkList[]->{      _type,      _key,      _id,      agencyClient,      agencyClientLink    }  }},    seo{      metaTitle,      metaDescription,      metaImage,      indexable    }  }
 export type GetPageQueryResult = {
   _id: string;
   _type: "page";
@@ -1004,56 +1013,60 @@ export type GetPageQueryResult = {
           } | null;
         } | null;
       } | {
-        _type: "mediaGroup";
+        _type: "mediaLayout";
         _key: string;
         mediaItems: Array<{
-          _type: "mediaType";
+          _type: "mediaGroup";
           _key: string;
-          mediaType: "image" | "video" | null;
-          image: {
-            asset: {
-              _id: string;
-              _type: "sanity.imageAsset";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              originalFilename?: string;
-              label?: string;
-              title?: string;
-              description?: string;
-              altText?: string;
-              sha1hash?: string;
-              extension?: string;
-              mimeType?: string;
-              size?: number;
-              assetId?: string;
-              uploadId?: string;
-              path?: string;
-              url?: string;
-              metadata?: SanityImageMetadata;
-              source?: SanityAssetSourceData;
+          mediaItems: Array<{
+            _type: "mediaType";
+            _key: string;
+            mediaType: "image" | "video" | null;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot: SanityImageHotspot | null;
+              crop: SanityImageCrop | null;
+              alt: string | null;
+              imageBrightness: number | null;
+              imageQuality: number | null;
             } | null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-            alt: string | null;
-            imageBrightness: number | null;
-            imageQuality: number | null;
-          } | null;
-          video: {
-            asset: {
-              _id: string;
-              _type: "mux.videoAsset";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              status?: string;
-              assetId?: string;
-              playbackId?: string;
-              filename?: string;
-              thumbTime?: number;
-              data?: MuxAssetData;
+            video: {
+              asset: {
+                _id: string;
+                _type: "mux.videoAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                status?: string;
+                assetId?: string;
+                playbackId?: string;
+                filename?: string;
+                thumbTime?: number;
+                data?: MuxAssetData;
+              } | null;
             } | null;
-          } | null;
+          }> | null;
         }> | null;
       } | {
         _type: "nameHero";
@@ -1148,56 +1161,14 @@ export type GetPageQueryResult = {
       } | null;
     } | null;
   } | {
-    _type: "mediaGroup";
+    _type: "mediaLayout";
     _key: string;
     mediaItems: Array<{
-      _type: "mediaType";
+      _type: "mediaGroup";
       _key: string;
-      mediaType: "image" | "video" | null;
-      image: {
-        asset: {
-          _id: string;
-          _type: "sanity.imageAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-        hotspot: SanityImageHotspot | null;
-        crop: SanityImageCrop | null;
-        alt: string | null;
-        imageBrightness: number | null;
-        imageQuality: number | null;
-      } | null;
-      video: {
-        asset: {
-          _id: string;
-          _type: "mux.videoAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          status?: string;
-          assetId?: string;
-          playbackId?: string;
-          filename?: string;
-          thumbTime?: number;
-          data?: MuxAssetData;
-        } | null;
-      } | null;
+      mediaType: null;
+      image: null;
+      video: null;
     }> | null;
   } | {
     _type: "nameHero";
@@ -1321,7 +1292,7 @@ export type MoreCaseStudiesQueryResult = Array<{
   } | null;
 }>;
 // Variable: caseStudyQuery
-// Query: *[_type == "caseStudy" && slug.current == $slug] [0] {    _id,    _type,    "status": select(_originalId in path("drafts.**") => "draft", "published"),    name,    slug,    poster{      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    },    "date": coalesce(date, _updatedAt),    "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaGroup" => {    mediaItems[]{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  },  _type == "mediaColumn" => {    mediaItem{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  }},    seo{      metaTitle,      metaDescription,      metaImage,      indexable    }  }
+// Query: *[_type == "caseStudy" && slug.current == $slug] [0] {    _id,    _type,    "status": select(_originalId in path("drafts.**") => "draft", "published"),    name,    slug,    poster{      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    },    "date": coalesce(date, _updatedAt),    "pageBuilder": pageBuilder[]{  _type,  _key,  _type == "callToAction" => {    heading,    text,    buttonText,    link {      _type,      _key,      linkType,      href,      page->{        name,        slug      },      caseStudy->{        name,        slug      },      openInNewTab    }  },  _type == "nameHero" => {    logo,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    }  },  _type == "caseDetails" => {    title,    descriptionLabel,    description[]{      _type,      _key,      children[]{        _type,        _key,        marks,        text      },      style,      listItem,      level,      markDefs[]{        _type,        _key,        _type == "link" => {          "page": page->slug.current,          "caseStudy": caseStudy->slug.current        }      }    },    detailsLabel,    detailsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    },    creditsLabel,    creditsItems[]{      _type,      _key,      itemType,      title,      text,      tags[]->{        _id,        _ref,        name,      },      linkData{        linkLabel,        link{          linkType,          href,          page->{            name,            slug          },          caseStudy->{            name,            slug          },          openInNewTab        }      }    }  },  _type == "mediaLayout" => {    mediaItems[]{      _type,      _key,      mediaItems[]{        _type,        _key,        mediaType,        image{          asset->{...,},          hotspot,          crop,          alt,          imageBrightness,          imageQuality        },        video{          asset->{...,},        }      }    }  },  _type == "mediaColumn" => {    mediaItem{      _type,      _key,      mediaType,      image{        asset->{...,},        hotspot,        crop,        alt,        imageBrightness,        imageQuality      },      video{        asset->{...,},      }    }  }},    seo{      metaTitle,      metaDescription,      metaImage,      indexable    }  }
 export type CaseStudyQueryResult = {
   _id: string;
   _type: "caseStudy";
@@ -1532,56 +1503,60 @@ export type CaseStudyQueryResult = {
       } | null;
     } | null;
   } | {
-    _type: "mediaGroup";
+    _type: "mediaLayout";
     _key: string;
     mediaItems: Array<{
-      _type: "mediaType";
+      _type: "mediaGroup";
       _key: string;
-      mediaType: "image" | "video" | null;
-      image: {
-        asset: {
-          _id: string;
-          _type: "sanity.imageAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
+      mediaItems: Array<{
+        _type: "mediaType";
+        _key: string;
+        mediaType: "image" | "video" | null;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot: SanityImageHotspot | null;
+          crop: SanityImageCrop | null;
+          alt: string | null;
+          imageBrightness: number | null;
+          imageQuality: number | null;
         } | null;
-        hotspot: SanityImageHotspot | null;
-        crop: SanityImageCrop | null;
-        alt: string | null;
-        imageBrightness: number | null;
-        imageQuality: number | null;
-      } | null;
-      video: {
-        asset: {
-          _id: string;
-          _type: "mux.videoAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          status?: string;
-          assetId?: string;
-          playbackId?: string;
-          filename?: string;
-          thumbTime?: number;
-          data?: MuxAssetData;
+        video: {
+          asset: {
+            _id: string;
+            _type: "mux.videoAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            status?: string;
+            assetId?: string;
+            playbackId?: string;
+            filename?: string;
+            thumbTime?: number;
+            data?: MuxAssetData;
+          } | null;
         } | null;
-      } | null;
+      }> | null;
     }> | null;
   } | {
     _type: "nameHero";
@@ -1657,11 +1632,11 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"settings\"][0]{\n    title,\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage,\n      indexable\n    }\n  }\n": SettingsQueryResult;
     "\n  *[_type == \"header\"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    _rev,\n    navigationItems[]{\n      _type,\n      _key,\n      label,\n      link{\n        linkType,\n        href,\n        page->{\n          name,\n          slug\n        },\n        caseStudy->{\n          name,\n          slug\n        },\n        openInNewTab\n      }\n    }\n  }\n": HeaderQueryResult;
-    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaGroup\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,  \n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  },\n  _type == \"mediaColumn\" => {\n    mediaItem{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  },\n  _type == \"contributions\" => {\n    title,\n    projectListLabel,\n    projectsList[]->{\n      _type,\n      _key,\n      _id,\n      name,\n      slug,\n      poster{\n        mediaType,\n        image{\n          asset->{...,},\n          hotspot,\n          crop,\n          alt,\n          imageBrightness,\n          imageQuality\n        },\n        video{\n          asset->{...,},\n        }\n      },\n      \"date\": coalesce(date, _updatedAt),\n      \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaGroup\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  },\n  _type == \"mediaColumn\" => {\n    mediaItem{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  }\n}\n    },\n    agencyWorkList[]->{\n      _type,\n      _key,\n      _id,\n      agencyClient,\n      agencyClientLink\n    }\n  }\n},\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage,\n      indexable\n    }\n  }\n": GetPageQueryResult;
+    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaLayout\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,  \n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  },\n  _type == \"mediaColumn\" => {\n    mediaItem{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  },\n  _type == \"contributions\" => {\n    title,\n    projectListLabel,\n    projectsList[]->{\n      _type,\n      _key,\n      _id,\n      name,\n      slug,\n      poster{\n        mediaType,\n        image{\n          asset->{...,},\n          hotspot,\n          crop,\n          alt,\n          imageBrightness,\n          imageQuality\n        },\n        video{\n          asset->{...,},\n        }\n      },\n      \"date\": coalesce(date, _updatedAt),\n      \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaLayout\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      mediaItems[]{\n        _type,\n        _key,\n        mediaType,\n        image{\n          asset->{...,},\n          hotspot,\n          crop,\n          alt,\n          imageBrightness,\n          imageQuality\n        },\n        video{\n          asset->{...,},\n        }\n      }\n    }\n  },\n  _type == \"mediaColumn\" => {\n    mediaItem{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  }\n}\n    },\n    agencyWorkList[]->{\n      _type,\n      _key,\n      _id,\n      agencyClient,\n      agencyClientLink\n    }\n  }\n},\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage,\n      indexable\n    }\n  }\n": GetPageQueryResult;
     "\n  *[_type == \"page\" || _type == \"caseStudy\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;
     "\n  *[_type == \"caseStudy\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    _id,\n    _type,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    \"date\": coalesce(date, _updatedAt),\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage,\n      indexable\n    }\n  }\n": AllCaseStudiesQueryResult;
     "\n  *[_type == \"caseStudy\" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    _id,\n    _type,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    \"date\": coalesce(date, _updatedAt),\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage,\n      indexable\n    }\n  }\n": MoreCaseStudiesQueryResult;
-    "\n  *[_type == \"caseStudy\" && slug.current == $slug] [0] {\n    _id,\n    _type,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    poster{\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    },\n    \"date\": coalesce(date, _updatedAt),\n    \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaGroup\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  },\n  _type == \"mediaColumn\" => {\n    mediaItem{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  }\n},\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage,\n      indexable\n    }\n  }\n": CaseStudyQueryResult;
+    "\n  *[_type == \"caseStudy\" && slug.current == $slug] [0] {\n    _id,\n    _type,\n    \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n    name,\n    slug,\n    poster{\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    },\n    \"date\": coalesce(date, _updatedAt),\n    \"pageBuilder\": pageBuilder[]{\n  _type,\n  _key,\n  _type == \"callToAction\" => {\n    heading,\n    text,\n    buttonText,\n    link {\n      _type,\n      _key,\n      linkType,\n      href,\n      page->{\n        name,\n        slug\n      },\n      caseStudy->{\n        name,\n        slug\n      },\n      openInNewTab\n    }\n  },\n  _type == \"nameHero\" => {\n    logo,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    }\n  },\n  _type == \"caseDetails\" => {\n    title,\n    descriptionLabel,\n    description[]{\n      _type,\n      _key,\n      children[]{\n        _type,\n        _key,\n        marks,\n        text\n      },\n      style,\n      listItem,\n      level,\n      markDefs[]{\n        _type,\n        _key,\n        _type == \"link\" => {\n          \"page\": page->slug.current,\n          \"caseStudy\": caseStudy->slug.current\n        }\n      }\n    },\n    detailsLabel,\n    detailsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    },\n    creditsLabel,\n    creditsItems[]{\n      _type,\n      _key,\n      itemType,\n      title,\n      text,\n      tags[]->{\n        _id,\n        _ref,\n        name,\n      },\n      linkData{\n        linkLabel,\n        link{\n          linkType,\n          href,\n          page->{\n            name,\n            slug\n          },\n          caseStudy->{\n            name,\n            slug\n          },\n          openInNewTab\n        }\n      }\n    }\n  },\n  _type == \"mediaLayout\" => {\n    mediaItems[]{\n      _type,\n      _key,\n      mediaItems[]{\n        _type,\n        _key,\n        mediaType,\n        image{\n          asset->{...,},\n          hotspot,\n          crop,\n          alt,\n          imageBrightness,\n          imageQuality\n        },\n        video{\n          asset->{...,},\n        }\n      }\n    }\n  },\n  _type == \"mediaColumn\" => {\n    mediaItem{\n      _type,\n      _key,\n      mediaType,\n      image{\n        asset->{...,},\n        hotspot,\n        crop,\n        alt,\n        imageBrightness,\n        imageQuality\n      },\n      video{\n        asset->{...,},\n      }\n    }\n  }\n},\n    seo{\n      metaTitle,\n      metaDescription,\n      metaImage,\n      indexable\n    }\n  }\n": CaseStudyQueryResult;
     "\n  *[_type == \"caseStudy\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": CaseStudyPagesSlugsResult;
     "\n    *[_type == \"page\" && defined(slug.current)]\n    {\"slug\": slug.current}\n  ": PagesSlugsResult;
     "\n  *[_type == \"footer\"][0]{\n    rights\n  }\n": FooterQueryResult;

@@ -472,7 +472,7 @@
     }
   },
   {
-    "name": "mediaGroup",
+    "name": "mediaLayout",
     "type": "type",
     "value": {
       "type": "object",
@@ -481,8 +481,15 @@
           "type": "objectAttribute",
           "value": {
             "type": "string",
-            "value": "mediaGroup"
+            "value": "mediaLayout"
           }
+        },
+        "flipLayout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
         },
         "mediaItems": {
           "type": "objectAttribute",
@@ -500,7 +507,7 @@
               },
               "rest": {
                 "type": "inline",
-                "name": "mediaType"
+                "name": "mediaGroup"
               }
             }
           },
@@ -1352,6 +1359,65 @@
     }
   },
   {
+    "name": "mediaGroup",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "mediaGroup"
+          }
+        },
+        "columnSpan": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "number",
+                "value": 1
+              },
+              {
+                "type": "number",
+                "value": 2
+              },
+              {
+                "type": "number",
+                "value": 12
+              }
+            ]
+          },
+          "optional": true
+        },
+        "mediaItems": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "rest": {
+                "type": "inline",
+                "name": "mediaType"
+              }
+            }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "detailsItem",
     "type": "type",
     "value": {
@@ -1955,7 +2021,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "mediaGroup"
+                  "name": "mediaLayout"
                 }
               },
               {
@@ -2231,7 +2297,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "mediaGroup"
+                  "name": "mediaLayout"
                 }
               },
               {

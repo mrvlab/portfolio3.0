@@ -138,21 +138,25 @@ const caseStudyBlocksQuery = /* groq */ `
       }
     }
   },
-  _type == "mediaGroup" => {
+  _type == "mediaLayout" => {
     mediaItems[]{
       _type,
       _key,
-      mediaType,
-      image{
-        asset->{...,},
-        hotspot,
-        crop,
-        alt,
-        imageBrightness,
-        imageQuality
-      },
-      video{
-        asset->{...,},
+      mediaItems[]{
+        _type,
+        _key,
+        mediaType,
+        image{
+          asset->{...,},
+          hotspot,
+          crop,
+          alt,
+          imageBrightness,
+          imageQuality
+        },
+        video{
+          asset->{...,},
+        }
       }
     }
   },
@@ -307,7 +311,7 @@ const blocksQuery = /* groq */ `
       }
     }
   },
-  _type == "mediaGroup" => {
+  _type == "mediaLayout" => {
     mediaItems[]{
       _type,
       _key,
