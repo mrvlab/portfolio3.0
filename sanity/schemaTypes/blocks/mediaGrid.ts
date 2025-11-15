@@ -1,9 +1,9 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { ProjectsIcon, VideoIcon } from '@sanity/icons';
 
-export const mediaLayout = defineType({
-  name: 'mediaLayout',
-  title: 'Media Layout',
+export const mediaGrid = defineType({
+  name: 'mediaGrid',
+  title: 'Media Grid',
   type: 'object',
   icon: ProjectsIcon,
   fields: [
@@ -58,7 +58,7 @@ export const mediaLayout = defineType({
       }
 
       return {
-        title: 'Media Layout',
+        title: 'Media Grid',
         subtitle: subtitle,
         media: media || ProjectsIcon,
       };

@@ -4,9 +4,8 @@ import { HeaderQueryResult, GetPageQueryResult } from '@/sanity.types';
 import Cta from '../../Cta';
 import CaseDetailsComponent from '../../CaseDetails';
 import ContributionsComponent from '../../Contributions';
-import MediaLayoutComponent from '../../MediaLayout';
+import MediaGridComponent from '../../MediaGrid';
 import NameHeroComponent from '../../NameHero';
-import MediaColumnComponent from '../../MediaColumn';
 
 type IBlockType = NonNullable<
   NonNullable<GetPageQueryResult>['pageBuilder']
@@ -27,8 +26,7 @@ const BLOCK_COMPONENTS = {
   nameHero: NameHeroComponent,
   contributions: ContributionsComponent,
   caseDetails: CaseDetailsComponent,
-  mediaLayout: MediaLayoutComponent,
-  mediaColumn: MediaColumnComponent,
+  mediaGrid: MediaGridComponent,
 } as const;
 
 export default function BlockRenderer({
@@ -54,7 +52,7 @@ export default function BlockRenderer({
       <div
         key={block._key}
         data-sanity={dataAttributes}
-        className='w-full bg-red-50 border border-red-200 text-center text-red-600 p-8 rounded'
+        className="w-full bg-red-50 border border-red-200 text-center text-red-600 p-8 rounded"
       >
         A &ldquo;{block._type}&rdquo; block hasn&apos;t been created
       </div>

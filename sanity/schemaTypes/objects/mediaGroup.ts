@@ -15,9 +15,9 @@ export const mediaGroup = defineType({
         'Number of columns this group should span on desktop. Options: 1 Column, 2 Columns, or Full Width. Note: This setting is based on desktop designs. On mobile, the group will span the full width regardless of this setting.',
       options: {
         list: [
-          { title: '1 Column', value: 1 },
-          { title: '2 Columns', value: 2 },
-          { title: 'Full Width', value: 12 },
+          { title: 'Span 1 Column', value: 1 },
+          { title: 'Span 2 Columns', value: 2 },
+          { title: 'Span Full Width', value: 12 },
         ],
       },
       initialValue: 12,
@@ -36,15 +36,8 @@ export const mediaGroup = defineType({
       columnSpan: 'columnSpan',
       firstMediaType: 'mediaItems[0].mediaType',
       firstImage: 'mediaItems[0].image',
-      firstVideo: 'mediaItems[0].video',
     },
-    prepare({
-      mediaItems,
-      columnSpan,
-      firstMediaType,
-      firstImage,
-      firstVideo,
-    }) {
+    prepare({ mediaItems, columnSpan, firstMediaType, firstImage }) {
       let subtitle = '';
       let media:
         | typeof VideoIcon
@@ -55,7 +48,7 @@ export const mediaGroup = defineType({
       if (mediaItems && mediaItems.length > 0) {
         const itemCount = `${mediaItems.length} media item${mediaItems.length > 1 ? 's' : ''}`;
         const spanInfo = columnSpan
-          ? ` · ${columnSpan} col${columnSpan > 1 ? 's' : ''}`
+          ? ` · span ${columnSpan} col${columnSpan > 1 ? 's' : ''}`
           : '';
         subtitle = itemCount + spanInfo;
 

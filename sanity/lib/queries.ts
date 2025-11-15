@@ -138,7 +138,7 @@ const caseStudyBlocksQuery = /* groq */ `
       }
     }
   },
-  _type == "mediaLayout" => {
+  _type == "mediaGrid" => {
     flipLayout,
     mediaItems[]{
       _type,
@@ -159,24 +159,6 @@ const caseStudyBlocksQuery = /* groq */ `
         video{
           asset->{...,},
         }
-      }
-    }
-  },
-  _type == "mediaColumn" => {
-    mediaItem{
-      _type,
-      _key,
-      mediaType,
-      image{
-        asset->{...,},
-        hotspot,
-        crop,
-        alt,
-        imageBrightness,
-        imageQuality
-      },
-      video{
-        asset->{...,},
       }
     }
   }
@@ -313,7 +295,7 @@ const blocksQuery = /* groq */ `
       }
     }
   },
-  _type == "mediaLayout" => {
+  _type == "mediaGrid" => {
     flipLayout,
     mediaItems[]{
       _type,
@@ -334,24 +316,6 @@ const blocksQuery = /* groq */ `
         video{
           asset->{...,},
         }
-      }
-    }
-  },
-  _type == "mediaColumn" => {
-    mediaItem{
-      _type,
-      _key,
-      mediaType,
-      image{
-        asset->{...,},
-        hotspot,
-        crop,
-        alt,
-        imageBrightness,
-        imageQuality
-      },
-      video{
-        asset->{...,},
       }
     }
   },

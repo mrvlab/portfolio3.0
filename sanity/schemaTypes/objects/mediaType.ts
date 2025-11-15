@@ -119,7 +119,7 @@ export const mediaType = defineType({
         title: isVideo
           ? video?.asset?.playbackId
             ? 'Video'
-            : 'Video (Processing...)'
+            : 'Video'
           : title || 'Image',
         media: isVideo
           ? videoThumbnail

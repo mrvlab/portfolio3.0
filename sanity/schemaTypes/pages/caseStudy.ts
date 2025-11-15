@@ -103,21 +103,13 @@ export const caseStudy = defineType({
       posterImage: 'poster.image',
       posterVideo: 'poster.video',
     },
-    prepare({
-      title,
-      date,
-      posterType,
-      posterImage,
-      posterVideo,
-    }) {
+    prepare({ title, date, posterType, posterImage }) {
       const subtitles = [
         date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
       ].filter(Boolean);
 
       const isVideo = posterType === 'video';
-      const media = isVideo
-        ? VideoIcon
-        : posterImage || ImageIcon;
+      const media = isVideo ? VideoIcon : posterImage || ImageIcon;
 
       return {
         title: title || 'Untitled Case Study',
