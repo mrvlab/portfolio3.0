@@ -14,18 +14,20 @@ const FlexibleText = ({ block }: IFlexibleText) => {
 
   // Define grid classes based on flipLayout
   const titleClasses = flipLayout
-    ? 'col-span-full sm:col-start-5 sm:col-span-4 lg:col-start-9 lg:col-span-4'
-    : 'col-span-full sm:col-start-1 sm:col-span-4 lg:col-start-1 lg:col-span-4';
+    ? 'col-span-full row-start-1 sm:col-start-5 sm:col-span-4 lg:col-start-9 lg:col-span-4'
+    : 'col-span-full row-start-1 sm:col-start-1 sm:col-span-4 lg:col-start-1 lg:col-span-4';
 
   const paragraphClasses = flipLayout
-    ? 'col-span-full sm:col-start-1 sm:col-span-4 lg:col-start-1 lg:col-span-7'
-    : 'col-span-full sm:col-start-5 sm:col-span-4 lg:col-start-5 lg:col-span-7';
+    ? 'col-span-full row-start-1 sm:col-start-1 sm:col-span-4 lg:col-start-1 lg:col-span-7'
+    : 'col-span-full row-start-1 sm:col-start-5 sm:col-span-4 lg:col-start-5 lg:col-span-7';
 
   return (
     <section className="grid grid-cols-4 gap-5 sm:grid-cols-8 lg:grid-cols-12">
       {title && (
         <div className={titleClasses}>
-          <h2 className="text-scale-3 md:text-scale-4 font-semibold mb-6 text-light-900 dark:text-white top-5">
+          <h2
+            className={`text-scale-3 md:text-scale-4 font-semibold mb-6 text-light-900 dark:text-white ${flipLayout ? 'sm:text-end' : ''}`}
+          >
             {title}
           </h2>
         </div>
