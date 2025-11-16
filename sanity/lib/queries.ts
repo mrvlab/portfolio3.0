@@ -168,6 +168,31 @@ const caseStudyBlocksQuery = /* groq */ `
         }
       }
     }
+  },
+  _type == "flexibleText" => {
+    title,
+    flipLayout,
+    paragraph[]{
+      _type,
+      _key,
+      children[]{
+        _type,
+        _key,
+        marks,
+        text
+      },
+      style,
+      listItem,
+      level,
+      markDefs[]{
+        _type,
+        _key,
+        _type == "link" => {
+          "page": page->slug.current,
+          "caseStudy": caseStudy->slug.current
+        }
+      }
+    }
   }
 `;
 
@@ -365,6 +390,31 @@ const blocksQuery = /* groq */ `
       _id,
       agencyClient,
       agencyClientLink
+    }
+  },
+  _type == "flexibleText" => {
+    title,
+    flipLayout,
+    paragraph[]{
+      _type,
+      _key,
+      children[]{
+        _type,
+        _key,
+        marks,
+        text
+      },
+      style,
+      listItem,
+      level,
+      markDefs[]{
+        _type,
+        _key,
+        _type == "link" => {
+          "page": page->slug.current,
+          "caseStudy": caseStudy->slug.current
+        }
+      }
     }
   }
 `;

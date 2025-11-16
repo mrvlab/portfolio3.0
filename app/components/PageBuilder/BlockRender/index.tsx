@@ -6,6 +6,7 @@ import CaseDetailsComponent from '../../CaseDetails';
 import ContributionsComponent from '../../Contributions';
 import MediaGridComponent from '../../MediaGrid';
 import NameHeroComponent from '../../NameHero';
+import FlexibleTextComponent from '../FlexibleText';
 
 type IBlockType = NonNullable<
   NonNullable<GetPageQueryResult>['pageBuilder']
@@ -27,6 +28,7 @@ const BLOCK_COMPONENTS = {
   contributions: ContributionsComponent,
   caseDetails: CaseDetailsComponent,
   mediaGrid: MediaGridComponent,
+  flexibleText: FlexibleTextComponent,
 } as const;
 
 export default function BlockRenderer({
