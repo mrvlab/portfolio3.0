@@ -23,19 +23,92 @@ export const mediaGroup = defineType({
       initialValue: 12,
       validation: (Rule) => Rule.min(1).max(12),
     }),
+
     defineField({
       name: 'mediaItems',
       title: 'Media Items',
       type: 'array',
-      of: [defineArrayMember({ type: 'mediaType' })],
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'media',
+              title: 'Media',
+              type: 'mediaType',
+            }),
+            defineField({
+              name: 'fullHeight',
+              title: 'Full Height',
+              type: 'boolean',
+              description:
+                'Enable to set the column to the full height of the container',
+              initialValue: false,
+            }),
+            defineField({
+              name: 'stickyToTop',
+              title: 'Sticky to Top',
+              type: 'boolean',
+              description:
+                'Enable to make the media item sticky to the top of the column. This will only work if the full height is enabled.',
+              initialValue: false,
+            }),
+            defineField({
+              name: 'border',
+              title: 'Border',
+              type: 'boolean',
+              description: 'Enable to add a border to the media',
+              initialValue: true,
+            }),
+            defineField({
+              name: 'borderColorLight',
+              title: 'Border Color Light',
+              type: 'color',
+            }),
+            defineField({
+              name: 'borderColorDark',
+              title: 'Border Color Dark',
+              type: 'color',
+            }),
+          ],
+          preview: {
+            select: {
+              mediaType: 'media.mediaType',
+              image: 'media.image',
+              alt: 'media.image.alt',
+              fullHeight: 'fullHeight',
+              stickyToTop: 'stickyToTop',
+              border: 'border',
+            },
+            prepare({
+              mediaType,
+              image,
+              alt,
+              fullHeight,
+              stickyToTop,
+              border,
+            }) {
+              const altLabel = alt ? `Alt: ${alt}` : '';
+
+              return {
+                title: `${mediaType === 'video' ? 'Video' : 'Image'} | ${altLabel}`,
+                subtitle:
+                  `Full Height: ${fullHeight ? '🟢' : '🔴'} | Border: ${border ? '🟢' : '🔴'} | Sticky: ${stickyToTop ? '🟢' : '🔴'}` ||
+                  '',
+                media: image || (mediaType === 'video' ? VideoIcon : ImageIcon),
+              };
+            },
+          },
+        }),
+      ],
     }),
   ],
   preview: {
     select: {
       mediaItems: 'mediaItems',
       columnSpan: 'columnSpan',
-      firstMediaType: 'mediaItems[0].mediaType',
-      firstImage: 'mediaItems[0].image',
+      firstMediaType: 'mediaItems[0].media.mediaType',
+      firstImage: 'mediaItems[0].media.image',
     },
     prepare({ mediaItems, columnSpan, firstMediaType, firstImage }) {
       let subtitle = '';

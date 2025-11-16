@@ -147,17 +147,24 @@ const caseStudyBlocksQuery = /* groq */ `
       mediaItems[]{
         _type,
         _key,
-        mediaType,
-        image{
-          asset->{...,},
-          hotspot,
-          crop,
-          alt,
-          imageBrightness,
-          imageQuality
-        },
-        video{
-          asset->{...,},
+        fullHeight,
+        stickyToTop,
+        border,
+        borderColorLight,
+        borderColorDark,
+        media{
+          mediaType,
+          image{
+            asset->{...,},
+            hotspot,
+            crop,
+            alt,
+            imageBrightness,
+            imageQuality
+          },
+          video{
+            asset->{...,},
+          }
         }
       }
     }
@@ -304,17 +311,24 @@ const blocksQuery = /* groq */ `
       mediaItems[]{
         _type,
         _key,
-        mediaType,
-        image{
-          asset->{...,},
-          hotspot,
-          crop,
-          alt,
-          imageBrightness,
-          imageQuality
-        },
-        video{
-          asset->{...,},
+        fullHeight,
+        stickyToTop,
+        border,
+        borderColorLight,
+        borderColorDark,
+        media{
+          mediaType,
+          image{
+            asset->{...,},
+            hotspot,
+            crop,
+            alt,
+            imageBrightness,
+            imageQuality
+          },
+          video{
+            asset->{...,},
+          }
         }
       }
     }

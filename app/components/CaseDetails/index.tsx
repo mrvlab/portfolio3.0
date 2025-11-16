@@ -34,7 +34,7 @@ const CaseDetails = ({ block }: ICaseDetails) => {
   return (
     <section className="flex flex-col pt-[10%] gap-10">
       <h1 className="text-scale-8 ">{title}</h1>
-      <div className="flex flex-col gap-10 md:grid md:grid-cols-2 md:grid-rows-[auto_auto] md:gap-5 lg:grid-cols-3 lg:grid-rows-1">
+      <div className="flex flex-col gap-10 md:grid md:grid-cols-2 md:grid-rows-[auto_auto] md:gap-5 lg:grid-cols-3 lg:grid-rows-1 2xl:gap-10">
         <div className="flex flex-col gap-6 text-scale--1 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-2 lg:col-start-1 lg:col-span-1 lg:row-start-1 lg:row-span-1">
           <div className="sticky top-5 flex flex-col gap-6">
             {descriptionLabel && (
