@@ -6,6 +6,16 @@ export const mediaGrid = defineType({
   title: 'Media Grid',
   type: 'object',
   icon: ProjectsIcon,
+  groups: [
+    {
+      name: 'content',
+      title: 'Content',
+    },
+    {
+      name: 'settings',
+      title: 'Settings',
+    },
+  ],
   fields: [
     defineField({
       name: 'flipLayout',
@@ -14,6 +24,7 @@ export const mediaGrid = defineType({
       description:
         'When enabled, the media groups will be displayed in reverse order (flipped horizontally)',
       initialValue: false,
+      group: 'settings',
     }),
     defineField({
       name: 'mediaItems',
@@ -24,6 +35,7 @@ export const mediaGrid = defineType({
           type: 'mediaGroup',
         }),
       ],
+      group: 'content',
     }),
   ],
   preview: {

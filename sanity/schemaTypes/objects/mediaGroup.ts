@@ -6,6 +6,16 @@ export const mediaGroup = defineType({
   title: 'Media Group',
   type: 'object',
   icon: ProjectsIcon,
+  groups: [
+    {
+      name: 'content',
+      title: 'Content',
+    },
+    {
+      name: 'settings',
+      title: 'Settings',
+    },
+  ],
   fields: [
     defineField({
       name: 'columnSpan',
@@ -22,6 +32,7 @@ export const mediaGroup = defineType({
       },
       initialValue: 12,
       validation: (Rule) => Rule.min(1).max(12),
+      group: 'settings',
     }),
 
     defineField({
@@ -31,11 +42,22 @@ export const mediaGroup = defineType({
       of: [
         defineArrayMember({
           type: 'object',
+          groups: [
+            {
+              name: 'content',
+              title: 'Content',
+            },
+            {
+              name: 'settings',
+              title: 'Settings',
+            },
+          ],
           fields: [
             defineField({
               name: 'media',
               title: 'Media',
               type: 'mediaType',
+              group: 'content',
             }),
             defineField({
               name: 'fullHeight',
@@ -44,6 +66,7 @@ export const mediaGroup = defineType({
               description:
                 'Enable to set the column to the full height of the container',
               initialValue: false,
+              group: 'settings',
             }),
             defineField({
               name: 'stickyToTop',
@@ -52,6 +75,7 @@ export const mediaGroup = defineType({
               description:
                 'Enable to make the media item sticky to the top of the column. This will only work if the full height is enabled.',
               initialValue: false,
+              group: 'settings',
             }),
             defineField({
               name: 'border',
@@ -59,16 +83,19 @@ export const mediaGroup = defineType({
               type: 'boolean',
               description: 'Enable to add a border to the media',
               initialValue: true,
+              group: 'settings',
             }),
             defineField({
               name: 'borderColorLight',
               title: 'Border Color Light',
               type: 'color',
+              group: 'settings',
             }),
             defineField({
               name: 'borderColorDark',
               title: 'Border Color Dark',
               type: 'color',
+              group: 'settings',
             }),
           ],
           preview: {
