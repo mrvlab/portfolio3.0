@@ -25,7 +25,7 @@ const CardContent = ({ project, index, hasPageBuilder }: ICardContent) => {
 
   return (
     <>
-      <div className='absolute top-6 left-6 right-6 flex lg:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
+      <div className="absolute top-6 left-6 right-6 flex lg:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
         <span data-sanity={nameDataAttr}>{name}</span>
       </div>
       <div
@@ -42,7 +42,7 @@ const CardContent = ({ project, index, hasPageBuilder }: ICardContent) => {
           />
         )}
       </div>
-      <div className='absolute bottom-6 left-6 right-6 flex justify-between lg:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300'>
+      <div className="absolute bottom-6 left-6 right-6 flex justify-between lg:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
         <span className={`${hasPageBuilder ? '' : 'w-full flex justify-end'}`}>
           <span data-sanity={dateDataAttr}>
             {new Date(date || '').getFullYear()}

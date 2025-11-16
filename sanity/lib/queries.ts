@@ -11,26 +11,6 @@ const linkReferenceQuery = /* groq */ `
 const caseStudyBlocksQuery = /* groq */ `
   _type,
   _key,
-  _type == "callToAction" => {
-    heading,
-    text,
-    buttonText,
-    link {
-      _type,
-      _key,
-      linkType,
-      href,
-      page->{
-        name,
-        slug
-      },
-      caseStudy->{
-        name,
-        slug
-      },
-      openInNewTab
-    }
-  },
   _type == "nameHero" => {
     logo,
     description[]{
@@ -138,39 +118,59 @@ const caseStudyBlocksQuery = /* groq */ `
       }
     }
   },
-  _type == "mediaGroup" => {
+  _type == "mediaGrid" => {
+    flipLayout,
     mediaItems[]{
       _type,
       _key,
-      mediaType,
-      image{
-        asset->{...,},
-        hotspot,
-        crop,
-        alt,
-        imageBrightness,
-        imageQuality
-      },
-      video{
-        asset->{...,},
+      columnSpan,
+      mediaItems[]{
+        _type,
+        _key,
+        fullHeight,
+        stickyToTop,
+        border,
+        borderColorLight,
+        borderColorDark,
+        media{
+          mediaType,
+          image{
+            asset->{...,},
+            hotspot,
+            crop,
+            alt,
+            imageBrightness,
+            imageQuality
+          },
+          video{
+            asset->{...,},
+          }
+        }
       }
     }
   },
-  _type == "mediaColumn" => {
-    mediaItem{
+  _type == "flexibleText" => {
+    title,
+    flipLayout,
+    paragraph[]{
       _type,
       _key,
-      mediaType,
-      image{
-        asset->{...,},
-        hotspot,
-        crop,
-        alt,
-        imageBrightness,
-        imageQuality
+      children[]{
+        _type,
+        _key,
+        marks,
+        text
       },
-      video{
-        asset->{...,},
+      style,
+      listItem,
+      level,
+      markDefs[]{
+        _type,
+        _key,
+        _type == "link" => {
+          "page": page->slug.current,
+          "caseStudy": caseStudy->slug.current
+        }
       }
     }
   }
@@ -180,26 +180,6 @@ const caseStudyBlocksQuery = /* groq */ `
 const blocksQuery = /* groq */ `
   _type,
   _key,
-  _type == "callToAction" => {
-    heading,
-    text,
-    buttonText,
-    link {
-      _type,
-      _key,
-      linkType,
-      href,
-      page->{
-        name,
-        slug
-      },
-      caseStudy->{
-        name,
-        slug
-      },
-      openInNewTab
-    }
-  },
   _type == "nameHero" => {
     logo,
     description[]{
@@ -307,39 +287,34 @@ const blocksQuery = /* groq */ `
       }
     }
   },
-  _type == "mediaGroup" => {
+  _type == "mediaGrid" => {
+    flipLayout,
     mediaItems[]{
       _type,
       _key,
-      mediaType,
-      image{
-        asset->{...,},
-        hotspot,
-        crop,
-        alt,  
-        imageBrightness,
-        imageQuality
-      },
-      video{
-        asset->{...,},
-      }
-    }
-  },
-  _type == "mediaColumn" => {
-    mediaItem{
-      _type,
-      _key,
-      mediaType,
-      image{
-        asset->{...,},
-        hotspot,
-        crop,
-        alt,
-        imageBrightness,
-        imageQuality
-      },
-      video{
-        asset->{...,},
+      columnSpan,
+      mediaItems[]{
+        _type,
+        _key,
+        fullHeight,
+        stickyToTop,
+        border,
+        borderColorLight,
+        borderColorDark,
+        media{
+          mediaType,
+          image{
+            asset->{...,},
+            hotspot,
+            crop,
+            alt,
+            imageBrightness,
+            imageQuality
+          },
+          video{
+            asset->{...,},
+          }
+        }
       }
     }
   },
@@ -375,6 +350,31 @@ const blocksQuery = /* groq */ `
       _id,
       agencyClient,
       agencyClientLink
+    }
+  },
+  _type == "flexibleText" => {
+    title,
+    flipLayout,
+    paragraph[]{
+      _type,
+      _key,
+      children[]{
+        _type,
+        _key,
+        marks,
+        text
+      },
+      style,
+      listItem,
+      level,
+      markDefs[]{
+        _type,
+        _key,
+        _type == "link" => {
+          "page": page->slug.current,
+          "caseStudy": caseStudy->slug.current
+        }
+      }
     }
   }
 `;

@@ -16,6 +16,7 @@ import { apiVersion, dataset, projectId, studioUrl } from './sanity/env';
 import { schema } from './sanity/schemaTypes';
 import { structure } from './sanity/structure';
 import { resolve } from './sanity/presentation/resolve';
+import { colorInput } from '@sanity/color-input';
 
 export default defineConfig({
   basePath: '/studio',
@@ -42,6 +43,7 @@ export default defineConfig({
       // Add configuration to prevent progress field errors
       mp4_support: 'standard',
     }),
+    colorInput(),
     visionTool({ defaultApiVersion: apiVersion }),
   ],
 });

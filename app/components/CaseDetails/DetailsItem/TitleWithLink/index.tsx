@@ -1,5 +1,4 @@
 import React from 'react';
-import ResolvedLink from '@/app/components/ResolvedLink';
 import { CaseDetailsBlock } from '../..';
 import OpenLinkIcon from '@/app/components/Icons/OpenLinkIcon';
 
@@ -13,25 +12,11 @@ type ITitleWithLink = {
 
 const TitleWithLink = ({ linkData }: ITitleWithLink) => {
   return (
-    <div className='flex items-center justify-between gap-2 group'>
-      {linkData?.link && linkData?.linkLabel && (
-        <ResolvedLink
-          className='flex-1'
-          link={
-            linkData.link
-              ? {
-                  _type: 'link',
-                  linkType: linkData.link.linkType ?? undefined,
-                  href: linkData.link.href ?? undefined,
-                  openInNewTab: linkData.link.openInNewTab ?? undefined,
-                }
-              : null
-          }
-        >
-          {linkData.linkLabel}
-        </ResolvedLink>
+    <div className="flex items-center justify-between gap-2 group pointer-events-none">
+      {linkData?.linkLabel && (
+        <span className="flex-1">{linkData.linkLabel}</span>
       )}
-      <OpenLinkIcon className='transition-all duration-300 group-hover:rotate-45' />
+      <OpenLinkIcon className="transition-all duration-300 group-hover:rotate-45" />
     </div>
   );
 };

@@ -5,12 +5,13 @@ import {
   RichText as SanityRichText,
 } from '@/sanity.types';
 import RichText from '../RichText/RichText';
-import DetailsItem from './DetailsItem';
+import TableSection from './TableSection';
 
 export type CaseDetailsBlock = Extract<
   NonNullable<NonNullable<CaseStudyQueryResult>['pageBuilder']>[number],
   { _type: 'caseDetails' }
 >;
+
 type ICaseDetails = {
   block: CaseDetailsBlock;
   index: number;
@@ -31,17 +32,17 @@ const CaseDetails = ({ block }: ICaseDetails) => {
   } = block;
 
   return (
-    <section className='flex flex-col pt-[10%] gap-10'>
-      <h1 className='text-scale-8 '>{title}</h1>
-      <div className='flex flex-col gap-10 md:grid md:grid-cols-2 md:grid-rows-[auto_auto] md:gap-10 lg:grid-cols-3 lg:grid-rows-1'>
-        <div className='flex flex-col gap-6 text-scale--1 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-2 lg:col-start-1 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
-          <div className='sticky top-5 flex flex-col gap-6'>
+    <section className="flex flex-col pt-[10%] gap-10">
+      <h1 className="text-scale-8 ">{title}</h1>
+      <div className="flex flex-col gap-10 md:grid md:grid-cols-2 md:grid-rows-[auto_auto] md:gap-5 lg:grid-cols-3 lg:grid-rows-1 2xl:gap-10">
+        <div className="flex flex-col gap-6 text-scale--1 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-2 lg:col-start-1 lg:col-span-1 lg:row-start-1 lg:row-span-1">
+          <div className="sticky top-5 flex flex-col gap-6">
             {descriptionLabel && (
-              <h2 className='text-scale-0 md:text-scale-1'>
+              <h2 className="text-scale-0 md:text-scale-1">
                 {descriptionLabel}
               </h2>
             )}
-            <div className='flex flex-col text-scale-0 md:text-scale-1 w-[90%] dark:text-white/60'>
+            <div className="flex flex-col text-scale-0 md:text-scale-1 w-[90%] dark:text-white/60">
               {description && (
                 <RichText content={description as unknown as SanityRichText} />
               )}
@@ -49,69 +50,17 @@ const CaseDetails = ({ block }: ICaseDetails) => {
           </div>
         </div>
 
-        <div className='flex flex-col gap-5 text-scale-0 md:text-scale-1 md:col-start-2 md:col-span-1 md:row-start-1 md:row-span-1 lg:col-start-2 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
+        <div className="flex flex-col gap-5 text-scale-0 md:text-scale-1 md:col-start-2 md:col-span-1 md:row-start-1 md:row-span-1 lg:col-start-2 lg:col-span-1 lg:row-start-1 lg:row-span-1">
           {detailsLabel && (
-            <h3 className='text-scale-0 md:text-scale-1'>{detailsLabel}</h3>
+            <h3 className="text-scale-0 md:text-scale-1">{detailsLabel}</h3>
           )}
-          {detailsItems && (
-            <table className='flex flex-col h-fit w-full border-collapse'>
-              <tbody className='flex flex-col h-fit'>
-                {detailsItems.map((item, index) => (
-                  <tr
-                    key={item._key}
-                    className={`flex flex-1 gap-2.5 ${
-                      index === 0
-                        ? 'border-t border-light-200 dark:border-white/20'
-                        : ''
-                    } ${
-                      item.itemType === 'titleWithLink'
-                        ? 'group relative cursor-pointer transition-all duration-600 ease-out before:absolute before:left-0 before:bottom-0 before:h-[1.5px] before:w-full before:bg-light-200 dark:before:bg-white/20 after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:w-full after:bg-gray-600 dark:after:bg-white/60 after:origin-left after:scale-x-0 after:transition-all after:duration-300 hover:after:scale-x-100'
-                        : 'border-b border-light-200 dark:border-white/20'
-                    }`}
-                  >
-                    <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-light-600 dark:text-white/60'>
-                      {item.title}
-                    </td>
-                    <td className='py-3 align-top flex-2 xl:flex-1'>
-                      <DetailsItem item={item} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <TableSection items={detailsItems} />
         </div>
-        <div className='flex flex-col gap-5 text-scale-0 md:text-scale-1 md:col-start-2 md:col-span-1 md:row-start-2 md:row-span-1 lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-1'>
+        <div className="flex flex-col gap-5 text-scale-0 md:text-scale-1 md:col-start-2 md:col-span-1 md:row-start-2 md:row-span-1 lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-1">
           {creditsLabel && (
-            <h3 className='text-scale-0 md:text-scale-1'>{creditsLabel}</h3>
+            <h3 className="text-scale-0 md:text-scale-1">{creditsLabel}</h3>
           )}
-          {creditsItems && (
-            <table className='flex flex-col h-fit w-full border-collapse'>
-              <tbody className='flex flex-col h-fit'>
-                {creditsItems.map((item, index) => (
-                  <tr
-                    key={item._key}
-                    className={`flex flex-1 gap-2.5 ${
-                      index === 0
-                        ? 'border-t border-light-200 dark:border-white/20'
-                        : ''
-                    } ${
-                      item.itemType === 'titleWithLink'
-                        ? 'group relative cursor-pointer transition-all duration-600 ease-out before:absolute before:left-0 before:bottom-0 before:h-[1.5px] before:w-full before:bg-light-200 dark:before:bg-white/20 after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:w-full after:bg-gray-600 dark:after:bg-white/60 after:origin-left after:scale-x-0 after:transition-all after:duration-300 hover:after:scale-x-100'
-                        : 'border-b border-light-200 dark:border-white/20'
-                    }`}
-                  >
-                    <td className='py-3 font-medium flex-[1.4] xl:flex-1 align-top text-light-600 dark:text-white/60'>
-                      {item.title}
-                    </td>
-                    <td className='py-3 align-top flex-2 xl:flex-1'>
-                      <DetailsItem item={item} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <TableSection items={creditsItems} />
         </div>
       </div>
     </section>
