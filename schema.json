@@ -529,6 +529,13 @@
             "value": "flexibleText"
           }
         },
+        "flipLayout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "title": {
           "type": "objectAttribute",
           "value": {
@@ -697,13 +704,6 @@
                 }
               ]
             }
-          },
-          "optional": true
-        },
-        "flipLayout": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
           },
           "optional": true
         }

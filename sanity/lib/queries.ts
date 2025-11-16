@@ -11,26 +11,6 @@ const linkReferenceQuery = /* groq */ `
 const caseStudyBlocksQuery = /* groq */ `
   _type,
   _key,
-  _type == "callToAction" => {
-    heading,
-    text,
-    buttonText,
-    link {
-      _type,
-      _key,
-      linkType,
-      href,
-      page->{
-        name,
-        slug
-      },
-      caseStudy->{
-        name,
-        slug
-      },
-      openInNewTab
-    }
-  },
   _type == "nameHero" => {
     logo,
     description[]{
@@ -200,26 +180,6 @@ const caseStudyBlocksQuery = /* groq */ `
 const blocksQuery = /* groq */ `
   _type,
   _key,
-  _type == "callToAction" => {
-    heading,
-    text,
-    buttonText,
-    link {
-      _type,
-      _key,
-      linkType,
-      href,
-      page->{
-        name,
-        slug
-      },
-      caseStudy->{
-        name,
-        slug
-      },
-      openInNewTab
-    }
-  },
   _type == "nameHero" => {
     logo,
     description[]{

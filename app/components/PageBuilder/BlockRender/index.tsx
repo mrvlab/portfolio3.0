@@ -1,7 +1,6 @@
 import React from 'react';
 import { dataAttr } from '@/sanity/lib/utils';
 import { HeaderQueryResult, GetPageQueryResult } from '@/sanity.types';
-import Cta from '../../Cta';
 import CaseDetailsComponent from '../../CaseDetails';
 import ContributionsComponent from '../../Contributions';
 import MediaGridComponent from '../../MediaGrid';
@@ -23,7 +22,6 @@ type IBlockRenderer = {
 
 // Simple block registry - single source of truth for all blocks
 const BLOCK_COMPONENTS = {
-  callToAction: Cta,
   nameHero: NameHeroComponent,
   contributions: ContributionsComponent,
   caseDetails: CaseDetailsComponent,
