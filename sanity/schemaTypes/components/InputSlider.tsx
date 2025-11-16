@@ -3,7 +3,7 @@ import { NumberInputProps, set } from 'sanity';
 import { Slider } from '@/app/components/shadcn/slider';
 
 const InputSlider = (props: NumberInputProps) => {
-  const { value, onChange, ...rest } = props;
+  const { value, onChange } = props;
 
   const [localValue, setLocalValue] = useState(
     value !== undefined ? value : 75
@@ -30,15 +30,14 @@ const InputSlider = (props: NumberInputProps) => {
   };
 
   return (
-    <div className='flex items-center gap-2 pb-2'>
+    <div className="flex items-center gap-2 pb-2">
       <Slider
         value={[localValue]}
         max={100}
         step={1}
         onValueChange={handleValueChange}
-        {...rest}
       />
-      <span className='flex justify-center items-center w-[5ch] text-xs font-medium'>
+      <span className="flex justify-center items-center w-[5ch] text-xs font-medium">
         {localValue}
       </span>
     </div>

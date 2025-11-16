@@ -99,29 +99,17 @@ export const caseStudy = defineType({
     select: {
       title: 'name',
       date: 'date',
-      posterType: 'poster.type',
+      posterType: 'poster.mediaType',
       posterImage: 'poster.image',
       posterVideo: 'poster.video',
-      posterVideoThumbnail: 'poster.video.asset.thumbTime',
     },
-    prepare({
-      title,
-      date,
-      posterType,
-      posterImage,
-      posterVideo,
-      posterVideoThumbnail,
-    }) {
+    prepare({ title, date, posterType, posterImage }) {
       const subtitles = [
         date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
       ].filter(Boolean);
 
       const isVideo = posterType === 'video';
-      const media = isVideo
-        ? posterVideoThumbnail
-          ? posterVideo
-          : VideoIcon // Use video icon when thumbnail not ready
-        : posterImage || ImageIcon;
+      const media = isVideo ? VideoIcon : posterImage || ImageIcon;
 
       return {
         title: title || 'Untitled Case Study',

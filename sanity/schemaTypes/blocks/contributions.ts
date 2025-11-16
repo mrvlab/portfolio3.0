@@ -57,24 +57,19 @@ export const contributions = defineType({
   preview: {
     select: {
       title: 'title',
-      projectsListFirstPosterType: 'projectsList.0.poster.type',
+      projectsListFirstPosterType: 'projectsList.0.poster.mediaType',
       projectsListFirstPosterImage: 'projectsList.0.poster.image',
       projectsListFirstPosterVideo: 'projectsList.0.poster.video',
-      projectsListFirstPosterVideoThumbnail:
-        'projectsList.0.poster.video.asset.thumbTime',
     },
     prepare({
       title,
       projectsListFirstPosterType,
       projectsListFirstPosterImage,
       projectsListFirstPosterVideo,
-      projectsListFirstPosterVideoThumbnail,
     }) {
       const isVideo = projectsListFirstPosterType === 'video';
       const media = isVideo
-        ? projectsListFirstPosterVideoThumbnail
-          ? projectsListFirstPosterVideo
-          : VideoIcon // Use video icon when thumbnail not ready
+        ? VideoIcon
         : projectsListFirstPosterImage || MasterDetailIcon;
 
       return {

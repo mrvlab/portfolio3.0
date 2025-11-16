@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity';
-import InputSlider from '../components/InputSlider';
 
 export const seo = defineType({
   name: 'seo',

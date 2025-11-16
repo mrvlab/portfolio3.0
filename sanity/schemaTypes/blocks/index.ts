@@ -1,6 +1,5 @@
-export { callToAction } from './callToAction';
 export { nameHero } from './nameHero';
 export { contributions } from './contributions';
 export { caseDetails } from './caseDetails';
-export { mediaGroup } from './mediaGroup';
-export { mediaColumn } from './mediaColumn';
+export { mediaGrid } from './mediaGrid';
+export { flexibleText } from './flexibleText';
